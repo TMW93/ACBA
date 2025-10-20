@@ -1,0 +1,73 @@
+[
+  {
+    "name": "Pool A",
+    "day": "Sunday"
+
+  },
+  {
+    "name": "Pool B",
+    "day": "Sunday"
+
+  },
+  {
+    "name": "Division 8A",
+    "day": "Sunday"
+  },
+  {
+    "name": "Social 10B",
+    "day": "Sunday"
+  },
+  {
+    "name": "Unisex 7",
+    "day": "Sunday"
+  },
+  {
+    "name": "Division 8B",
+    "day": "Sunday"
+
+  },
+  {
+    "name": "PCYC Social C",
+    "day": "Monday"
+  },
+  {
+    "name": "Concord Social C",
+    "day": "Monday"
+  },
+  {
+    "name": "Division 2/3",
+    "day": "Tuesday"
+  },
+  {
+    "name": "Social A",
+    "day": "Tuesday" 
+  },
+  {
+    "name": "Social B",
+    "day": "Tuesday" 
+  },
+  {
+    "name": "Division 2",
+    "day": "Wednesday"
+  },
+  {
+    "name": "Division 3",
+    "day": "Wednesday"
+  },
+  {
+    "name": "Unisex 7",
+    "day": "Thursday"
+  },
+  {
+    "name": "Social B",
+    "day": "Thursday" 
+  },
+  {
+    "name": "Social C",
+    "day": "Thursday"
+  },
+  {
+    "name": "Social Beginners",
+    "day": "Thursday"   
+  }
+]
