@@ -15,7 +15,7 @@ const resolvers = {
       return teams;
     },
 
-    divison: async(parent, {divisionId}) => {
+    division: async(parent, {divisionId}) => {
       const divison = await Division.findOne({_id: divisionId}).populate('teams');
       return divison;
     },
