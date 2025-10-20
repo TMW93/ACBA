@@ -28,6 +28,7 @@ const typeDefs = `
   }
 
   type Query {
+    user: User
     team(name: String!): Team
     teamsByDivision(division: String!): Team
     allTeams: [Team]
