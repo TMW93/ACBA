@@ -5,6 +5,11 @@ import './index.css'
 import App from './App.jsx'
 import Error from './pages/Error.jsx'
 import Home from './pages/Home.jsx'
+import Divisions from './pages/Divisions.jsx'
+import Tours from './pages/Tours.jsx'
+import TeamRegistration from './pages/TeamRegistration.jsx'
+import ContactUs  from './pages/ContactUs.jsx'
+import Testing from './pages/Testing.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,10 +21,29 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />
       },
+      {
+        path: 'divisions',
+        element: <Divisions />,
+      },
+      {
+        path: 'tours',
+        element: <Tours />,
+      },
+      {
+        path: 'team-registration',
+        element: <TeamRegistration />,
+      },
+      {
+        path: 'contact-us',
+        element: <ContactUs />,
+      },
+      {
+        path: 'testing',
+        element: <Testing />,
+      },
     ]
   }
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router = {router} />
