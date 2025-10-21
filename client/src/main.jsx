@@ -9,6 +9,7 @@ import Divisions from './pages/Divisions.jsx'
 import Tours from './pages/Tours.jsx'
 import TeamRegistration from './pages/TeamRegistration.jsx'
 import ContactUs  from './pages/ContactUs.jsx'
+import Div from './pages//Div.jsx'
 import Testing from './pages/Testing.jsx'
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'contact-us',
         element: <ContactUs />,
+      },
+      {
+        path: 'divisions/:divisionId',
+        element: <Div />
       },
       {
         path: 'testing',
