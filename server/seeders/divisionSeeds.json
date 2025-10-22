@@ -2,12 +2,10 @@
   {
     "name": "Pool A",
     "day": "Sunday"
-
   },
   {
     "name": "Pool B",
     "day": "Sunday"
-
   },
   {
     "name": "Division 8A",
@@ -24,7 +22,10 @@
   {
     "name": "Division 8B",
     "day": "Sunday"
-
+  },
+  {
+    "name": "Division 5",
+    "day": "Monday"
   },
   {
     "name": "PCYC Social C",
@@ -33,10 +34,6 @@
   {
     "name": "Concord Social C",
     "day": "Monday"
-  },
-  {
-    "name": "Division 2/3",
-    "day": "Tuesday"
   },
   {
     "name": "Social A",
