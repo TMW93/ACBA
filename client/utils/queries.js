@@ -28,6 +28,11 @@ export const QUERY_SINGLE_DIVISION = gql`
       _id
       name
       day
+      teams {
+        _id
+        name
+        payment
+      }
     }
   }
 `;
