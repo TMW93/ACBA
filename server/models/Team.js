@@ -1,16 +1,18 @@
 const {Schema, model} = require('mongoose');
 
-// const Division = require('./Division');
-
 const teamSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
   division: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'Division'
   },
+  // players: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User'
+  // }],
   payment: {
     type: Boolean,
     default: false,

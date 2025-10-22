@@ -1,6 +1,5 @@
+const mongoose = require('mongoose');
 const {Schema, model} = require('mongoose');
-
-const Team = require('./Team');
 
 const divisionSchema = new Schema({
   name: {
@@ -11,7 +10,10 @@ const divisionSchema = new Schema({
     type: String,
     required: true,
   },
-  teams: [Team.schema],
+  teams: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Team'
+  }],
 });
 
 const Division = model('Division', divisionSchema);
