@@ -11,7 +11,7 @@ const typeDefs = `
   type Team {
     _id: ID
     name: String
-    division: String
+    division: Division
     payment: Boolean
   }
 
@@ -30,7 +30,7 @@ const typeDefs = `
   type Query {
     user: User
     team(name: String!): Team
-    teamsByDivision(division: String!): Team
+    teamsByDivision(divisionId: ID!): Team
     allTeams: [Team]
     division(divisionId: ID!): Division
     allDivisions: [Division]

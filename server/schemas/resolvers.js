@@ -3,6 +3,7 @@ const {signToken, AuthenticationError} = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    //user queries
     user: async(parent, args, context) => {
       if(context.user) {
         const user = await User.findById(context.user._id).populate('teams');
@@ -10,25 +11,28 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+
+    //team queries
     team: async(parent, {teamName}) => {
       const team = await Team.findOne({name: teamName});
       return team;
     },
-    teamsByDivision: async(parent, {divisionName}) => {
-      const teams = await Team.find({division: divisionName});
+    teamsByDivision: async(parent, {divisionId}) => {
+      const teams = await Team.find({division: divisionId});
       return teams;
     },
     allTeams: async() => {
-      const teams = await Team.find();
+      const teams = await Team.find().populate('division');
       return teams;
     },
 
+    //division queries
     division: async(parent, {divisionId}) => {
       const divison = await Division.findOne({_id: divisionId}).populate('teams');
       return divison;
     },
     allDivisions: async() => {
-      const divisions = await Division.find();
+      const divisions = await Division.find().populate('teams');
       return divisions;
     },
   },
