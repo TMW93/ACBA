@@ -38,6 +38,7 @@ const resolvers = {
   },
 
   Mutation: {
+    //user mutations
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -61,6 +62,33 @@ const resolvers = {
 
       return { token, user };
     },
+
+    //team mutations
+    addTeam: async (parent, {teamName, divisionId}) => {
+      const team = await Team.create({
+        name: teamName,
+        division: divisionId
+      });
+
+      await Division.findByIdAndUpdate(divisionId, {
+        $push: {teams: team._id}
+      });
+
+      return team;
+    },
+    removeTeam: async (parent, {teamId, divisionId}) => {
+      const teams = await Team.findByIdAndDelete(teamId);
+
+      await Division.findByIdAndUpdate(divisionId, {
+        $pull: {
+          teams: {
+            _id: teamId
+          }
+        }
+      });
+
+      return teams;
+    }
   },
 };
 
