@@ -10,6 +10,7 @@ import Tours from './pages/Tours.jsx'
 import TeamRegistration from './pages/TeamRegistration.jsx'
 import ContactUs  from './pages/ContactUs.jsx'
 import Div from './pages//Div.jsx'
+import TeamManager from './pages/TeamManager.jsx'
 import Testing from './pages/Testing.jsx'
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: 'divisions/:divisionId',
         element: <Div />
+      },
+      {
+        path: 'admin',
+        element: <TeamManager />
       },
       {
         path: 'testing',
