@@ -31,3 +31,29 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_TEAM = gql`
+  mutation addTeam($teamName: String!, $divisionId: ID!) {
+    addTeam(teamName: $teamName, divisionId: $divisionId) {
+      _id
+      name
+      division {
+        _id
+      }
+      payment
+    }   
+  }
+`
+
+export const REMOVE_TEAM = gql`
+  mutation removeTeam(
+    $teamId: ID!,
+    $divisionid: ID!
+  ) {
+    removeTeam(
+      teamId: $teamId
+    ) {
+      _id
+    }
+  }
+`
