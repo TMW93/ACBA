@@ -76,18 +76,30 @@ const resolvers = {
 
       return team;
     },
-    removeTeam: async (parent, {teamId, divisionId}) => {
+    removeTeam: async (parent, {teamId}) => {
       const teams = await Team.findByIdAndDelete(teamId);
 
-      await Division.findByIdAndUpdate(divisionId, {
-        $pull: {
-          teams: {
-            _id: teamId
-          }
-        }
+      return teams;
+    },
+
+    //division mutations
+    addDivision: async (parent, {divisionName, divisionDay}) => {
+      const division = await Division.create({
+        name: divisionName,
+        day: divisionDay
       });
 
-      return teams;
+      return division;
+    },
+
+    removeDivision: async (parent, {divisionId}) => {
+      const divisions = await Division.findByIdAndDelete(divisionId);
+      if(divisions && divisions.teams.length > 0) {
+        await Team.deleteMany({_id: {$in: divisions.teams}});
+        console.log("Teams deleted successfully.");
+      }
+      
+      return divisions;
     }
   },
 };
