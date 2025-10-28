@@ -46,13 +46,26 @@ export const ADD_TEAM = gql`
 `
 
 export const REMOVE_TEAM = gql`
-  mutation removeTeam(
-    $teamId: ID!,
-    $divisionid: ID!
-  ) {
-    removeTeam(
-      teamId: $teamId
-    ) {
+  mutation removeTeam($teamId: ID!) {
+    removeTeam(teamId: $teamId) {
+      _id
+    }
+  }
+`
+
+export const ADD_DIVISION = gql`
+  mutation addDivision($divisionName: String!, $divisionDay: String!) {
+    addDivision(divisionName: $divisionName, divisionDay: $divisionDay) {
+      _id
+      name
+      day
+    }
+  }
+`
+
+export const REMOVE_DIVISION = gql`
+  mutation removeDivision($divisionId: ID!) {
+    removeDivision(divisionId: $divisionId) {
       _id
     }
   }
