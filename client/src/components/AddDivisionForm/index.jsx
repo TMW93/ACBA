@@ -70,7 +70,6 @@ export default function AddDivisionForm () {
           <label htmlFor="teamnamelabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
             Select The Day For The New Division
           </label>
-          
           <div className="mt-2 grid grid-cols-1">
             <select
               id="divisionDay"
