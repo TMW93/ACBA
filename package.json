@@ -9,7 +9,8 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "node server/seeders/seed.js",
     "build": "cd client && npm run build",
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install && npm run build",
+    "server": "cd server && npm run start"
   },
   "repository": {
     "type": "git",
