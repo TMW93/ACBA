@@ -33,7 +33,34 @@ export const QUERY_SINGLE_DIVISION = gql`
         name
         payment
       }
+      games {
+        _id
+        time
+        date
+        teamOne
+        teamTwo
+        venue
+        scoreWinner
+        scoreLoser
+        winner {
+          _id
+          name
+        }
+      }
+      playedGames {
+        _id
+        time
+        date
+        teamOne
+        teamTwo
+        venue
+        scoreWinner
+        scoreLoser
+        winner {
+          _id
+          name
+        }
+      }
     }
   }
 `;
-

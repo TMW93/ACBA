@@ -70,3 +70,34 @@ export const REMOVE_DIVISION = gql`
     }
   }
 `
+
+export const ADD_GAME = gql`
+  mutation addGame($gameTime: String!, $gameDate: String!, $teamOneId: String!, $teamTwoId: String!, $divisionId: ID!, $venue: String!) {
+    addGame(gameTime: $gameTime, gameDate: $gameDate, teamOneId: $teamOneId, teamTwoId: $teamTwoId, divisionId: $divisionId, venue: $venue) {
+      _id
+      time
+      date
+      teamOne
+      teamTwo
+      venue
+      scoreWinner
+      scoreLoser
+    }
+  }
+`
+
+export const REMOVE_GAMES = gql`
+  mutation removeGames($divisionId: ID!) {
+    removeGames(divisionId: $divisionId) {
+      _id
+    }
+  }
+`
+
+export const REMOVE_SINGLE_GAME = gql`
+  mutation removeSingleGame($gameId: ID!) {
+    removeSingleGame(gameId: $gameId) {
+      _id
+    }
+  }
+`
