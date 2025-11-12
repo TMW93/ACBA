@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const {Schema, model} = require('mongoose');
 
 const divisionSchema = new Schema({
@@ -13,6 +12,14 @@ const divisionSchema = new Schema({
   teams: [{
     type: Schema.Types.ObjectId,
     ref: 'Team'
+  }],
+  games: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Game'
+  }],
+  playedGames: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Game'
   }],
 });
 

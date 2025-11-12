@@ -13,6 +13,9 @@ const typeDefs = `
     name: String
     division: Division
     payment: Boolean
+    wins: Int
+    losses: Int
+    draws: Int
   }
 
   type Division {
@@ -20,11 +23,25 @@ const typeDefs = `
     name: String
     day: String
     teams: [Team]
+    games: [Game]
+    playedGames: [Game]
+  }
+  
+  type Game {
+    _id: ID
+    time: String
+    date: String
+    teamOne: String
+    teamTwo: String
+    venue: String
+    scoreWinner: Int
+    scoreLoser: Int
+    winner: Team
   }
 
   type Auth {
     token: ID!
-    user:User
+    user: User
   }
 
   type Query {
@@ -43,6 +60,9 @@ const typeDefs = `
     removeTeam(teamId: ID!): Team
     addDivision(divisionName: String!, divisionDay: String!): Division
     removeDivision(divisionId: ID!): Division
+    addGame(gameTime: String!, gameDate: String!, teamOneId: String!, teamTwoId: String!, divisionId: ID!, venue: String!): Game
+    removeGames(divisionId: ID!): Division
+    removeSingleGame(gameId: ID!): Game
   }
 `;
 

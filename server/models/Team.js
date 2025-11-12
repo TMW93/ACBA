@@ -9,15 +9,23 @@ const teamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Division'
   },
-  // players: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User'
-  // }],
   payment: {
     type: Boolean,
     default: false,
   },
-});
+  wins: {
+    type: Number,
+    default: 0,
+  },
+  losses: {
+    type: Number,
+    default: 0,
+  },
+  draws: {
+    type: Number,
+    default: 0,
+  }
+})
 
 const Team = model('Team', teamSchema);
 

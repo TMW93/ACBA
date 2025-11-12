@@ -1,4 +1,4 @@
-const {Team, Division, User} = require('../models');
+const {Team, Division, User, Game} = require('../models');
 const {signToken, AuthenticationError} = require('../utils/auth');
 
 const resolvers = {
@@ -28,7 +28,7 @@ const resolvers = {
 
     //division queries
     division: async(parent, {divisionId}) => {
-      const divison = await Division.findOne({_id: divisionId}).populate('teams');
+      const divison = await Division.findOne({_id: divisionId}).populate('teams').populate('games').populate('playedGames');
       return divison;
     },
     allDivisions: async() => {
@@ -100,7 +100,40 @@ const resolvers = {
       }
       
       return divisions;
-    }
+    },
+
+    //game mutations
+    addGame: async (parent, {gameTime, gameDate, teamOneId, teamTwoId, divisionId, venue}) => {
+      const game = await Game.create({
+        time: gameTime,
+        date: gameDate,
+        teamOne: teamOneId,
+        teamTwo: teamTwoId,
+        venue: venue,
+      });
+
+      await Division.findByIdAndUpdate(divisionId, {
+        $push: {games: game._id}
+      });
+      
+      return game;
+    },
+
+    removeGames: async (parent, {divisionId}) => {
+      const divisions = await Division.findById(divisionId);
+      if(divisions && divisions.games.length > 0) {
+        await Game.deleteMany({_id: {$in: divisions.games}});
+        console.log("Games deleted successfully.");
+      }
+
+      return divisions;
+    },
+
+    removeSingleGame: async (parent, {gameId}) => {
+      const games = await Game.findByIdAndDelete(gameId);
+
+      return games;
+    },
   },
 };
 
