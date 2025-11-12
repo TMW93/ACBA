@@ -17,6 +17,7 @@ const navigation = [
   {name: 'Tours', href: '/tours'},
   {name: 'Team Registration', href: '/team-registration'},
   {name: 'Contact Us', href: '/contact-us'},
+  {name: 'Admin', href: '/admin'},
 ];
 
 export default function Nav() {
