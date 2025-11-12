@@ -1,21 +1,28 @@
 import { useState, useEffect } from "react"
-import { useQuery, useLazyQuery } from "@apollo/client/react"
+import { useQuery, useLazyQuery, useMutation } from "@apollo/client/react"
 import { QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION } from "../../../utils/queries"
+import {ADD_GAME, REMOVE_GAMES, REMOVE_SINGLE_GAME} from '../../../utils/mutations'
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
-const ampm = ['a.m', 'p.m'];
+// const ampm = ['a.m', 'p.m'];
 
-const venues = ['PCYC Auburn', 'Lidcombe Uni', 'Concord'];
+const venues = ['PCYC Auburn Court 1', 'PCYC Auburn Court 2', 'Lidcombe Uni', 'Concord'];
 
 export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
   const [currentDiv, setDivState] = useState();
   const [teams, setTeamState] = useState();
   const [loadingTeams, setLoadingTeams] = useState(true);
-  const [formState, setFormState] = useState({teamId: ''});
+  const [formState, setFormState] = useState({
+    teamOneId: '',
+    teamTwoId: '',
+    time: '',
+    venue: '',
+  });
 
   const [selectDiv, {loadingSingleDiv, errorSingleDiv, dataSingleDiv}] = useLazyQuery(QUERY_SINGLE_DIVISION);
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
+  const [addGame, {errorAddGmae}] = useMutation(ADD_GAME);
 
   if(loading) {
     return null;
@@ -49,16 +56,14 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
   } else if(day === 'Wednesday') {
     selectedDiv = wednesdayDivs;
   } else if(day === 'Thursday') {
-    selectedDiv = thursdayDivs;
-  } else {
-    return `Error! No Divisions on this day.`;
+    selectedDiv = thursdayDivs; 
   }
 
   const handleDivChange = async (e) => {
     setDivState(e.target.value);
   };
 
-  const handleTeamChange = async (e) => {
+  const handleFormChange = async (e) => {
     const {name, value} = e.target;
     setFormState({
       ...formState,
@@ -83,6 +88,30 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     avaliableTeams();
   }, [currentDiv]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(typeof(date));
+    console.log(formState);
+    try {
+      const {mutationResponse} = await addGame({
+        variables: {
+          gameTime: formState.time,
+          gameDate: date,
+          teamOneId: formState.teamOneId,
+          teamTwoId: formState.teamTwoId,
+          divisionId: currentDiv,
+          venue: formState.venue,
+        },
+      });
+
+      window.location.reload();
+      console.log('Team added.');
+    } catch (error) {
+      console.error(error);
+      alert("There was an error adding the team.");
+    }
+  };
+
   return (
     <Dialog open={dialogOpen} onClose={onClose} className="relative z-10">
       <DialogBackdrop transition
@@ -93,142 +122,173 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
           <DialogPanel transition
             className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-sm sm:p-6 data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10"
           >
-            <form method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
-              <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                <h2 className="text-base/7 font-semibold text-gray-900 dark:text-white">{day} Games {date}</h2>
-                {/* Division Select */}
-                <div className="sm:col-span-2">
-                  <label htmlFor="teamnamelabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                    Select A Division
-                  </label>
-                  <div className="mt-2 grid grid-cols-1">
-                    <select
-                      id="divSelect"
-                      name="divSelect"
-                      type="divSelect"
-                      className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
-                      onChange={handleDivChange}
-                    >
-                      {selectedDiv.map((div) => (
-                        <option key={div._id} value={div._id}>
-                          {div.day} {div.name}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDownIcon
-                      aria-hidden="true"
-                      className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
-                    />
-                  </div>
-                </div>
-                {/* Team Select */}
-                <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                  {/* Team Select  1*/}
-                  <div className="sm:col-span-2">
-                    <label htmlFor="teamselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                      Team
-                    </label>
-                    <div className="mt-2 grid grid-cols-1">
-                      <select
-                        id="teamId"
-                        name="teamId"
-                        type="teamId"
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
-                        onChange={handleTeamChange}
-                      >
-                        {loadingTeams ? <option value='Loading' disabled>Loading...</option> :
-                        teams.map((team) => (
-                          <option key={team.teamId} value={team.teamId}>{team.name}</option>
-                        ))}
-                      </select>
-                      <ChevronDownIcon
-                        aria-hidden="true"
-                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
-                      />
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-4">
+                <div className="border-b border-gray-900/10 pb-12 dark:border-white/10">
+                  {/* Division Select */}
+                  <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="sm:col-span-4">
+                      <label className="block text-sm/6 font-medium text-gray-900 dark:text-white">
+                        {day} Games {date}
+                      </label>
+                      <div className="mt-2 grid grid-cols-1">
+                          <select
+                              id="divSelect"
+                              name="divSelect"
+                              type="divSelect"
+                              className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
+                              onChange={handleDivChange}
+                            >
+                              {selectedDiv.map((div) => (
+                                <option key={div._id} value={div._id}>
+                                  {div.day} {div.name}
+                                </option>
+                              ))}
+                            </select>
+                            <ChevronDownIcon
+                              aria-hidden="true"
+                              className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
+                            />
+                        </div>
                     </div>
                   </div>
-                  {/* Team Select 2 */}
-                  <div className="sm:col-span-2">
-                    <label htmlFor="teamselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                      Team
-                    </label>
-                    <div className="mt-2 grid grid-cols-1">
-                      <select
-                        id="teamId"
-                        name="teamId"
-                        type="teamId"
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
-                        onChange={handleTeamChange}
-                      >
-                        {loadingTeams ? <option value='Loading' disabled>Loading...</option> :
-                        teams.map((team) => (
-                          <option key={team.teamId} value={team.teamId}>{team.name}</option>
-                        ))}
-                      </select>
-                      <ChevronDownIcon
-                        aria-hidden="true"
-                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
-                      />
-                    </div>
-                  </div>           
                 </div>
-                {/* Time Select */}
-                <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                  <div>
-                    <label className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                      Game Time
-                    </label>
-                    <div className="mt-2">
-                      <input className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                      />
+
+                <div className="border-b border-gray-900/10 pb-12 dark:border-white/10">
+                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    {/* First Team Select */}
+                    <div className="sm:col-span-3">
+                      <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900 dark:text-white">
+                        Team
+                      </label>
+                      <div className="mt-2 grid grid-cols-1">
+                        <select
+                          id="teamOneId"
+                          name="teamOneId"
+                          type="teamOneId"
+                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
+                          onChange={handleFormChange}
+                        >
+                          {loadingTeams ? <option value='Loading' disabled>Loading...</option> :
+                          teams.map((team) => (
+                            <option key={team.teamId} value={team.name}>{team.name}</option>
+                          ))}
+                        </select>
+                        <ChevronDownIcon
+                          aria-hidden="true"
+                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
+                        />
+                      </div> 
                     </div>
-                    <div>
-                      <label className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+                    {/* Second Team Select*/}
+                    <div className="sm:col-span-3">
+                      <label htmlFor="last-name" className="block text-sm/6 font-medium text-gray-900 dark:text-white">
+                        Team
+                      </label>
+                      <div className="mt-2 grid grid-cols-1">
+                        <select
+                          id="teamTwoId"
+                          name="teamTwoId"
+                          type="teamTwoId"
+                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
+                          onChange={handleFormChange}
+                        >
+                          {loadingTeams ? <option value='Loading' disabled>Loading...</option> :
+                          teams.map((team) => (
+                            <option key={team.teamId} value={team.name}>{team.name}</option>
+                          ))}
+                        </select>
+                        <ChevronDownIcon
+                          aria-hidden="true"
+                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
+                        />
+                      </div>
+                    </div>
+                    {/* Time */}
+                    <div className="sm:col-span-3">
+                      <label className="block text-sm/6 font-medium text-gray-900 dark:text-white">
+                        Game Time
+                      </label>
+                      <div className="mt-2 grid grid-cols-1">
+                        <input 
+                          id="time"
+                          type="time"
+                          name="time"
+                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+                          onChange={handleFormChange}
+                        />
+                      </div>
+                    </div>
+                    {/* Time Period Select */}
+                    {/* <div className="sm:col-span-3">
+                      <label htmlFor="last-name" className="block text-sm/6 font-medium text-gray-900 dark:text-white">
                         Time Period
                       </label>
-                      <select>
-                        {ampm.map((time) => (
-                          <option key={time}>
-                            {time}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronDownIcon
-                        aria-hidden="true"
-                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
-                      />
+                      <div className="mt-2 grid grid-cols-1">
+                        <select
+                          id="timePeriod"
+                          type="timePeriod"
+                          name="timePeriod"
+                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
+                          onChange={handleFormChange}
+                        >
+                          {ampm.map((time) => (
+                            <option key={time}>{time}</option>
+                          ))}
+                        </select>
+                        <ChevronDownIcon
+                          aria-hidden="true"
+                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
+                        />
+                      </div>
+                    </div> */}
+                    {/* Venue Select */}
+                    <div className="sm:col-span-3">
+                      <label className="block text-sm/6 font-medium text-gray-900 dark:text-white">
+                        Venue
+                      </label>
+                      <div className="mt-2 grid grid-cols-1">
+                        <select
+                          id="venue"
+                          type="venue"
+                          name="venue"
+                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
+                          onChange={handleFormChange}
+                        >
+                          {venues.map((venue) => (
+                            <option key={venue}>{venue}</option>
+                          ))}
+                        </select>
+                        <ChevronDownIcon
+                          aria-hidden="true"
+                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
+                        />
+                      </div>
                     </div>
                   </div>
-
                 </div>
-                {/* Venue Select */}
-                <div className="sm:col-span-2">
+              </div>
 
-                </div>
-              </div>  
               {/* Buttons */}
-              <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                <button
-                  data-autofocus
-                  type="submit"
-                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0 dark:bg-white/10 dark:text-white dark:shadow-none dark:inset-ring-white/5 dark:hover:bg-white/20"
-                >
-                  Add Game
-                </button>
-                <button
-                  type="button"
+              <div className="mt-6 flex items-center justify-end gap-x-6">
+                <button 
+                  type="button" 
+                  className="text-sm/6 font-semibold text-red-500 dark:text-white"
                   onClick={onClose}
-                  className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
                 >
                   Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:focus-visible:outline-indigo-500"
+                >
+                  Add Game
                 </button>
               </div>
             </form>
           </DialogPanel>
         </div>
       </div>
-
     </Dialog>
-  
   )
 }

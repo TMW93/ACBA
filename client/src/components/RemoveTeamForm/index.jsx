@@ -1,5 +1,5 @@
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
-import {useState, useEffect, use} from 'react'
+import {useState, useEffect} from 'react'
 import {useQuery, useLazyQuery, useMutation} from '@apollo/client/react'
 import {QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION} from '../../../utils/queries'
 import {REMOVE_TEAM} from '../../../utils/mutations'
@@ -42,7 +42,7 @@ export default function RemoveTeamForm () {
     setLoadingTeams(true);
     const avaliableTeams = async () => {
       if(currentDiv) {
-      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}})
+      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
         // console.log(divInfo.data.division.teams);
         if(divInfo) {
           setTeamState(divInfo.data.division.teams.map(team => ({teamId: team._id, name: team.name})));

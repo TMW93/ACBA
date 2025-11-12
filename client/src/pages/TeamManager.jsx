@@ -4,6 +4,7 @@ import RemoveTeamForm from '../components/RemoveTeamForm'
 import AddDivisionForm from '../components/AddDivisionForm'
 import RemoveDivisionForm from '../components/RemoveDivisionForm'
 import GameScheduler from '../components/GameScheduler'
+import RemoveGamesForm from '../components/RemoveGamesForm'
 
 import {useState} from 'react'
 
@@ -33,7 +34,7 @@ export default function TeamManager() {
         {/* mode switcher */}
         <div className="mt-16 flex justify-center">
           <fieldset aria-label="Admin">
-            <div className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs/5 font-semibold inset-ring inset-ring-gray-200 dark:inset-ring-white/10">
+            <div className="grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs/5 font-semibold inset-ring inset-ring-gray-200 dark:inset-ring-white/10">
               {/* Add Team */}
               <label className="group relative rounded-full px-2.5 py-1 has-checked:bg-indigo-600 dark:has-checked:bg-indigo-500">
                 <input
@@ -101,6 +102,17 @@ export default function TeamManager() {
                 />
                 <span className="text-gray-500 group-has-checked:text-white dark:text-gray-400">Set Table</span>
               </label>
+              {/* Game Remover */}
+              <label className="group relative rounded-full px-2.5 py-1 has-checked:bg-indigo-600 dark:has-checked:bg-indigo-500">
+                <input
+                  defaultValue="gameRemover"
+                  name="switcher"
+                  type="radio"
+                  className="absolute inset-0 appearance-none rounded-full"
+                  onClick={() => setFormState('gameRemover')}
+                />
+                <span className="text-gray-500 group-has-checked:text-white dark:text-gray-400">Remove Games</span>
+              </label>
             </div>
           </fieldset>
         </div>
@@ -110,6 +122,7 @@ export default function TeamManager() {
           {currentForm === 'addDivision' && (<AddDivisionForm />)}
           {currentForm === 'removeDivision' && (<RemoveDivisionForm />)}
           {currentForm === 'gameScheduler' && (<GameScheduler />)}
+          {currentForm === 'gameRemover' && (<RemoveGamesForm />)}
         </div>
       </div>
     </div>
