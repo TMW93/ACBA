@@ -158,25 +158,25 @@ const resolvers = {
         if(winner && loser === 'draw') {
           await Team.findOneAndUpdate(
             {name: winner , division: divisionId},
-            {$inc: {draws: 1}},
+            {$inc: {draws: 1, totalPoints: scoreWinner}},
             {new: true}
           );
 
           await Team.findOneAndUpdate(
             {name: loser, division: divisionId},
-            {$inc: {draws: 1}},
+            {$inc: {draws: 1, totalPoints: scoreLoser}},
             {new: true}
           );
         } else {
           await Team.findOneAndUpdate(
             {name: winner, division: divisionId},
-            {$inc: {wins: 1}},
+            {$inc: {wins: 1, totalPoints: scoreWinner}},
             {new: true}
           );
 
           await Team.findOneAndUpdate(
             {name: loser, division: divisionId},
-            {$inc: {losses: 1}},
+            {$inc: {losses: 1, totalPoints: scoreLoser}},
             {new: true}
           );
         }

@@ -24,7 +24,11 @@ const teamSchema = new Schema({
   draws: {
     type: Number,
     default: 0,
-  }
+  },
+  totalPoints: {
+    type: Number,
+    default: 0,
+  },
 })
 
 const Team = model('Team', teamSchema);
