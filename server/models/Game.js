@@ -11,9 +11,11 @@ const gameSchema = new Schema({
   },
   teamOne: {
     type: String,
+    required: true,
   },
   teamTwo: {
     type: String,
+    required: true,
   },
   venue: {
     type: String,
@@ -28,9 +30,11 @@ const gameSchema = new Schema({
     default: 0,
   },
   winner: {
-    type: Schema.Types.ObjectId,
-    ref: 'Team'
+    type: String,
   },
+  loser: {
+    type: String,
+  }
 });
 
 const Game = model('Game', gameSchema);

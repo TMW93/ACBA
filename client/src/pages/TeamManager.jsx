@@ -5,6 +5,7 @@ import AddDivisionForm from '../components/AddDivisionForm'
 import RemoveDivisionForm from '../components/RemoveDivisionForm'
 import GameScheduler from '../components/GameScheduler'
 import RemoveGamesForm from '../components/RemoveGamesForm'
+import ArchiveGamesForm from '../components/ArchiveGamesForm'
 
 import {useState} from 'react'
 
@@ -113,6 +114,28 @@ export default function TeamManager() {
                 />
                 <span className="text-gray-500 group-has-checked:text-white dark:text-gray-400">Remove Games</span>
               </label>
+              {/* Game Archiver */}
+              <label className="group relative rounded-full px-2.5 py-1 has-checked:bg-indigo-600 dark:has-checked:bg-indigo-500">
+                <input
+                  defaultValue="archiveGames"
+                  name="switcher"
+                  type="radio"
+                  className="absolute inset-0 appearance-none rounded-full"
+                  onClick={() => setFormState('archiveGames')}
+                />
+                <span className="text-gray-500 group-has-checked:text-white dark:text-gray-400">Archive Games</span>
+              </label>
+              {/* Season Reset */}
+              <label className="group relative rounded-full px-2.5 py-1 has-checked:bg-indigo-600 dark:has-checked:bg-indigo-500">
+                <input
+                  defaultValue="seasonReset"
+                  name="switcher"
+                  type="radio"
+                  className="absolute inset-0 appearance-none rounded-full"
+                  onClick={() => setFormState('seasonReset')}
+                />
+                <span className="text-gray-500 group-has-checked:text-white dark:text-gray-400">Reset Season</span>
+              </label>
             </div>
           </fieldset>
         </div>
@@ -123,6 +146,7 @@ export default function TeamManager() {
           {currentForm === 'removeDivision' && (<RemoveDivisionForm />)}
           {currentForm === 'gameScheduler' && (<GameScheduler />)}
           {currentForm === 'gameRemover' && (<RemoveGamesForm />)}
+          {currentForm === 'archiveGames' && (<ArchiveGamesForm />)}
         </div>
       </div>
     </div>

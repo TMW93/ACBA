@@ -13,12 +13,12 @@ const resolvers = {
     },
 
     //team queries
-    team: async(parent, {teamName}) => {
-      const team = await Team.findOne({name: teamName});
+    team: async(parent, {teamName, divisionId}) => {
+      const team = await Team.findOne({name: teamName, division: divisionId}).populate('division').exec();
       return team;
     },
     teamsByDivision: async(parent, {divisionId}) => {
-      const teams = await Team.find({division: divisionId});
+      const teams = await Team.find({division: divisionId}).populate('division');
       return teams;
     },
     allTeams: async() => {
@@ -34,6 +34,12 @@ const resolvers = {
     allDivisions: async() => {
       const divisions = await Division.find().populate('teams');
       return divisions;
+    },
+
+    //game queries
+    game: async(parent, {gameId}) => {
+      const game = await Game.findOne({_id: gameId});
+      return game;
     },
   },
 
@@ -113,8 +119,9 @@ const resolvers = {
       });
 
       await Division.findByIdAndUpdate(divisionId, {
-        $push: {games: game._id}
-      });
+        $push: {games: game._id}},
+        {new: true}
+    );
       
       return game;
     },
@@ -134,6 +141,62 @@ const resolvers = {
 
       return games;
     },
+
+    updateGames: async (parent, {divisionId, gameId, scoreWinner, scoreLoser, winner, loser}) => {
+      const game = await Game.findByIdAndUpdate(
+        {_id: gameId},
+        {
+          scoreWinner: scoreWinner,
+          scoreLoser: scoreLoser,
+          winner: winner,
+          loser: loser
+        },
+        {new: true, runValidators: true}
+      );
+      
+      if(game) {
+        if(winner && loser === 'draw') {
+          await Team.findOneAndUpdate(
+            {name: winner , division: divisionId},
+            {$inc: {draws: 1}},
+            {new: true}
+          );
+
+          await Team.findOneAndUpdate(
+            {name: loser, division: divisionId},
+            {$inc: {draws: 1}},
+            {new: true}
+          );
+        } else {
+          await Team.findOneAndUpdate(
+            {name: winner, division: divisionId},
+            {$inc: {wins: 1}},
+            {new: true}
+          );
+
+          await Team.findOneAndUpdate(
+            {name: loser, division: divisionId},
+            {$inc: {losses: 1}},
+            {new: true}
+          );
+        }
+      }
+
+      await Division.findByIdAndUpdate(
+        {_id: divisionId},
+        {
+          $push: {playedGames: game._id},
+          $pull: {games: gameId}
+        },
+        {new: true}
+      );
+      
+      return game;
+    },
+
+    // removeArchivedGames: async (parent, {divisionId}) => {
+
+    // },
   },
 };
 

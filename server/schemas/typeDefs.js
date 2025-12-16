@@ -36,7 +36,8 @@ const typeDefs = `
     venue: String
     scoreWinner: Int
     scoreLoser: Int
-    winner: Team
+    winner: String
+    loser: String
   }
 
   type Auth {
@@ -46,11 +47,12 @@ const typeDefs = `
 
   type Query {
     user: User
-    team(name: String!): Team
+    team(teamName: String!, divisionId: ID): Team
     teamsByDivision(divisionId: ID!): Team
     allTeams: [Team]
     division(divisionId: ID!): Division
     allDivisions: [Division]
+    game(gameId: ID!): Game
   }
 
   type Mutation {
@@ -63,6 +65,7 @@ const typeDefs = `
     addGame(gameTime: String!, gameDate: String!, teamOneId: String!, teamTwoId: String!, divisionId: ID!, venue: String!): Game
     removeGames(divisionId: ID!): Division
     removeSingleGame(gameId: ID!): Game
+    updateGames(divisionId: ID!, gameId: ID!, scoreWinner: Int!, scoreLoser: Int!, winner: String!, loser: String!): Game
   }
 `;
 

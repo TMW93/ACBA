@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 
 export const QUERY_SINGLE_USER = gql`
-  query singleUser($userId:ID!) {
+  query singleUser($userId: ID!) {
     user(userId: $userId) {
       _id
       firstName
@@ -42,10 +42,8 @@ export const QUERY_SINGLE_DIVISION = gql`
         venue
         scoreWinner
         scoreLoser
-        winner {
-          _id
-          name
-        }
+        winner
+        loser
       }
       playedGames {
         _id
@@ -56,11 +54,26 @@ export const QUERY_SINGLE_DIVISION = gql`
         venue
         scoreWinner
         scoreLoser
-        winner {
-          _id
-          name
-        }
+        winner
+        loser
       }
+    }
+  }
+`;
+
+export const QUERY_SINGLE_GAME = gql`
+  query getSingleGame($gameId: ID!) {
+    game(gameId: $gameId) {
+      _id
+      time
+      date
+      teamOne
+      teamTwo
+      venue
+      scoreWinner
+      scoreLoser
+      winner
+      loser
     }
   }
 `;

@@ -82,6 +82,8 @@ export const ADD_GAME = gql`
       venue
       scoreWinner
       scoreLoser
+      winner
+      loser
     }
   }
 `
@@ -98,6 +100,23 @@ export const REMOVE_SINGLE_GAME = gql`
   mutation removeSingleGame($gameId: ID!) {
     removeSingleGame(gameId: $gameId) {
       _id
+    }
+  }
+`
+
+export const UPDATE_SINGLE_GAME = gql`
+  mutation updateGames($divisionId: ID!, $gameId: ID!, $scoreWinner: Int!, $scoreLoser: Int!, $winner: String!, $loser: String!) {
+    updateGames(divisionId: $divisionId, gameId: $gameId, scoreWinner: $scoreWinner, scoreLoser: $scoreLoser, winner: $winner, loser: $loser) {
+      _id
+      time
+      date
+      teamOne
+      teamTwo
+      venue
+      scoreWinner
+      scoreLoser
+      winner
+      loser
     }
   }
 `

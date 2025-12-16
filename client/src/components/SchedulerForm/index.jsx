@@ -5,8 +5,6 @@ import {ADD_GAME, REMOVE_GAMES, REMOVE_SINGLE_GAME} from '../../../utils/mutatio
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
-// const ampm = ['a.m', 'p.m'];
-
 const venues = ['PCYC Auburn Court 1', 'PCYC Auburn Court 2', 'Lidcombe Uni', 'Concord'];
 
 export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
@@ -69,7 +67,7 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
       ...formState,
       [name]: value,
     });
-    // console.log(formState);
+    console.log(formState);
   };
 
   useEffect(() => {
@@ -90,7 +88,7 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(typeof(date));
+    // console.log(typeof(date));
     console.log(formState);
     try {
       const {mutationResponse} = await addGame({
@@ -136,9 +134,11 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                               id="divSelect"
                               name="divSelect"
                               type="divSelect"
+                              defaultValue={'defaultDiv'}
                               className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
                               onChange={handleDivChange}
                             >
+                              <option value='defaultDiv' disabled>Choose a Division ...</option>
                               {selectedDiv.map((div) => (
                                 <option key={div._id} value={div._id}>
                                   {div.day} {div.name}
@@ -166,9 +166,11 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                           id="teamOneId"
                           name="teamOneId"
                           type="teamOneId"
+                          defaultValue={'defaultTeam'}
                           className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
                           onChange={handleFormChange}
                         >
+                          <option value='defaultTeam' disabled>Choose a Team...</option>
                           {loadingTeams ? <option value='Loading' disabled>Loading...</option> :
                           teams.map((team) => (
                             <option key={team.teamId} value={team.name}>{team.name}</option>
@@ -190,9 +192,11 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                           id="teamTwoId"
                           name="teamTwoId"
                           type="teamTwoId"
+                          defaultValue={'defaultTeam'}
                           className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
                           onChange={handleFormChange}
                         >
+                          <option value='defaultTeam' disabled>Choose a Team...</option>
                           {loadingTeams ? <option value='Loading' disabled>Loading...</option> :
                           teams.map((team) => (
                             <option key={team.teamId} value={team.name}>{team.name}</option>
@@ -219,29 +223,6 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                         />
                       </div>
                     </div>
-                    {/* Time Period Select */}
-                    {/* <div className="sm:col-span-3">
-                      <label htmlFor="last-name" className="block text-sm/6 font-medium text-gray-900 dark:text-white">
-                        Time Period
-                      </label>
-                      <div className="mt-2 grid grid-cols-1">
-                        <select
-                          id="timePeriod"
-                          type="timePeriod"
-                          name="timePeriod"
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
-                          onChange={handleFormChange}
-                        >
-                          {ampm.map((time) => (
-                            <option key={time}>{time}</option>
-                          ))}
-                        </select>
-                        <ChevronDownIcon
-                          aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400"
-                        />
-                      </div>
-                    </div> */}
                     {/* Venue Select */}
                     <div className="sm:col-span-3">
                       <label className="block text-sm/6 font-medium text-gray-900 dark:text-white">
@@ -252,9 +233,11 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                           id="venue"
                           type="venue"
                           name="venue"
+                          defaultValue={'defaultVenue'}
                           className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500"
                           onChange={handleFormChange}
                         >
+                          <option value='defaultVenue' disabled>Choose a Venue...</option>
                           {venues.map((venue) => (
                             <option key={venue}>{venue}</option>
                           ))}
