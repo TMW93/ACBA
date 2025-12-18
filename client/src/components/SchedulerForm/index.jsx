@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client/react"
 import { QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION } from "../../../utils/queries"
 import {ADD_GAME, REMOVE_GAMES, REMOVE_SINGLE_GAME} from '../../../utils/mutations'
+import timeConvert from "../../../utils/timeConvert"
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
@@ -86,14 +87,17 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     avaliableTeams();
   }, [currentDiv]);
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(typeof(date));
-    console.log(formState);
+    // console.log(formState);
+    const convertedTime = timeConvert(formState.time);
     try {
       const {mutationResponse} = await addGame({
         variables: {
-          gameTime: formState.time,
+          gameTime: convertedTime,
           gameDate: date,
           teamOneId: formState.teamOneId,
           teamTwoId: formState.teamTwoId,
