@@ -1,120 +1,109 @@
 import {useState} from 'react'
-import {Link} from 'react-router-dom'
-import {
-  Navbar, 
-  NavbarItem, 
-  NavbarSection, 
-  NavbarDivider, 
-  NavbarSpacer
-} from '../../catComponents/navbar'
-import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import { Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import { Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import ACBALogo from '../../assets/icons/acbaLogo.png'
 
 const navigation = [
-  {name: 'Home', href: '/'},
-  {name: 'Divisions', href: '/divisions'},
-  {name: 'Tours', href: '/tours'},
-  {name: 'Team Registration', href: '/team-registration'},
-  {name: 'Contact Us', href: '/contact-us'},
-  {name: 'Admin', href: '/admin'},
+  {
+    name: 'Home', 
+    href: '/',
+    current: true,
+  },
+  {
+    name: 'Divisions', 
+    href: '/divisions',
+    current: false,
+  },
+  {
+    name: 'Tours', 
+    href: '/tours',
+    current: false,
+  },
+  {
+    name: 'Team Registration', 
+    href: '/team-registration',
+    current: false,
+  },
+  {
+    name: 'Contact Us', 
+    href: '/contact-us',
+    current: false,
+  },
+  {
+    name: 'Admin', 
+    href: '/admin',
+    current: false,
+  },
 ];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+};
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
+
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
-        <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">ACBA</span>
-            <img
-              alt=""
-              src={ACBALogo}
-              className="h-8 w-auto dark:hidden"
-            />
-            <img
-              alt=""
-              src={ACBALogo}
-              className="h-8 w-auto not-dark:hidden"
-            />
-          </a>
-        </div>
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-500 dark:text-gray-400"
-          >
-            <span className="sr-only">Open main menu</span>
-            <Bars3Icon aria-hidden="true" className="size-6" />
-          </button>
-        </div>
-        <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900 dark:text-white">
-              {item.name}
-            </a>
-          ))}
-        </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </nav>
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-        <div className="fixed inset-0 z-50" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
-          <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+    <Disclosure
+      as='nav'
+      className="absolute inset-x-0 top-0 z-50 bg-gray-800 dark:bg-gray-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 justify-between">
+          <div className='flex'>
+            <div className="mr-2 -ml-2 flex items-center md:hidden">
+              {/* Mobile Menu Button */}
+              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+                <span className="absolute -inset-0.5" />
+                <span className="sr-only">Open main menu</span>
+                <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
+                <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              </DisclosureButton>
+            </div>
+            {/* Navbar Icon */}
+            <div className="flex shrink-0 items-center">
               <img
-                alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto dark:hidden"
+                alt='ACBA Logo'
+                src={ACBALogo}
+                className='h-8 w-auto'
               />
-              <img
-                alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto not-dark:hidden"
-              />
-            </a>
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-400"
-            >
-              <span className="sr-only">Close menu</span>
-              <XMarkIcon aria-hidden="true" className="size-6" />
-            </button>
-          </div>
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10 dark:divide-gray-500/25">
-              <div className="space-y-2 py-6">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-              <div className="py-6">
+            </div>
+            {/* Navbar Items */}
+            <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+              {navigation.map((item) => (
                 <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5"
+                  key={item.name}
+                  href={item.href}
+                  aria-current={item.current ? 'page' : undefined}
+                  className={classNames(item.current ? 'bg-gray-900 text-white dark:bg-gray-950/50' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                    'rounded-md px-3 py-2 text-sm font-medium',
+                  )}
                 >
-                  Log in
+                  {item.name}
                 </a>
-              </div>
+              ))}
             </div>
           </div>
-        </DialogPanel>
-      </Dialog>
-    </header>
+        </div>
+      </div>
+
+      <DisclosurePanel>
+        <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+          {navigation.map((item) => (
+            <DisclosureButton
+              key={item.name}
+              as='a'
+              href={item.href}
+              aria-current={item.current ? 'page' : undefined}
+              className={classNames(item.current ? 'bg-gray-900 text-white dark:bg-gray-950/50' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                'block rounded-md px-3 py-2 text-base font-medium',
+              )}
+            >
+              {item.name}
+            </DisclosureButton>
+          ))}
+        </div>
+      </DisclosurePanel>
+    </Disclosure>
   )
 };
