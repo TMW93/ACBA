@@ -32,6 +32,10 @@ export const QUERY_SINGLE_DIVISION = gql`
         _id
         name
         payment
+        wins
+        losses
+        draws
+        totalPoints
       }
       games {
         _id

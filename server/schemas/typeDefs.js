@@ -16,6 +16,7 @@ const typeDefs = `
     wins: Int
     losses: Int
     draws: Int
+    totalPoints: Int
   }
 
   type Division {
@@ -64,8 +65,10 @@ const typeDefs = `
     removeDivision(divisionId: ID!): Division
     addGame(gameTime: String!, gameDate: String!, teamOneId: String!, teamTwoId: String!, divisionId: ID!, venue: String!): Game
     removeGames(divisionId: ID!): Division
+    removeArchivedGames(divisionId: ID!) : Division
     removeSingleGame(gameId: ID!): Game
     updateGames(divisionId: ID!, gameId: ID!, scoreWinner: Int!, scoreLoser: Int!, winner: String!, loser: String!): Game
+    resetSeason(divisionId: ID!) : Team
   }
 `;
 

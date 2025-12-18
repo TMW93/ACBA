@@ -41,6 +41,10 @@ export const ADD_TEAM = gql`
         _id
       }
       payment
+      wins
+      losses
+      draws
+      totalPoints
     }   
   }
 `
@@ -96,6 +100,14 @@ export const REMOVE_GAMES = gql`
   }
 `
 
+export const REMOVE_ARCHIVED_GAMES = gql`
+  mutation removeArchivedGames($divisionId: ID!) {
+    removeArchivedGames(divisionId: $divisionId) {
+      _id
+    }
+  }
+`
+
 export const REMOVE_SINGLE_GAME = gql`
   mutation removeSingleGame($gameId: ID!) {
     removeSingleGame(gameId: $gameId) {
@@ -117,6 +129,22 @@ export const UPDATE_SINGLE_GAME = gql`
       scoreLoser
       winner
       loser
+    }
+  }
+`
+
+export const RESET_SEASON = gql`
+  mutation resetSeason($divisionId: ID!) {
+    resetSeason(divisionId: $divisionId) {
+      _id
+      division {
+        _id
+      }
+      payment
+      wins
+      losses
+      draws
+      totalPoints
     }
   }
 `

@@ -136,6 +136,16 @@ const resolvers = {
       return divisions;
     },
 
+    removeArchivedGames: async (parent, {divisionId}) => {
+      const divisions = await Division.findById(divisionId);
+      if(divisions && divisions.playedGames.length > 0) {
+        await Game.deleteMany({_id: {$in: divisions.playedGames}});
+        console.log("Games deleted successfully.");
+      }
+
+      return divisions;
+    },
+
     removeSingleGame: async (parent, {gameId}) => {
       const games = await Game.findByIdAndDelete(gameId);
 
@@ -194,9 +204,20 @@ const resolvers = {
       return game;
     },
 
-    // removeArchivedGames: async (parent, {divisionId}) => {
-
-    // },
+    resetSeason: async (parent, {divisionId}) => {
+      await Team.updateMany(
+        {division: divisionId},
+        {
+          $set: {
+            wins: 0,
+            losses: 0,
+            draws: 0,
+            totalPoints: 0,
+            payment: false,
+          }
+        }
+      );
+    },
   },
 };
 
