@@ -6,6 +6,7 @@ import RemoveDivisionForm from '../components/RemoveDivisionForm'
 import GameScheduler from '../components/GameScheduler'
 import RemoveGamesForm from '../components/RemoveGamesForm'
 import ArchiveGamesForm from '../components/ArchiveGamesForm'
+import ResetSeasonForm from '../components/ResetSeasonForm'
 
 import {useState} from 'react'
 
@@ -147,6 +148,7 @@ export default function TeamManager() {
           {currentForm === 'gameScheduler' && (<GameScheduler />)}
           {currentForm === 'gameRemover' && (<RemoveGamesForm />)}
           {currentForm === 'archiveGames' && (<ArchiveGamesForm />)}
+          {currentForm === 'seasonReset' && (<ResetSeasonForm />)}
         </div>
       </div>
     </div>
