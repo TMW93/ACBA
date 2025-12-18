@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION} from '../../../utils/queries'
-import {REMOVE_GAMES, REMOVE_SINGLE_GAME} from '../../../utils/mutations'
+import {REMOVE_GAMES, REMOVE_SINGLE_GAME, REMOVE_ARCHIVED_GAMES} from '../../../utils/mutations'
 import {useQuery, useMutation, useLazyQuery} from '@apollo/client/react'
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 
@@ -12,6 +12,7 @@ export default function RemoveGamesForm () {
 
   const [removeGames, {removeGamesWError}] = useMutation(REMOVE_GAMES);
   const [removeSingleGame, {removeSingleGameError}] = useMutation(REMOVE_SINGLE_GAME);
+  const [removeArchivedGames, {removeArchivedGamesError}] = useMutation(REMOVE_ARCHIVED_GAMES);
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
   const [selectedDiv, {loadingSingleDiv, errorSingleDiv, dataSingleDiv}] = useLazyQuery(QUERY_SINGLE_DIVISION);
 
@@ -30,7 +31,7 @@ export default function RemoveGamesForm () {
       ...formState,
       [name]: value,
     });
-    console.log(formState.gameId);
+    // console.log(formState.gameId);
   };
 
   const handleDivChange = async (e) => {
@@ -82,6 +83,16 @@ export default function RemoveGamesForm () {
           await removeGames({variables: {divisionId: currentDiv}});
           window.location.reload();
           console.log('Games removed.');
+        } catch (error) {
+          alert("There was an error removing the games.");
+        }
+      }
+    } else if(submitter.name === 'archiveGames') {
+      if(window.confirm('Are you sure you want to delete all archived games from this division?')) {
+        try {
+          await removeArchivedGames({variables: {divisionId: currentDiv}});
+          window.location.reload();
+          console.log("Games Removed.");
         } catch (error) {
           alert("There was an error removing the games.");
         }
@@ -162,6 +173,16 @@ export default function RemoveGamesForm () {
           className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
         >
           Remove All Games
+        </button>
+      </div>
+      {/* Remove All Archived Games Button */}
+      <div className="mt-10">
+        <button
+          type="submit"
+          name='archiveGames'
+          className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+        >
+          Remove All Archived Games
         </button>
       </div>
     </form>
