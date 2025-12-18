@@ -28,6 +28,40 @@ export default function ArchiveGamesForm () {
 
   const initialTeamState = [];
 
+  useEffect(() => {
+    setLoadingGames(true);
+    const avaliableGames = async () => {
+      if(currentDiv) {
+      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
+        // console.log(divInfo.data.division.games);
+        if(divInfo) {
+          setGameState(divInfo.data.division.games.map(game => ({gameId: game._id, time: game.name, date: game.date, teamOne: game.teamOne, teamTwo: game.teamTwo})));
+          // console.log(teams);
+          setLoadingGames(false);
+        }
+      } 
+    };
+    avaliableGames();
+  }, [currentDiv]);
+
+  useEffect(() => {
+    setLoadingTeams(true);
+    resetTeams();
+    const avaliableTeams = async () => {
+      if(currentGame != undefined) {
+        const gameData = await selectedGame({variables: {gameId: currentGame}, skipToken});
+        if(gameData) {
+          // console.log(gameData.data.game);
+          updateTeams(gameData.data.game.teamOne);
+          updateTeams(gameData.data.game.teamTwo);
+          setLoadingTeams(false);
+          // console.log(teams);
+        }
+      }
+    };
+    avaliableTeams();
+  }, [currentGame]);
+
   if(loading) {
     return null;
   }
@@ -86,40 +120,6 @@ export default function ArchiveGamesForm () {
       });
     } 
   };
-
-  useEffect(() => {
-    setLoadingGames(true);
-    const avaliableGames = async () => {
-      if(currentDiv) {
-      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
-        // console.log(divInfo.data.division.games);
-        if(divInfo) {
-          setGameState(divInfo.data.division.games.map(game => ({gameId: game._id, time: game.name, date: game.date, teamOne: game.teamOne, teamTwo: game.teamTwo})));
-          // console.log(teams);
-          setLoadingGames(false);
-        }
-      } 
-    };
-    avaliableGames();
-  }, [currentDiv]);
-
-  useEffect(() => {
-    setLoadingTeams(true);
-    resetTeams();
-    const avaliableTeams = async () => {
-      if(currentGame != undefined) {
-        const gameData = await selectedGame({variables: {gameId: currentGame}, skipToken});
-        if(gameData) {
-          // console.log(gameData.data.game);
-          updateTeams(gameData.data.game.teamOne);
-          updateTeams(gameData.data.game.teamTwo);
-          setLoadingTeams(false);
-          // console.log(teams);
-        }
-      }
-    };
-    avaliableTeams();
-  }, [currentGame]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

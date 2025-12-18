@@ -23,6 +23,22 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
   const [addGame, {errorAddGmae}] = useMutation(ADD_GAME);
 
+  useEffect(() => {
+    setLoadingTeams(true);
+    const avaliableTeams = async () => {
+      if(currentDiv) {
+      const divInfo = await selectDiv({variables: {divisionId: currentDiv}})
+        // console.log(divInfo.data.division.teams);
+        if(divInfo) {
+          setTeamState(divInfo.data.division.teams.map(team => ({teamId: team._id, name: team.name})));
+          // console.log(teams);
+          setLoadingTeams(false);
+        }
+      } 
+    };
+    avaliableTeams();
+  }, [currentDiv]);
+
   if(loading) {
     return null;
   }
@@ -70,24 +86,6 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     });
     console.log(formState);
   };
-
-  useEffect(() => {
-    setLoadingTeams(true);
-    const avaliableTeams = async () => {
-      if(currentDiv) {
-      const divInfo = await selectDiv({variables: {divisionId: currentDiv}})
-        // console.log(divInfo.data.division.teams);
-        if(divInfo) {
-          setTeamState(divInfo.data.division.teams.map(team => ({teamId: team._id, name: team.name})));
-          // console.log(teams);
-          setLoadingTeams(false);
-        }
-      } 
-    };
-    avaliableTeams();
-  }, [currentDiv]);
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();

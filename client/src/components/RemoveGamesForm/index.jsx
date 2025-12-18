@@ -16,6 +16,22 @@ export default function RemoveGamesForm () {
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
   const [selectedDiv, {loadingSingleDiv, errorSingleDiv, dataSingleDiv}] = useLazyQuery(QUERY_SINGLE_DIVISION);
 
+  useEffect(() => {
+    setLoadingGames(true);
+    const avaliableGames = async () => {
+      if(currentDiv) {
+      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
+        console.log(divInfo.data.division.games);
+        if(divInfo) {
+          setGameState(divInfo.data.division.games.map(game => ({gameId: game._id, time: game.name, date: game.date, teamOne: game.teamOne, teamTwo: game.teamTwo})));
+          // console.log(teams);
+          setLoadingGames(false);
+        }
+      } 
+    };
+    avaliableGames();
+  }, [currentDiv]);
+
   if(loading) {
     return null;
   }
@@ -38,21 +54,7 @@ export default function RemoveGamesForm () {
     setDivState(e.target.value);
   };
 
-  useEffect(() => {
-    setLoadingGames(true);
-    const avaliableGames = async () => {
-      if(currentDiv) {
-      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
-        console.log(divInfo.data.division.games);
-        if(divInfo) {
-          setGameState(divInfo.data.division.games.map(game => ({gameId: game._id, time: game.name, date: game.date, teamOne: game.teamOne, teamTwo: game.teamTwo})));
-          // console.log(teams);
-          setLoadingGames(false);
-        }
-      } 
-    };
-    avaliableGames();
-  }, [currentDiv]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -15,6 +15,22 @@ export default function RemoveTeamForm () {
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
   const [removeTeam, {removeTeamError}] = useMutation(REMOVE_TEAM);
 
+  useEffect(() => {
+    setLoadingTeams(true);
+    const avaliableTeams = async () => {
+      if(currentDiv) {
+      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
+        // console.log(divInfo.data.division.teams);
+        if(divInfo) {
+          setTeamState(divInfo.data.division.teams.map(team => ({teamId: team._id, name: team.name})));
+          // console.log(teams);
+          setLoadingTeams(false);
+        }
+      } 
+    };
+    avaliableTeams();
+  }, [currentDiv]);
+
   if(loading) {
     return null;
   }
@@ -37,22 +53,6 @@ export default function RemoveTeamForm () {
     });
     // console.log(formState);
   };
-
-  useEffect(() => {
-    setLoadingTeams(true);
-    const avaliableTeams = async () => {
-      if(currentDiv) {
-      const divInfo = await selectedDiv({variables: {divisionId: currentDiv}});
-        // console.log(divInfo.data.division.teams);
-        if(divInfo) {
-          setTeamState(divInfo.data.division.teams.map(team => ({teamId: team._id, name: team.name})));
-          // console.log(teams);
-          setLoadingTeams(false);
-        }
-      } 
-    };
-    avaliableTeams();
-  }, [currentDiv]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
