@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import AddTeamForm from '../components/AddTeamForm'
 import RemoveTeamForm from '../components/RemoveTeamForm'
 import AddDivisionForm from '../components/AddDivisionForm'
@@ -7,7 +8,7 @@ import GameScheduler from '../components/GameScheduler'
 import RemoveGamesForm from '../components/RemoveGamesForm'
 import ArchiveGamesForm from '../components/ArchiveGamesForm'
 import ResetSeasonForm from '../components/ResetSeasonForm'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
 import { ArchiveBoxIcon, ArrowPathIcon, CalendarIcon, CheckIcon, TrashIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/react/24/outline'
 
 import {useState} from 'react'
@@ -81,59 +82,62 @@ export default function TeamManager() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav/>
-      <h2 className="text-base mt-5 font-semibold text-gray-900 dark:text-white">Admin Tasks</h2>
-      {/* Task List */}
-      <ul
-        role="list"
-        className="mt-6 grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-2 dark:border-white/10"
-      >
-        {tasks.map((task, taskIndex) => (
-          <li key={taskIndex} className='flow-root'>
-            <div className="relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:outline-2 focus-within:outline-indigo-600 hover:bg-gray-50 dark:focus-within:outline-indigo-500 dark:hover:bg-white/5">
-              <div className={classNames(task.background, 'flex size-16 shrink-0 items-center justify-center rounded-lg')}>
-                <task.icon aria-hidden='true' className='size-6 text-white'/>
+      {/* Content */}
+      <div className='flex-1'>
+        <h2 className="text-base mt-5 font-semibold text-gray-900 dark:text-white">Admin Tasks</h2>
+        {/* Task List */}
+        <ul
+          role="list"
+          className="mt-6 grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-2 dark:border-white/10"
+        >
+          {tasks.map((task, taskIndex) => (
+            <li key={taskIndex} className='flow-root'>
+              <div className="relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:outline-2 focus-within:outline-indigo-600 hover:bg-gray-50 dark:focus-within:outline-indigo-500 dark:hover:bg-white/5">
+                <div className={classNames(task.background, 'flex size-16 shrink-0 items-center justify-center rounded-lg')}>
+                  <task.icon aria-hidden='true' className='size-6 text-white'/>
+                </div>
+                <div onClick={handleButtonClick}>
+                  <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                    <p className="focus:outline-hidden">
+                      <span aria-hidden='true' className='absolute inset-0' id={task.value}></span>
+                      <span>{task.title}</span>
+                      <span aria-hidden='true'> &rarr;</span>
+                    </p>
+                  </h3>             
+                </div>
               </div>
-              <div onClick={handleButtonClick}>
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                  <p className="focus:outline-hidden">
-                    <span aria-hidden='true' className='absolute inset-0' id={task.value}></span>
-                    <span>{task.title}</span>
-                    <span aria-hidden='true'> &rarr;</span>
-                  </p>
-                </h3>             
-              </div>
+            </li>
+          ))}
+        </ul>
+        <Dialog open={open} onClose={setOpen} className="relative z-10">
+          <DialogBackdrop
+            transition
+            className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-gray-900/50"
+          />
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <DialogPanel
+                transition
+                className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10"
+              >
+                <div className="imx-auto max-w-7xl px-6 lg:px-8">
+                  {currentForm === 'addTeam' && (<AddTeamForm />)}
+                  {currentForm === 'removeTeam' && (<RemoveTeamForm />)}
+                  {currentForm === 'addDivision' && (<AddDivisionForm />)}
+                  {currentForm === 'removeDivision' && (<RemoveDivisionForm />)}
+                  {currentForm === 'gameScheduler' && (<GameScheduler />)}
+                  {currentForm === 'removeGame' && (<RemoveGamesForm />)}
+                  {currentForm === 'archiveGames' && (<ArchiveGamesForm />)}
+                  {currentForm === 'seasonReset' && (<ResetSeasonForm />)}
+                </div>  
+              </DialogPanel>
             </div>
-          </li>
-        ))}
-      </ul>
-
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
-        <DialogBackdrop
-          transition
-          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-gray-900/50"
-        />
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <DialogPanel
-              transition
-              className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10"
-            >
-              <div className="imx-auto max-w-7xl px-6 lg:px-8">
-                {currentForm === 'addTeam' && (<AddTeamForm />)}
-                {currentForm === 'removeTeam' && (<RemoveTeamForm />)}
-                {currentForm === 'addDivision' && (<AddDivisionForm />)}
-                {currentForm === 'removeDivision' && (<RemoveDivisionForm />)}
-                {currentForm === 'gameScheduler' && (<GameScheduler />)}
-                {currentForm === 'removeGame' && (<RemoveGamesForm />)}
-                {currentForm === 'archiveGames' && (<ArchiveGamesForm />)}
-                {currentForm === 'seasonReset' && (<ResetSeasonForm />)}
-              </div>  
-            </DialogPanel>
           </div>
-        </div>
-      </Dialog>
+        </Dialog>
+      </div>
+      <Footer/>
     </div>
   )
 }

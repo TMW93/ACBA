@@ -1,3 +1,5 @@
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 import {useParams} from 'react-router-dom';
 import {useQuery} from '@apollo/client/react';
 import {QUERY_SINGLE_DIVISION} from '../../utils/queries';
@@ -5,8 +7,6 @@ import {useState} from 'react';
 import quickSortStandings from '../../utils/quickSortStandings'
 import ACBALogo from '../assets/icons/acbaLogo.png'
 import wideJiggle from '../assets/placeholders/widejiggling.webp'
-
-import Nav from "../components/Nav";
 
 const Div = () => {
   const {divisionId} = useParams();
@@ -32,10 +32,11 @@ const Div = () => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
+      {/* Content */}
+      <div className="mx-auto flex-1 max-w-7xl px-6 lg:px-8">
+        <h2 className="mx-auto mt-10 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
         <h2 className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
@@ -230,6 +231,7 @@ const Div = () => {
           </div>                  
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import Nav from "../components/Nav";
-
+import Footer from "../components/Footer";
 import {useQuery} from '@apollo/client/react'
 import {QUERY_ALL_DIVISIONS} from '../../utils/queries'
 import {Link} from "react-router-dom";
@@ -33,102 +33,110 @@ const Divisions = () => {
   // console.log(sundayDivs, mondayDivs, tuesdayDivs, wednesdayDivs, thursdayDivs);
 
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen mx-auto max-w-7xl px-6 lg:px-8">
       <Nav />
-      <h1>Divisions</h1>
-      <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-4 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-5">
-        {/* Sunday Divs */}
-        <div>
-          <h2>Sunday</h2>
-          <h2>Divisions</h2>
+      {/* Content */}
+      <div className="flex-1">
+        <h1 className="mt-11">Divisions</h1>
+        <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-4 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-5">
+          {/* Sunday Divs */}
           <div>
-            {sundayDivs.map((div) => (
-              <a key={div._id} 
-                    className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
-                                transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
-                    href={`/divisions/${div._id}`}>
-                <img className="w-full" src={ACBALogo} alt="acba logo"/>
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-center">{div.day}</div>
-                  <div className="font-bold text-xl mb-2 text-center">{div.name}</div>
-                </div>
-              </a>
-            ))}
+            <h2>Sunday</h2>
+            <h2>Divisions</h2>
+            <div className="mt-3">
+              {sundayDivs.map((div) => (
+                <Link key={div._id} 
+                      className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                                  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+                      to={`/divisions/${div._id}`}>
+                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl text-center">{div.day}</div>
+                    <div className="font-bold text-xl text-center">{div.name}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-        {/* Monday Divs */}
-        <div>
-          <h2>Monday</h2>
-          <h2>Divisions</h2>
+          {/* Monday Divs */}
           <div>
-            {mondayDivs.map((div) => (
+            <h2>Monday</h2>
+            <h2>Divisions</h2>
+            <div className="mt-3">
+              {mondayDivs.map((div) => (
+                <Link key={div._id} 
+                      className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                                  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+                      to={`/divisions/${div._id}`}>
+                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl text-center">{div.day}</div>
+                    <div className="font-bold text-xl text-center">{div.name}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          {/* Tuesday Divs */}
+          <div>
+            <h2>Tuesday</h2>
+            <h2>Divisions</h2>
+            <div className="mt-3">
+              {tuesdayDivs.map((div) => (
+                <Link key={div._id} 
+                      className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                                  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+                      to={`/divisions/${div._id}`}>
+                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl text-center">{div.day}</div>
+                    <div className="font-bold text-xl text-center">{div.name}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          {/* Wednesday Divs */}
+          <div>
+            <h2>Wednesday</h2>
+            <h2>Divisions</h2>
+            <div className="mt-3">
+              {wednesdayDivs.map((div) => (
+                <Link key={div._id} 
+                      className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                                  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+                      to={`/divisions/${div._id}`}>
+                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl text-center">{div.day}</div>
+                    <div className="font-bold text-xl text-center">{div.name}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          {/* Thursday Divs */}
+          <div>
+            <h2>Thursday</h2>
+            <h2>Divisions</h2>
+            <div className="mt-3">
+            {thursdayDivs.map((div) => (
               <Link key={div._id} 
-                    className="w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-black/5 dark:outline-white/10"
+                    className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                                  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                     to={`/divisions/${div._id}`}>
                 <img className="w-full" src={ACBALogo} alt="acba logo"/>
                 <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-center">{div.day}</div>
-                  <div className="font-bold text-xl mb-2 text-center">{div.name}</div>
+                  <div className="font-bold text-xl text-center">{div.day}</div>
+                  <div className="font-bold text-xl text-center">{div.name}</div>
                 </div>
               </Link>
             ))}
-          </div>
+            </div>
+          </div>  
         </div>
-        {/* Tuesday Divs */}
-        <div>
-          <h2>Tuesday</h2>
-          <h2>Divisions</h2>
-          <div>
-            {tuesdayDivs.map((div) => (
-              <Link key={div._id} 
-                    className="w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-black/5 dark:outline-white/10"
-                    to={`/divisions/${div._id}`}>
-                <img className="w-full" src={ACBALogo} alt="acba logo"/>
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-center">{div.day}</div>
-                  <div className="font-bold text-xl mb-2 text-center">{div.name}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-        {/* Wednesday Divs */}
-        <div>
-          <h2>Wednesday</h2>
-          <h2>Divisions</h2>
-          <div>
-            {wednesdayDivs.map((div) => (
-              <Link key={div._id} 
-                    className="w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-black/5 dark:outline-white/10"
-                    to={`/divisions/${div._id}`}>
-                <img className="w-full" src={ACBALogo} alt="acba logo"/>
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-center">{div.day}</div>
-                  <div className="font-bold text-xl mb-2 text-center">{div.name}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-        {/* Thursday Divs */}
-        <div>
-          <h2>Thursday</h2>
-          <h2>Divisions</h2>
-          <div>
-          {thursdayDivs.map((div) => (
-            <Link key={div._id} 
-                  className="w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-black/5 dark:outline-white/10"
-                  to={`/divisions/${div._id}`}>
-              <img className="w-full" src={ACBALogo} alt="acba logo"/>
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 text-center">{div.day}</div>
-                <div className="font-bold text-xl mb-2 text-center">{div.name}</div>
-              </div>
-            </Link>
-          ))}
-          </div>
-        </div>  
       </div>
+      <Footer/>
     </div>
   )
 };
