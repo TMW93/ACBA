@@ -148,3 +148,21 @@ export const RESET_SEASON = gql`
     }
   }
 `
+
+export const UPDATE_PAYMENT = gql`
+  mutation updatePayment($teamId: ID!, $payment: Boolean) {
+    updatePayment(teamId: $teamId, payment: $payment) {
+      _id
+      division {
+        _id
+        day
+        name
+      }
+      payment
+      wins
+      losses
+      draws
+      totalPoints
+    }
+  }
+`
