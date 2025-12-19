@@ -68,7 +68,8 @@ const typeDefs = `
     removeArchivedGames(divisionId: ID!) : Division
     removeSingleGame(gameId: ID!): Game
     updateGames(divisionId: ID!, gameId: ID!, scoreWinner: Int!, scoreLoser: Int!, winner: String!, loser: String!): Game
-    resetSeason(divisionId: ID!) : Team
+    resetSeason(divisionId: ID!): Team
+    updatePayment(teamId: ID!, payment: Boolean!): Team
   }
 `;
 

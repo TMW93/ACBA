@@ -218,6 +218,17 @@ const resolvers = {
         }
       );
     },
+
+    //payment mutations
+    updatePayment: async (parent, {teamId, payment}) => {
+      await Team.findByIdAndUpdate(
+        {_id: teamId},
+        {
+          payment: payment
+        },
+        {new: true, runValidators: true}
+      );
+    },
   },
 };
 
