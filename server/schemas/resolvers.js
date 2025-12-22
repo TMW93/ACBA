@@ -224,9 +224,7 @@ const resolvers = {
       await Team.findByIdAndUpdate(
         {_id: teamId},
         {
-          $set: {
-            payment: payment,
-          }
+          payment: payment,
         },
         {new: true, runValidators: true}
       );
