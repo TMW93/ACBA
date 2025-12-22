@@ -1,7 +1,7 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import {useQuery} from '@apollo/client/react'
-import {QUERY_ALL_DIVISIONS} from '../../utils/queries'
+import {QUERY_ALL_DIVISIONS} from '../utils/queries'
 import {Link} from "react-router-dom";
 import ACBALogo from '../assets/icons/acbaLogo.png'
 

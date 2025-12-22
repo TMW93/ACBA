@@ -2,9 +2,9 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import {useParams} from 'react-router-dom';
 import {useQuery} from '@apollo/client/react';
-import {QUERY_SINGLE_DIVISION} from '../../utils/queries';
+import {QUERY_SINGLE_DIVISION} from '../utils/queries';
 import {useState} from 'react';
-import quickSortStandings from '../../utils/quickSortStandings'
+import quickSortStandings from '../utils/quickSortStandings'
 import ACBALogo from '../assets/icons/acbaLogo.png'
 import wideJiggle from '../assets/placeholders/widejiggling.webp'
 
