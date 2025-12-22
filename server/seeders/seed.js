@@ -1,17 +1,21 @@
 const db = require('../config/connection');
 const cleanDB = require('./cleanDB');
-const {Division, Team, Game} = require('../models');
+const {Division, Team, Game, User} = require('../models');
 
 const divisionSeeds = require('./divisionSeeds.json');
 const teamSeeds = require('./teamSeeds.json');
+const userSeeds = require('./userSeeds.json');
 
 db.once('open', async () => {
   await cleanDB('Division', 'divisions');
   await cleanDB('Team', 'teams');
   await cleanDB('Game', 'games');
+  await cleanDB('User', 'users');
+
 
   const divisions = await Division.create(divisionSeeds);
   const teams = await Team.create(teamSeeds);
+  const users = await User.create(userSeeds);
   
   let i = 0;
 

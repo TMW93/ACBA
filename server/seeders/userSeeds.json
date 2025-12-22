@@ -1,0 +1,9 @@
+[
+  {
+    "firstName": "Tim",
+    "lastName": "Wong",
+    "email": "timwong@email.com",
+    "password": "admin123",
+    "admin": true
+  }
+]
