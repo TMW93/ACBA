@@ -8,8 +8,9 @@ import GameScheduler from '../components/GameScheduler'
 import RemoveGamesForm from '../components/RemoveGamesForm'
 import ArchiveGamesForm from '../components/ArchiveGamesForm'
 import ResetSeasonForm from '../components/ResetSeasonForm'
+import UpdatePayment from '../components/SetPaymentsForm'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
-import { ArchiveBoxIcon, ArrowPathIcon, CalendarIcon, CheckIcon, TrashIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/react/24/outline'
+import { ArchiveBoxIcon, ArrowPathIcon, CalendarIcon, CheckIcon, CurrencyDollarIcon,TrashIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/react/24/outline'
 
 import {useState} from 'react'
 
@@ -29,7 +30,7 @@ const tasks = [
   {
     title: 'Add Division',
     icon: UserGroupIcon,
-    background: 'bg-green-500',
+    background: 'bg-teal-500',
     value: 'addDivision',
   },
   {
@@ -62,6 +63,12 @@ const tasks = [
     icon: ArrowPathIcon,
     background: 'bg-purple-500',
     value: 'seasonReset',
+  },
+  {
+    title: 'Update Payments',
+    icon: CurrencyDollarIcon,
+    background: 'bg-green-500',
+    value: 'updatePayment',
   },
 ];
 
@@ -131,6 +138,7 @@ export default function TeamManager() {
                   {currentForm === 'removeGame' && (<RemoveGamesForm />)}
                   {currentForm === 'archiveGames' && (<ArchiveGamesForm />)}
                   {currentForm === 'seasonReset' && (<ResetSeasonForm />)}
+                  {currentForm === 'updatePayment' && (<UpdatePayment />)}
                 </div>  
               </DialogPanel>
             </div>
