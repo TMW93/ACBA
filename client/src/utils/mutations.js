@@ -150,7 +150,7 @@ export const RESET_SEASON = gql`
 `
 
 export const UPDATE_PAYMENT = gql`
-  mutation updatePayment($teamId: ID!, $payment: String) {
+  mutation updatePayment($teamId: ID!, $payment: String!) {
     updatePayment(teamId: $teamId, payment: $payment) {
       _id
       division {
