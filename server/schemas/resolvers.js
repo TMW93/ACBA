@@ -68,7 +68,7 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUserPassword: async (parent, {currentPassword, newPassword, confirmedPassword}, context) => {
+    changePassword: async (parent, {currentPassword, newPassword, confirmedPassword}, context) => {
       if(context.user) {
         const user = await User.findById(context.user._id);
         
@@ -97,10 +97,7 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    adminPrivileges: async (parent, {userId}) => {
-
-    },
-
+    
     //team mutations
     addTeam: async (parent, {teamName, divisionId}) => {
       const team = await Team.create({
