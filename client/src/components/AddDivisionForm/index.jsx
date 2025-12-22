@@ -1,7 +1,7 @@
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import {useState} from 'react'
 import {useMutation} from '@apollo/client/react'
-import {ADD_DIVISION} from '../../../utils/mutations'
+import {ADD_DIVISION} from '../../utils/mutations'
 
 const days = [
   {

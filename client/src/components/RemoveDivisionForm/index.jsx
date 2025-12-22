@@ -1,8 +1,8 @@
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import {useState} from 'react'
 import {useQuery ,useMutation} from '@apollo/client/react'
-import {REMOVE_DIVISION} from '../../../utils/mutations'
-import { QUERY_ALL_DIVISIONS } from '../../../utils/queries'
+import {REMOVE_DIVISION} from '../../utils/mutations'
+import { QUERY_ALL_DIVISIONS } from '../../utils/queries'
 
 export default function RemoveDivisionForm () {
   const [formState, setFormState] = useState({divisionId: ''});

@@ -1,8 +1,8 @@
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import {useState} from 'react'
 import {useQuery, useMutation} from '@apollo/client/react'
-import {QUERY_ALL_DIVISIONS} from '../../../utils/queries'
-import {ADD_TEAM} from '../../../utils/mutations'
+import {QUERY_ALL_DIVISIONS} from '../../utils/queries'
+import {ADD_TEAM} from '../../utils/mutations'
 
 export default function AddTeamForm () {
   const [formState, setFormState] = useState({

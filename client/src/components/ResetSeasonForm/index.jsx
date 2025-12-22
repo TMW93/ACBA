@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import { QUERY_ALL_DIVISIONS } from '../../../utils/queries'
-import { RESET_SEASON } from '../../../utils/mutations'
+import { QUERY_ALL_DIVISIONS } from '../../utils/queries'
+import { RESET_SEASON } from '../../utils/mutations'
 import { useMutation, useQuery } from '@apollo/client/react';
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 

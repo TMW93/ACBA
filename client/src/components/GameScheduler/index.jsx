@@ -1,4 +1,4 @@
-import createDates from "../../../utils/createDates"
+import createDates from "../../utils/createDates"
 import { useState } from "react"
 import SchedulerForm from "../SchedulerForm"
 

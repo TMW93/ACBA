@@ -1,6 +1,6 @@
 import {useState, useEffect, Suspense} from 'react'
-import {QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION, QUERY_SINGLE_GAME} from '../../../utils/queries'
-import {UPDATE_SINGLE_GAME} from '../../../utils/mutations'
+import {QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION, QUERY_SINGLE_GAME} from '../../utils/queries'
+import {UPDATE_SINGLE_GAME} from '../../utils/mutations'
 import {useQuery, useMutation, useLazyQuery, skipToken, useSuspenseQuery} from '@apollo/client/react'
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 

@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
-import {QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION} from '../../../utils/queries'
-import {REMOVE_GAMES, REMOVE_SINGLE_GAME, REMOVE_ARCHIVED_GAMES} from '../../../utils/mutations'
+import {QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION} from '../../utils/queries'
+import {REMOVE_GAMES, REMOVE_SINGLE_GAME, REMOVE_ARCHIVED_GAMES} from '../../utils/mutations'
 import {useQuery, useMutation, useLazyQuery} from '@apollo/client/react'
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 
