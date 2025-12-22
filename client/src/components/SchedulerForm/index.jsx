@@ -84,7 +84,7 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
       ...formState,
       [name]: value,
     });
-    console.log(formState);
+    // console.log(formState);
   };
 
   const handleSubmit = async (e) => {
