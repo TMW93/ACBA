@@ -6,7 +6,7 @@ const resolvers = {
     //user queries
     user: async(parent, args, context) => {
       if(context.user) {
-        const user = await User.findById(context.user._id).populate('teams');
+        const user = await User.findById(context.user._id);
         return user
       }
       throw AuthenticationError;
@@ -67,6 +67,38 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    updateUserPassword: async (parent, {currentPassword, newPassword, confirmedPassword}, context) => {
+      if(context.user) {
+        const user = await User.findById(context.user._id);
+        
+        if(!user) {
+          throw AuthenticationError;
+        }
+
+        if(newPassword.length < 8) {
+          throw new Error('Password should be at least 8 characters long.');
+        }
+
+        if(newPassword !== confirmedPassword) {
+          throw new Error('Passwords do not match.');
+        }
+
+        const isMatch = await user.comparePassword(currentPassword);
+        if(!isMatch) {
+          throw new Error('Incorrect current password.');
+        }
+
+        user.password = newPassword;
+
+        await user.save();
+
+        return user;
+      }
+      throw AuthenticationError;
+    },
+    adminPrivileges: async (parent, {userId}) => {
+
     },
 
     //team mutations

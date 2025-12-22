@@ -5,7 +5,7 @@ const typeDefs = `
     lastName: String
     email: String
     password: String
-    teams: [Team]
+    admin: Boolean
   }
 
   type Team {
@@ -59,6 +59,7 @@ const typeDefs = `
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    changePassword(currentPassword: String!, newPassword: String!, confirmedPassword: String!): Auth
     addTeam(divisionId: ID!, teamName: String!): Team
     removeTeam(teamId: ID!): Team
     addDivision(divisionName: String!, divisionDay: String!): Division
