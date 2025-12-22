@@ -10,8 +10,8 @@ const teamSchema = new Schema({
     ref: 'Division'
   },
   payment: {
-    type: Boolean,
-    default: false,
+    type: String,
+    default: 'Unpaid',
   },
   wins: {
     type: Number,

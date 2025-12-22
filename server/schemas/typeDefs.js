@@ -12,7 +12,7 @@ const typeDefs = `
     _id: ID
     name: String
     division: Division
-    payment: Boolean
+    payment: String
     wins: Int
     losses: Int
     draws: Int
@@ -69,7 +69,7 @@ const typeDefs = `
     removeSingleGame(gameId: ID!): Game
     updateGames(divisionId: ID!, gameId: ID!, scoreWinner: Int!, scoreLoser: Int!, winner: String!, loser: String!): Game
     resetSeason(divisionId: ID!): Team
-    updatePayment(teamId: ID!, payment: Boolean!): Team
+    updatePayment(teamId: ID!, payment: String!): Team
   }
 `;
 
