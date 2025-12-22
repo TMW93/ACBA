@@ -7,7 +7,19 @@ export const QUERY_SINGLE_USER = gql`
       firstName
       lastName
       email
-      teams
+      admin
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  {
+    user {
+      _id
+      firstName
+      lastName
+      email
+      admin
     }
   }
 `;

@@ -11,6 +11,7 @@ import TeamRegistration from './pages/TeamRegistration.jsx'
 import ContactUs  from './pages/ContactUs.jsx'
 import Div from './pages//Div.jsx'
 import TeamManager from './pages/TeamManager.jsx'
+import Login from './pages/Login.jsx'
 import Testing from './pages/Testing.jsx'
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: 'admin',
         element: <TeamManager />
+      },
+      {
+        path: 'login',
+        element: <Login />
       },
       {
         path: 'testing',
