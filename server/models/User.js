@@ -20,7 +20,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 8,
-  }
+  },
+  admin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -34,6 +39,10 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
 };
 
 userSchema.virtual("fullName").get(function () {
