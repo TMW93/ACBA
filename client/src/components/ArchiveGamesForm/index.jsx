@@ -32,6 +32,7 @@ export default function ArchiveGamesForm () {
     setTeams(initialTeamState);
   };
   
+  // Games useEffect
   useEffect(() => {
     setLoadingGames(true);
     const avaliableGames = async () => {
@@ -48,6 +49,7 @@ export default function ArchiveGamesForm () {
     avaliableGames();
   }, [currentDiv]);
 
+  // Teams useEffect
   useEffect(() => {
     setLoadingTeams(true);
     resetTeams();
@@ -107,8 +109,6 @@ export default function ArchiveGamesForm () {
   const updateTeams = (newTeam) => {
     setTeams(playingTeams => [...playingTeams, newTeam]);
   };
-
-  
 
   const handleScoreChange = async (e) => {
     // console.log(typeof(e.target.value));
@@ -293,5 +293,4 @@ export default function ArchiveGamesForm () {
       </div>
     </form>
   )
-
 }
