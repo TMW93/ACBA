@@ -13,7 +13,11 @@ const resolvers = {
     },
 
     //team queries
-    team: async(parent, {teamName, divisionId}) => {
+    teamById: async(parent, {teamId}) => {
+      const team = await Team.findById(teamId).populate('division');
+      return team;
+    },
+    teamByName: async(parent, {teamName, divisionId}) => {
       const team = await Team.findOne({name: teamName, division: divisionId}).populate('division').exec();
       return team;
     },

@@ -48,7 +48,8 @@ const typeDefs = `
 
   type Query {
     user: User
-    team(teamName: String!, divisionId: ID): Team
+    teamById(teamId: ID!): Team
+    teamByName(teamName: String!, divisionId: ID): Team
     teamsByDivision(divisionId: ID!): Team
     allTeams: [Team]
     division(divisionId: ID!): Division
