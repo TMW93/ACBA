@@ -96,6 +96,25 @@ export const QUERY_ALL_TEAMS = gql`
   }
 `;
 
+export const QUERY_SINGLE_TEAM = gql`
+  query singleTeam($teamId: ID!) {
+    teamById(teamId: $teamId) {
+      _id
+      name
+      division {
+        _id
+        name
+        day
+      }
+      payment
+      wins
+      losses
+      draws
+      totalPoints
+    }
+  }
+`;
+
 export const QUERY_SINGLE_GAME = gql`
   query getSingleGame($gameId: ID!) {
     game(gameId: $gameId) {
