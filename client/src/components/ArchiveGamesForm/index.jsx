@@ -115,7 +115,7 @@ export default function ArchiveGamesForm () {
     const intValue = parseInt(e.target.value, 10);
     if(!isNaN(intValue)) {
       const {name} = e.target;
-      console.log(name);
+      // console.log(name);
       setFormState({
         ...formState,
         [name]: intValue,
