@@ -3,10 +3,47 @@ import Footer from "../components/Footer";
 import {useParams} from 'react-router-dom';
 import {useQuery} from '@apollo/client/react';
 import {QUERY_SINGLE_DIVISION} from '../utils/queries';
+import Auth from '../utils/auth'
 import {useState} from 'react';
 import quickSortStandings from '../utils/quickSortStandings'
 import ACBALogo from '../assets/icons/acbaLogo.png'
 import wideJiggle from '../assets/placeholders/widejiggling.webp'
+
+const tableHeaders = [
+  {
+    name: 'Pos',
+  },
+  {
+    name: 'Team',
+  },
+  {
+    name: 'Wins',
+  },
+  {
+    name: 'Losses',
+  },
+  {
+    name: 'Draws',
+  },
+  {
+    name: 'Total Points',
+  }
+];
+
+const archiveHeaders = [
+  {
+    name: 'Date',
+  },
+  {
+    name: 'Winner',
+  },
+  {
+    name: 'Final Score',
+  },
+  {
+    name: 'Loser',
+  }
+];
 
 const Div = () => {
   const {divisionId} = useParams();
@@ -28,9 +65,199 @@ const Div = () => {
 
   if(division) {
     sortedTeams = quickSortStandings(division.teams);
-    console.log(sortedTeams);
+    // console.log(sortedTeams);
   }
 
+  const adminTableHeaders = () => {
+    if(Auth.loggedIn()) {
+      return (
+        <tr>
+          {tableHeaders.map((header, index) => (
+            <th
+              key={index}
+              scope="col"
+              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+            >
+              {header.name}
+            </th>
+          ))}
+          <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
+            <span className="sr-only">Edit</span>
+          </th>
+        </tr>
+      );
+    } else {
+      return (
+        <tr>
+          {tableHeaders.map((header, index) => (
+            <th
+              key={index}
+              scope="col"
+              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+            >
+              {header.name}
+            </th>
+          ))}
+        </tr>
+      );
+    }
+  };
+
+  const adminTableContent = () => {
+    if(Auth.loggedIn()) {
+      return (
+        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+          {sortedTeams.map((team, index) => (
+            <tr key={team._id}>
+              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                {index + 1}
+              </td>
+              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                {team.name}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.wins}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.losses}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.draws}
+              </td>
+                <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.totalPoints}
+              </td>
+              <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6">
+                <a
+                  href="#"
+                  className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                >
+                  Edit<span className="sr-only">, {team._id}</span>
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      );
+    } else {
+      return (
+        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+          {sortedTeams.map((team, index) => (
+            <tr key={team._id}>
+              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                {index + 1}
+              </td>
+              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                {team.name}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.wins}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.losses}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.draws}
+              </td>
+                <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {team.totalPoints}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      );
+    }
+  };
+
+  const adminArchiveHeaders = () => {
+    if(Auth.loggedIn()) {
+      return (
+        <tr>
+          {archiveHeaders.map((header, index) => (
+            <th
+              key={index}
+              scope="col"
+              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+            >
+              {header.name}
+            </th>
+          ))}
+          <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
+            <span className="sr-only">Edit</span>
+          </th>
+        </tr>
+      )
+    } else {
+      return (
+        <tr>
+          {archiveHeaders.map((header, index) => (
+            <th
+              key={index}
+              scope="col"
+              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+            >
+              {header.name}
+            </th>
+          ))}
+        </tr>
+      )
+    }
+  };
+
+  const adminArchiveContent = () => {
+    if(Auth.loggedIn()) {
+      return (
+        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+          {division.playedGames.map((game) => (
+            <tr key={game._id}>
+              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                {game.date}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {game.winner}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {game.scoreWinner} - {game.scoreLoser}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {game.loser}
+              </td>
+              <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6">
+                <a
+                  href="#"
+                  className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                >
+                  Edit<span className="sr-only">, {game._id}</span>
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      );
+    } else {
+      return (
+        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+          {division.playedGames.map((game) => (
+            <tr key={game._id}>
+              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                {game.name}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {game.winner}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {game.scoreWinner} - {game.scoreLoser}
+              </td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {game.loser}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      );
+    }
+  };
+  
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
@@ -47,80 +274,9 @@ const Div = () => {
                   <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
                     <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
                       <thead className="bg-gray-50 dark:bg-gray-800/75">
-                        <tr>
-                          <th
-                            scope="col"
-                            className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-                          >
-                            Pos
-                          </th>
-                          <th
-                            scope="col"
-                            className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-                          >
-                            Team
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
-                          >
-                            Wins
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
-                          >
-                            Losses
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
-                          >
-                            Draws
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
-                          >
-                            Total Points
-                          </th>
-                          <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
-                            <span className="sr-only">Edit</span>
-                          </th>
-                        </tr>
+                        {adminTableHeaders()}
                       </thead>
-                      <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-                        {sortedTeams.map((team, index) => (
-                          <tr key={team._id}>
-                            <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                              {index + 1}
-                            </td>
-                            <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                              {team.name}
-                            </td>
-                            <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                              {team.wins}
-                            </td>
-                            <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                              {team.losses}
-                            </td>
-                            <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                              {team.draws}
-                            </td>
-                              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                              {team.totalPoints}
-                            </td>
-                            <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6">
-                              <a
-                                href="#"
-                                className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
-                              >
-                                Edit<span className="sr-only">, {team._id}</span>
-                              </a>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
+                      {adminTableContent()}
                     </table>
                   </div>
                 </div>
@@ -167,62 +323,9 @@ const Div = () => {
                     <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
                       <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
                         <thead className="bg-gray-50 dark:bg-gray-800/75">
-                          <tr>
-                            <th
-                              scope="col"
-                              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-                            >
-                              Date
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-3 py-3.5 text-centertext-sm font-semibold text-gray-900 dark:text-gray-200"
-                            >
-                              Winner
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
-                            >
-                              Final Score
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
-                            >
-                              Loser
-                            </th>
-                            <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
-                              <span className="sr-only">Edit</span>
-                            </th>
-                          </tr>
+                          {adminArchiveHeaders()}
                         </thead>
-                        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-                          {division.playedGames.map((game) => (
-                            <tr key={game._id}>
-                              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                                {game.date}
-                              </td>
-                              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                                {game.winner}
-                              </td>
-                              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                                {game.scoreWinner} - {game.scoreLoser}
-                              </td>
-                              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                                {game.loser}
-                              </td>
-                              <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6">
-                                <a
-                                  href="#"
-                                  className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
-                                >
-                                  Edit<span className="sr-only">, {game._id}</span>
-                                </a>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
+                        {adminArchiveContent()}
                       </table>
                     </div>
                   </div>
