@@ -610,6 +610,8 @@ const Div = () => {
           </form>
         );
       }
+    } else if (division.playedGames.length === 0) {
+      <p>No games have been played.</p>
     } else {
       return (
         <p>There was a problem in loading the form...</p>
