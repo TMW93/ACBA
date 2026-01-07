@@ -1,8 +1,6 @@
 import {useState} from 'react'
-import { useQuery } from '@apollo/client/react'
-import { QUERY_ME } from '../../utils/queries'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Auth from '../../utils/auth'
 import ACBALogo from '../../assets/icons/acbaLogo.png'
 
@@ -39,18 +37,7 @@ function classNames(...classes) {
 };
 
 export default function Nav() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // const {loading, error, data} = useQuery(QUERY_ME);
-  // if(loading) {
-  //   return null;
-  // }
-  // if(error) {
-  //   return `Error! ${error}`;
-  // }
-
-  // const user = data.user || [];
-
-  // console.log(user);
+  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const adminNav = () => {
     if(Auth.loggedIn()) {
@@ -117,6 +104,7 @@ export default function Nav() {
   return (
     <Disclosure
       as='nav'
+      aria-label='Global'
       className="absolute inset-x-0 top-0 z-50 bg-gray-800 dark:bg-gray-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10"
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -160,7 +148,6 @@ export default function Nav() {
           {adminNav()}
         </div>
       </div>
-
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => (
