@@ -1,5 +1,6 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import Drawer from "../components/Drawer";
 import {useParams} from 'react-router-dom';
 import {useQuery, useLazyQuery} from '@apollo/client/react';
 import {QUERY_SINGLE_DIVISION, QUERY_SINGLE_TEAM, QUERY_SINGLE_GAME} from '../utils/queries';
@@ -69,6 +70,7 @@ const Div = () => {
     Loser: '',
   });
   let sortedTeams = [];
+  
 
   const [teamQuery, {loadingSingleTeam, errorSingleTeam, dataSingleTeam}] = useLazyQuery(QUERY_SINGLE_TEAM);
   const [gameQuery, {loadingSingleGame, errorSingleGame, dataSingleGame}] = useLazyQuery(QUERY_SINGLE_GAME);
@@ -622,9 +624,10 @@ const Div = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
+       <Drawer/>
       {/* Content */}
       <div className="mx-auto flex-1 max-w-7xl px-6 lg:px-8">
-        <h2 className="mx-auto mt-10 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
+        <h2 className="mx-auto max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
         <h2 className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
