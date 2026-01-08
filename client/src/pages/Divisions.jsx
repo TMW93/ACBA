@@ -1,6 +1,5 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import Drawer from "../components/Drawer";
 import {useQuery} from '@apollo/client/react'
 import {QUERY_ALL_DIVISIONS} from '../utils/queries'
 import {Link} from "react-router-dom";
@@ -38,8 +37,7 @@ const Divisions = () => {
       <Nav />
       {/* Content */}
       <div className="flex-1 mx-auto max-w-7xl px-6 lg:px-8">
-        <Drawer/>
-        <h1 className="mt-11">Divisions</h1>
+        <h1>Divisions</h1>
         <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-4 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-5">
           {/* Sunday Divs */}
           <div>

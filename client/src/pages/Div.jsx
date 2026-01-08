@@ -1,6 +1,5 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import Drawer from "../components/Drawer";
 import {useParams} from 'react-router-dom';
 import {useQuery, useLazyQuery} from '@apollo/client/react';
 import {QUERY_SINGLE_DIVISION, QUERY_SINGLE_TEAM, QUERY_SINGLE_GAME} from '../utils/queries';
@@ -624,7 +623,6 @@ const Div = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
-       <Drawer/>
       {/* Content */}
       <div className="mx-auto flex-1 max-w-7xl px-6 lg:px-8">
         <h2 className="mx-auto max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>

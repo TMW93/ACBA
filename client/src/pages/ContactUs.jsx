@@ -1,6 +1,5 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import Drawer from '../components/Drawer'
 import { EnvelopeIcon, PhoneIcon, UserIcon } from '@heroicons/react/20/solid'
 
 const socialIcons = [
@@ -40,8 +39,7 @@ const ContactUs = () => {
       <Nav />
       {/* Content */}
       <div className="flex-1 mx-auto max-w-3xl text-base/7 text-gray-700 dark:text-gray-300">
-      <Drawer/>
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-15">         
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">         
           <div className="mx-auto max-w-2xl lg:mx-0">           
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
               Contact Us

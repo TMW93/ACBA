@@ -2,7 +2,6 @@ import {useState} from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Divider from '../components/Divider'
-import Drawer from '../components/Drawer';
 import iLoveSnow from '../assets/placeholders/ilovesnow.jpg'
 import wideJiggling from '../assets/placeholders/wideJiggling.webp'
 import catBanner from '../assets/placeholders/catbanner.jpg'
@@ -184,9 +183,8 @@ const Home = () => {
       <Nav/>
       {/* Main Content */}
       <div className="flex-1 mx-auto max-w-7xl px-6 lg:px-8">
-        <Drawer/>
         {/* Content */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-10">
+        <div className="mx-auto max-w-7xl lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">08/07/2025</p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">

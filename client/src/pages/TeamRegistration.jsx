@@ -1,7 +1,6 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Divider from "../components/Divider";
-import Drawer from '../components/Drawer'
 import {XMarkIcon} from '@heroicons/react/20/solid'
 
 const avaliableDivs = [
@@ -174,8 +173,7 @@ const TeamRegistration = () => {
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
       <div>
-        <Drawer/> 
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-10">   
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">   
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
             <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
               Team Registration/Information

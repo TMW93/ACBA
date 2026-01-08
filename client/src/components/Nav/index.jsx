@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import Drawer from '../Drawer'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Auth from '../../utils/auth'
@@ -42,7 +43,7 @@ export default function Nav() {
   const adminNav = () => {
     if(Auth.loggedIn()) {
       return (
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-4">
           {/* Profile dropdown */}
           <Menu as="div" className="relative ml-3">
             <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
@@ -89,7 +90,7 @@ export default function Nav() {
       );
     } else {
       return (
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-4">
           <a
           href='/login'
             className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500 dark:hover:text-white"
@@ -146,6 +147,7 @@ export default function Nav() {
             </div>
           </div>
           {adminNav()}
+          <Drawer/>
         </div>
       </div>
       <DisclosurePanel className="sm:hidden">
