@@ -39,6 +39,10 @@ const resolvers = {
       const divisions = await Division.find().populate('teams');
       return divisions;
     },
+    divisionBySlug: async(parent, {slug}) => {
+      const division = await Division.findOne({slug: slug}).populate('teams');
+      return division;
+    },
 
     //game queries
     game: async(parent, {gameId}) => {

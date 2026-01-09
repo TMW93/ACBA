@@ -1,70 +1,87 @@
 [
   {
     "name": "Pool A",
-    "day": "Sunday"
+    "day": "Sunday",
+    "slug": "Sunday-Pool-A"
   },
   {
     "name": "Pool B",
-    "day": "Sunday"
+    "day": "Sunday",
+    "slug": "Sunday-Pool-B"
   },
   {
     "name": "Division 8A",
-    "day": "Sunday"
+    "day": "Sunday",
+    "slug": "Sunday-Division-8A"
   },
   {
     "name": "Social 10B",
-    "day": "Sunday"
+    "day": "Sunday",
+    "slug": "Sunday-Social-10B"
   },
   {
     "name": "Unisex 7",
-    "day": "Sunday"
+    "day": "Sunday",
+    "slug": "Sunday-Unisex-7"
   },
   {
     "name": "Division 8B",
-    "day": "Sunday"
+    "day": "Sunday",
+    "slug": "Sunday-Division-8B"
   },
   {
     "name": "Division 5",
-    "day": "Monday"
+    "day": "Monday",
+    "slug": "Monday-Division-5"
   },
   {
     "name": "PCYC Social C",
-    "day": "Monday"
+    "day": "Monday",
+    "slug": "Monday-PCYC-Social-C"
   },
   {
     "name": "Concord Social C",
-    "day": "Monday"
+    "day": "Monday",
+    "slug": "Monday-Concord-Social-C"
   },
   {
     "name": "Social A",
-    "day": "Tuesday" 
+    "day": "Tuesday",
+    "slug": "Tuesday-Social-A" 
   },
   {
     "name": "Social B",
-    "day": "Tuesday" 
+    "day": "Tuesday",
+    "slug": "Tuesday-Social-B" 
   },
   {
     "name": "Division 2",
-    "day": "Wednesday"
+    "day": "Wednesday",
+    "slug": "Wednesday-Division-2"
   },
   {
     "name": "Division 3",
-    "day": "Wednesday"
+    "day": "Wednesday",
+    "slug": "Wednesday-Division-3"
   },
   {
     "name": "Unisex 7",
-    "day": "Thursday"
+    "day": "Thursday",
+    "slug": "Thursday-Unisex-7"
   },
   {
     "name": "Social B",
-    "day": "Thursday" 
+    "day": "Thursday",
+    "slug": "Thursday-Social-B" 
   },
   {
     "name": "Social C",
-    "day": "Thursday"
+    "day": "Thursday",
+    "slug": "Thursday-Social-C"
   },
   {
     "name": "Social Beginners",
-    "day": "Thursday"   
+    "day": "Thursday",
+    "slug": "Thursday-Social-Benginners"   
   }
 ]

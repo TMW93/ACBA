@@ -23,6 +23,7 @@ const typeDefs = `
     _id: ID
     name: String
     day: String
+    slug: String
     teams: [Team]
     games: [Game]
     playedGames: [Game]
@@ -54,6 +55,7 @@ const typeDefs = `
     allTeams: [Team]
     division(divisionId: ID!): Division
     allDivisions: [Division]
+    divisionBySlug(slug: String!): Division
     game(gameId: ID!): Game
   }
 
