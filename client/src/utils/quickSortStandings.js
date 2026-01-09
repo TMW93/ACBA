@@ -1,5 +1,5 @@
 const quickSortStandings = (arr) => {
-  if(arr.length <= 1) {
+  if(arr.length <= 1 || arr.length === undefined) {
     return arr;
   }
 
