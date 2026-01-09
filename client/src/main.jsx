@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
       {
-        path: 'divisions/:divisionId',
+        path: 'divisions/:slug',
         element: <Div />
       },
       {

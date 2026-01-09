@@ -30,6 +30,7 @@ export const QUERY_ALL_DIVISIONS = gql`
       _id
       name
       day
+      slug
     }
   }
 `;
@@ -37,6 +38,50 @@ export const QUERY_ALL_DIVISIONS = gql`
 export const QUERY_SINGLE_DIVISION = gql`
   query getSingleDivision($divisionId: ID!) {
     division(divisionId: $divisionId) {
+      _id
+      name
+      day
+      slug
+      teams {
+        _id
+        name
+        payment
+        wins
+        losses
+        draws
+        totalPoints
+      }
+      games {
+        _id
+        time
+        date
+        teamOne
+        teamTwo
+        venue
+        scoreWinner
+        scoreLoser
+        winner
+        loser
+      }
+      playedGames {
+        _id
+        time
+        date
+        teamOne
+        teamTwo
+        venue
+        scoreWinner
+        scoreLoser
+        winner
+        loser
+      }
+    }
+  }
+`;
+
+export const QUERY_DIVISION_BY_SLUG = gql`
+  query getDivisionBySlug($slug: String!) {
+    divisionBySlug(slug: $slug) {
       _id
       name
       day
