@@ -1,6 +1,6 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { EnvelopeIcon, PhoneIcon, UserIcon } from '@heroicons/react/20/solid'
+import { EnvelopeIcon, PhoneIcon, UserIcon} from '@heroicons/react/20/solid'
 
 const socialIcons = [
   {
@@ -38,71 +38,68 @@ const ContactUs = () => {
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
       {/* Content */}
-      <div className="flex-1 mx-auto max-w-3xl text-base/7 text-gray-700 dark:text-gray-300">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">         
-          <div className="mx-auto max-w-2xl lg:mx-0">           
-            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-              Contact Us
-            </h1>
-            <p className="mt-6 text-xl/8 text-gray-700 dark:text-gray-300">
-              Contact Us
-            </p>
-          </div>
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
-            {/* Side Content */}
-            <div className="relative lg:order-last lg:col-span-5">
+      <div className="flex-1 relative isolate bg-white dark:bg-gray-900">
+        <div className="-mt-45 mx-auto max-w-7xl px-6 lg:px-8">         
+          <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
+            <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
+              <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+                <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+                  Contact Us
+                </h2>
+                <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
+                  ACBA Administration
+                </p>
+                <dl className="mt-10 space-y-4 text-base/7 text-gray-600 dark:text-gray-300">
+                  <div className="flex gap-x-4">
+                    <dt className="flex-none">
+                      <span className="sr-only">Phone</span>
+                      <PhoneIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
+                    </dt>
+                    <dd>
+                      <p className="hover:text-gray-900 dark:hover:text-white">
+                        Phone: 1234567890
+                      </p>
+                    </dd>
+                  </div>
+                  <div className="flex gap-x-4">
+                    <dt className="flex-none">
+                      <span className="sr-only">Email</span>
+                      <EnvelopeIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
+                    </dt>
+                    <dd>
+                      <p className="hover:text-gray-900 dark:hover:text-white">
+                        Email: email@email.com
+                      </p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </div>
-            {/* List */}
-            <div className="max-w-xl text-base/7 text-gray-600 lg:col-span-7 dark:text-gray-400">
-              <p className="mt-2 text-left text-xl/8 text-gray-700 dark:text-gray-300">
-                Contact
-              </p>
-              <ul role="list" className="mt-6 max-w-xl space-y-8 text-gray-600 dark:text-gray-400">
-                <li className="flex gap-x-3">
-                  <UserIcon
-                    aria-hidden="true"
-                    className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
-                  />
-                  <span>
-                    <strong className="font-semibold text-gray-900 dark:text-white">Contact:</strong> Name
-                  </span>
-                </li>
-                <li className="flex gap-x-3">
-                  <PhoneIcon
-                    aria-hidden="true"
-                    className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
-                  />
-                  <span>
-                    <strong className="font-semibold text-gray-900 dark:text-white">Phone No:</strong> 123456789
-                  </span>
-                </li>
-                <li className="flex gap-x-3">
-                  <EnvelopeIcon aria-hidden="true" className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400" />
-                  <span>
-                    <strong className="font-semibold text-gray-900 dark:text-white">Email:</strong> email@email.com
-                  </span>
-                </li>
-              </ul>
-              <p className="mt-12 text-left text-xl/8 text-gray-700 dark:text-gray-300">
-                Our Social Media
-              </p>
-              <ul role="list" className="mt-6 max-w-xl space-y-8 text-gray-600 dark:text-gray-400">
-                {socialIcons.map((item, index) =>(
-                  <li key={index} className="flex gap-x-3">
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      <span className="sr-only">{item.name}</span>
-                      <item.icon aria-hidden="true" className="size-6" />
-                    </a>
-                    <span key={item.description}>
-                      <strong className="font-semibold text-gray-900 dark:text-white">{item.name}:</strong> {item.description}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+            {/* Right Hand Section */}
+            <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
+              <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+                <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+                  ACBA Socials
+                </h2>
+                <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
+                  ACBA Content
+                </p>
+                <dl className="mt-10 space-y-4 text-base/7 text-gray-600 dark:text-gray-300">
+                  {socialIcons.map((social) => (
+                    <div key={social.name} className="flex gap-x-4">
+                      <dt className="flex-none">
+                        <span className="sr-only">{social.name}</span>
+                        <social.icon aria-hidden="true" className="h-7 w-6 text-gray-400"/>
+                      </dt>
+                      <dd>
+                        <p className="hover:text-gray-900 dark:hover:text-white">
+                          {social.description}
+                        </p>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </div>
           </div>
         </div>
