@@ -65,7 +65,7 @@ const typeDefs = `
     changePassword(currentPassword: String!, newPassword: String!, confirmedPassword: String!): Auth
     addTeam(divisionId: ID!, teamName: String!): Team
     removeTeam(teamId: ID!): Team
-    addDivision(divisionName: String!, divisionDay: String!): Division
+    addDivision(divisionName: String!, divisionDay: String!, slugName: String!): Division
     removeDivision(divisionId: ID!): Division
     addGame(gameTime: String!, gameDate: String!, teamOneId: String!, teamTwoId: String!, divisionId: ID!, venue: String!): Game
     removeGames(divisionId: ID!): Division

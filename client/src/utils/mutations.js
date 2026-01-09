@@ -58,11 +58,12 @@ export const REMOVE_TEAM = gql`
 `
 
 export const ADD_DIVISION = gql`
-  mutation addDivision($divisionName: String!, $divisionDay: String!) {
-    addDivision(divisionName: $divisionName, divisionDay: $divisionDay) {
+  mutation addDivision($divisionName: String!, $divisionDay: String!, $slugName: String!) {
+    addDivision(divisionName: $divisionName, divisionDay: $divisionDay, slugName: $slugName) {
       _id
       name
       day
+      slug
     }
   }
 `

@@ -126,10 +126,11 @@ const resolvers = {
     },
 
     //division mutations
-    addDivision: async (parent, {divisionName, divisionDay}) => {
+    addDivision: async (parent, {divisionName, divisionDay, slugName}) => {
       const division = await Division.create({
         name: divisionName,
-        day: divisionDay
+        day: divisionDay,
+        slug: slugName,
       });
 
       return division;

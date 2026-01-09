@@ -30,6 +30,7 @@ export default function AddDivisionForm () {
   const [formState, setFormState] = useState({
     divisionDay: '',
     divisionName: '',
+    slugName: '',
   });
 
   const [addDivision, error] = useMutation(ADD_DIVISION);
@@ -49,7 +50,8 @@ export default function AddDivisionForm () {
       const {mutationResponse} = await addDivision({
         variables: {
           divisionName: formState.divisionName,
-          divisionDay: formState.divisionDay
+          divisionDay: formState.divisionDay,
+          slugName: formState.slugName
         }
       });
 
@@ -101,6 +103,21 @@ export default function AddDivisionForm () {
               type="divisionName"
               name="divisionName"
               placeholder='Enter Division Name'
+              className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"           
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="divisionlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+            Division Url Name
+          </label>
+          <div className="mt-2.5">
+            <input
+              id="slugName"
+              type="slugName"
+              name="slugName"
+              placeholder='Enter Division URL Name'
               className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"           
               onChange={handleChange}
             />
