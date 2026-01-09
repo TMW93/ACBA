@@ -6,7 +6,8 @@ import {QUERY_SINGLE_DIVISION, QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_
 import Auth from '../utils/auth'
 import {useEffect, useState} from 'react';
 import quickSortStandings from '../utils/quickSortStandings'
-import wideJiggle from '../assets/placeholders/widejiggling.webp'
+import Gf7x from '../assets/placeholders/gf7x.jpg'
+import DuragCat from '../assets/placeholders/duragCat.jpg'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
 
 const tableHeaders = [
@@ -625,75 +626,77 @@ const Div = () => {
       <Nav />
       {/* Content */}
       <div className="-mt-10 mx-auto flex-1 max-w-7xl px-6 lg:px-8">
-        <h2 className="mx-auto max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
-        <h2 className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            {/* Standings */}
-            <div className="mt-8 flow-root">
-              <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                  <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-                    <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
-                      <thead className="bg-gray-50 dark:bg-gray-800/75">
-                        {adminTableHeaders()}
-                      </thead>
-                      {adminTableContent()}
-                    </table>
-                  </div>
+        <h2 className="text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
+        <h2 className="mt-2 text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
+        <div className="max-w-2xl lg:mx-0 lg:max-w-none">
+          {/* Standings */}
+          <div className="mt-8 flow-root">
+            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+                  <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
+                    <thead className="bg-gray-50 dark:bg-gray-800/75">
+                      {adminTableHeaders()}
+                    </thead>
+                    {adminTableContent()}
+                  </table>
                 </div>
               </div>
             </div>
-            {/* Games */}
-            <div className="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base/7 text-gray-700 lg:max-w-none lg:grid-cols-2 dark:text-gray-300">
-              <div>
-                {division.games.length > 0 && (
-                  <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8"> 
-                  <h2 className="mx-auto mt-2  mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">Upcoming Games For {division.games[0].date}</h2>
-                  {division.games.map((game) => (
-                    <div key={game._id} className="divide-y divide-gray-200 overflow-hidden mb-5 rounded-lg bg-white shadow-sm dark:divide-white/10 dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
-                      <div className="bg-gray-50 px-4 py-5 sm:px-6 dark:bg-gray-800/50">
-                        <p>{game.time}</p>
-                        <p>{game.venue}</p>
+          </div>
+          {/* Games & Images */}
+          <div className="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base/7 text-gray-700 lg:max-w-none lg:grid-cols-2 dark:text-gray-300">
+            <div>
+              <h2 className="mt-2 mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">Upcoming Games</h2>
+              {division.games.length > 0 && (
+                <div> 
+                <h2 className="mx-auto mt-2  mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.games[0].date}</h2>
+                {division.games.map((game) => (
+                  <div key={game._id} className="max-w-sm rounded overflow-hidden shadow-lg mb-10">
+                    <div className="px-6 py-4">
+                      <div className="font-bold text-xl">
+                        {game.time}
                       </div>
-                      <div className="bg-gray-50 px-4 py-5 sm:p-6 dark:bg-gray-800/50">
+                      <div className="font-bold text-xl mb-2">
+                        {game.venue}
+                      </div>
+                      <p className="text-gray-700 text-base">
                         <span>{game.teamOne}</span>
                         <span> VS </span>
                         <span>{game.teamTwo}</span>
-                      </div>
+                      </p>
                     </div>
-                  ))}
+                  </div>
+                ))}
                 </div>
-                )}
-              </div>
-              <div>
-                <img
-                  alt=""
-                  src={wideJiggle}
-                  className="h-auto w-auto dark:hidden"
-                />
-              </div>
+              )}
+            </div>
+            {/* Images */}
+            <div>
+              <img
+                alt=""
+                src={DuragCat}
+                className="w-full rounded-lg bg-gray-200"
+              />
             </div>
           </div>
         </div>
         {/* Past Games */}
         <div className="relative overflow-hidden pt-16 lg:pt-20 mb-10">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mt-8 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                  <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-                      <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
-                        <thead className="bg-gray-50 dark:bg-gray-800/75">
-                          {adminArchiveHeaders()}
-                        </thead>
-                        {adminArchiveContent()}
-                      </table>
-                    </div>
-                  </div>
+          <div className="mt-8 flow-root">
+            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+                  <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
+                    <thead className="bg-gray-50 dark:bg-gray-800/75">
+                      {adminArchiveHeaders()}
+                    </thead>
+                    {adminArchiveContent()}
+                  </table>
                 </div>
               </div>
-          </div>                  
+            </div>
+          </div>                
         </div>
       </div>
       {/* Modal */}

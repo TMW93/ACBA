@@ -174,7 +174,7 @@ const TeamRegistration = () => {
       <Nav />
       <div>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">   
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+          <div className="mx-auto -mt-5 max-w-2xl lg:mx-0 lg:max-w-none">
             <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
               Team Registration/Information
             </h1>

@@ -36,8 +36,8 @@ const Divisions = () => {
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
       {/* Content */}
-      <div className="flex-1 mx-auto max-w-7xl px-6 lg:px-8">
-        <h1>Divisions</h1>
+      <div className="flex-1 -mt-10 mx-auto max-w-7xl px-6 lg:px-8">
+        <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">Divisions</h1>
         <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-4 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-5">
           {/* Sunday Divs */}
           <div>
@@ -46,13 +46,13 @@ const Divisions = () => {
             <div className="mt-3">
               {sundayDivs.map((div) => (
                 <Link key={div._id} 
-                      className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                      className="block flex max-w-sm mb-3 p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                       to={`/divisions/${div.slug}`}>
                   <img className="w-full" src={ACBALogo} alt="acba logo"/>
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl text-center">{div.day}</div>
-                    <div className="font-bold text-xl text-center">{div.name}</div>
+                  <div className="px-6 py-4 content-center">
+                    <div className="font-bold text-base text-center">{div.day}</div>
+                    <div className="font-bold text-base text-center">{div.name}</div>
                   </div>
                 </Link>
               ))}
@@ -107,7 +107,7 @@ const Divisions = () => {
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                       to={`/divisions/${div.slug}`}>
                   <img className="w-full" src={ACBALogo} alt="acba logo"/>
-                  <div className="px-6 py-4">
+                  <div className="px-3 py-2">
                     <div className="font-bold text-xl text-center">{div.day}</div>
                     <div className="font-bold text-xl text-center">{div.name}</div>
                   </div>
@@ -122,13 +122,13 @@ const Divisions = () => {
             <div className="mt-3">
             {thursdayDivs.map((div) => (
               <Link key={div._id} 
-                    className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+                    className="block flex max-w-sm mb-3 p-2 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                     to={`/divisions/${div.slug}`}>
                 <img className="w-full" src={ACBALogo} alt="acba logo"/>
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl text-center">{div.day}</div>
-                  <div className="font-bold text-xl text-center">{div.name}</div>
+                <div className="px-3 py-2 content-center">
+                  <div className="font-bold text-base text-center">{div.day}</div>
+                  <div className="font-bold text-base text-center">{div.name}</div>
                 </div>
               </Link>
             ))}

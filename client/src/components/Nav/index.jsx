@@ -27,6 +27,11 @@ const navigation = [
     current: false,
   },
   {
+    name: 'Merch', 
+    href: '/merch',
+    current: false,
+  },
+  {
     name: 'Contact Us', 
     href: '/contact-us',
     current: false,
