@@ -3,6 +3,8 @@ import { useQuery, useLazyQuery, useMutation } from "@apollo/client/react"
 import { QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION } from "../../utils/queries"
 import {ADD_GAME, REMOVE_GAMES, REMOVE_SINGLE_GAME} from '../../utils/mutations'
 import timeConvert from "../../utils/timeConvert"
+import SuccessAlert from "../SuccessAlert"
+import Divider from '../Divider'
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
@@ -11,6 +13,7 @@ const venues = ['PCYC Auburn Court 1', 'PCYC Auburn Court 2', 'Lidcombe Uni', 'C
 export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
   const [currentDiv, setDivState] = useState();
   const [teams, setTeamState] = useState();
+  const [games, setGameState] = useState();
   const [loadingTeams, setLoadingTeams] = useState(true);
   const [formState, setFormState] = useState({
     teamOneId: '',
@@ -19,7 +22,7 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     venue: '',
   });
 
-  const [selectDiv, {loadingSingleDiv, errorSingleDiv, dataSingleDiv}] = useLazyQuery(QUERY_SINGLE_DIVISION);
+  const [selectDiv, {loadingSingleDiv, errorSingleDiv, dataSingleDiv, refetch: refetchGames}] = useLazyQuery(QUERY_SINGLE_DIVISION);
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
   const [addGame, {errorAddGmae}] = useMutation(ADD_GAME);
 
@@ -28,9 +31,23 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     const avaliableTeams = async () => {
       if(currentDiv) {
       const divInfo = await selectDiv({variables: {divisionId: currentDiv}})
-        // console.log(divInfo.data.division.teams);
+        // console.log(divInfo.data.division.games);
         if(divInfo) {
-          setTeamState(divInfo.data.division.teams.map(team => ({teamId: team._id, name: team.name})));
+          setTeamState(divInfo.data.division.teams.map(team => ({
+            teamId: team._id, 
+            name: team.name
+          })));
+          setGameState(divInfo.data.division.games.map(game => ({
+            time: game.time, 
+            date: game.date,
+            teamOne: game.teamOne,
+            teamTwo: game.teamTwo,
+            venue: game.venue,
+            scoreWinner: game.scoreWinner,
+            scoreLoser: game.scoreLoser,
+            winner: game.winner,
+            loser: game.loser, 
+          })));
           // console.log(teams);
           setLoadingTeams(false);
         }
@@ -74,6 +91,25 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     selectedDiv = thursdayDivs; 
   }
 
+  const handleRefetch = async () => {
+    const {data: newData} = await refetchGames();
+    // console.log(newData);
+    if(newData) {
+      setGameState(newData.division.games.map(game => ({
+        time: game.time, 
+        date: game.date,
+        teamOne: game.teamOne,
+        teamTwo: game.teamTwo,
+        venue: game.venue,
+        scoreWinner: game.scoreWinner,
+        scoreLoser: game.scoreLoser,
+        winner: game.winner,
+        loser: game.loser, 
+      })));
+      console.log(games);
+    }
+  };
+
   const handleDivChange = async (e) => {
     setDivState(e.target.value);
   };
@@ -91,6 +127,7 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
     e.preventDefault();
     // console.log(typeof(date));
     // console.log(formState);
+    // console.log(currentDiv);
     const convertedTime = timeConvert(formState.time);
     try {
       const {mutationResponse} = await addGame({
@@ -103,8 +140,8 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
           venue: formState.venue,
         },
       });
-
-      window.location.reload();
+      setFormState('');
+      handleRefetch();
       console.log('Team added.');
     } catch (error) {
       console.error(error);
@@ -253,7 +290,6 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                   </div>
                 </div>
               </div>
-
               {/* Buttons */}
               <div className="mt-6 flex items-center justify-end gap-x-6">
                 <button 
@@ -271,6 +307,20 @@ export default function SchedulerForm ({day, date, onClose, dialogOpen}) {
                 </button>
               </div>
             </form>
+            {/* Games */}
+            <div className="mt-4">
+              <h2>Current Games</h2>
+              <ul className="mt-4">
+                {games && games.map((game, index) => (
+                  <li key={index}>
+                    <span className="text-base">{game.time} - </span>
+                    <span className="text-base">{game.teamOne}</span>
+                    <span className="text-base"> vs </span>
+                    <span className="text-base">{game.teamTwo}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </DialogPanel>
         </div>
       </div>
