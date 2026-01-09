@@ -148,6 +148,7 @@ const Div = () => {
   };
 
   const division = data?.divisionBySlug || {};
+  // console.log(division);  
 
   if(division) {
     sortedTeams = quickSortStandings(division.teams);
@@ -623,7 +624,7 @@ const Div = () => {
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />
       {/* Content */}
-      <div className="mx-auto flex-1 max-w-7xl px-6 lg:px-8">
+      <div className="-mt-10 mx-auto flex-1 max-w-7xl px-6 lg:px-8">
         <h2 className="mx-auto max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
         <h2 className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

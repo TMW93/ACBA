@@ -40,7 +40,7 @@ const resolvers = {
       return divisions;
     },
     divisionBySlug: async(parent, {slug}) => {
-      const division = await Division.findOne({slug: slug}).populate('teams');
+      const division = await Division.findOne({slug: slug}).populate('teams').populate('games').populate('playedGames');
       return division;
     },
 
