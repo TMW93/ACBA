@@ -9,7 +9,7 @@ const navigation = [
   {
     name: 'Home', 
     href: '/',
-    current: true,
+    current: false,
   },
   {
     name: 'Divisions', 
@@ -89,16 +89,16 @@ export default function Nav() {
         </div>
       );
     } else {
-      return (
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-4">
-          <a
-          href='/login'
-            className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500 dark:hover:text-white"
-          >
-            Sign In
-          </a>   
-        </div>
-      );
+      // return (
+      //   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 mr-4">
+      //     <a
+      //     href='/login'
+      //       className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500 dark:hover:text-white"
+      //     >
+      //       Sign In
+      //     </a>   
+      //   </div>
+      // );
     }
   };
 
@@ -137,7 +137,7 @@ export default function Nav() {
                     href={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(item.current ? 'bg-gray-900 text-white dark:bg-gray-950/50' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium',
+                      'rounded-md px-3 py-2 text-base font-medium',
                     )}
                   >
                     {item.name}
