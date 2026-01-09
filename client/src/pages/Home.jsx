@@ -5,31 +5,8 @@ import Divider from '../components/Divider'
 import iLoveSnow from '../assets/placeholders/ilovesnow.jpg'
 import wideJiggling from '../assets/placeholders/wideJiggling.webp'
 import catBanner from '../assets/placeholders/catbanner.jpg'
-import 
-{
-  CloudArrowUpIcon,
-  LockClosedIcon,
-  ServerIcon, 
-} from '@heroicons/react/20/solid'
 
-const features = [
-  {
-    name: 'Cool Feature 1.',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: CloudArrowUpIcon,
-  },
-  {
-    name: 'Cool Feature 2.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-    icon: LockClosedIcon,
-  },
-  {
-    name: 'Cool Feature 3.',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-    icon: ServerIcon,
-  },
-];
+import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 
 const autumnSeasonInfo = [
   {
@@ -182,7 +159,43 @@ const Home = () => {
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav/>
       {/* Main Content */}
-      <div className="flex-1 mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="flex-1 -mt-10 mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative bg-white dark:bg-gray-900">
+          <div className="mx-auto max-w-7xl lg:flex lg:justify-between lg:px-8 xl:justify-end">
+            <div className="lg:flex lg:w-1/2 lg:shrink lg:grow-0 xl:absolute xl:inset-y-0 xl:right-1/2 xl:w-1/2">
+              <div className="relative lg:-ml-8 lg:h-auto lg:w-full lg:grow xl:ml-0">
+                <img
+                  alt=""
+                  src={iLoveSnow}
+                  className="absolute inset-0 size-full rounded bg-gray-50 object-cover dark:bg-gray-800"
+                />
+              </div>
+            </div>
+            <div className="px-6 lg:contents">
+              <div className="mx-auto max-w-2xl pt-16 pb-24 sm:pt-20 sm:pb-32 lg:mr-0 lg:ml-8 lg:w-full lg:max-w-lg lg:flex-none lg:pt-32 xl:w-1/2">
+                <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">09/01/2026</p>
+                <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+                  Announcement
+                </h1>
+                <p className="mt-6 text-xl/8 text-gray-700 dark:text-gray-300">
+                  Welcome to my basketball sandbox website.
+                </p>
+                <div className="mt-6 max-w-xl text-base/7 text-gray-600 lg:max-w-none dark:text-gray-400">
+                  <p>
+                    To login, go to /login
+                  </p>
+                  <p>
+                    email: timwong@email.com
+                  </p>
+                  <p>
+                    password: admin123
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Divider/>
         {/* Content */}
         <div className="mx-auto max-w-7xl lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
@@ -207,6 +220,7 @@ const Home = () => {
                 <img 
                   alt='catBanner'
                   src={catBanner}
+                  className='rounded'
                 >
                 </img>
               </figure>
