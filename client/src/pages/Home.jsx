@@ -3,7 +3,6 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Divider from '../components/Divider'
 import iLoveSnow from '../assets/placeholders/ilovesnow.jpg'
-import wideJiggling from '../assets/placeholders/wideJiggling.webp'
 import catBanner from '../assets/placeholders/catbanner.jpg'
 
 const autumnSeasonInfo = [

@@ -6,7 +6,6 @@ import {QUERY_SINGLE_DIVISION, QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_
 import Auth from '../utils/auth'
 import {useEffect, useState} from 'react';
 import quickSortStandings from '../utils/quickSortStandings'
-import Gf7x from '../assets/placeholders/gf7x.jpg'
 import DuragCat from '../assets/placeholders/duragCat.jpg'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
 
