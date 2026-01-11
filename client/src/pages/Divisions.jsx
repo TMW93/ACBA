@@ -4,6 +4,7 @@ import {useQuery} from '@apollo/client/react'
 import {QUERY_ALL_DIVISIONS} from '../utils/queries'
 import {Link} from "react-router-dom";
 import ACBALogo from '../assets/icons/acbaLogo.png'
+import snow from '../assets/placeholders/ilovesnow.jpg'
 
 const Divisions = () => {
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
@@ -49,7 +50,7 @@ const Divisions = () => {
                       className="block flex max-w-sm mb-3 p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                       to={`/divisions/${div.slug}`}>
-                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <img className="w-full" src={snow} alt="acba logo"/>
                   <div className="px-6 py-4 content-center">
                     <div className="font-bold text-base text-center">{div.day}</div>
                     <div className="font-bold text-base text-center">{div.name}</div>
@@ -68,7 +69,7 @@ const Divisions = () => {
                       className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                       to={`/divisions/${div.slug}`}>
-                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <img className="w-full" src={snow} alt="acba logo"/>
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl text-center">{div.day}</div>
                     <div className="font-bold text-xl text-center">{div.name}</div>
@@ -87,7 +88,7 @@ const Divisions = () => {
                       className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                       to={`/divisions/${div.slug}`}>
-                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <img className="w-full" src={snow} alt="acba logo"/>
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl text-center">{div.day}</div>
                     <div className="font-bold text-xl text-center">{div.name}</div>
@@ -106,7 +107,7 @@ const Divisions = () => {
                       className="block max-w-sm mb-3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                       to={`/divisions/${div.slug}`}>
-                  <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                  <img className="w-full" src={snow} alt="acba logo"/>
                   <div className="px-3 py-2">
                     <div className="font-bold text-xl text-center">{div.day}</div>
                     <div className="font-bold text-xl text-center">{div.name}</div>
@@ -125,7 +126,7 @@ const Divisions = () => {
                     className="block flex max-w-sm mb-3 p-2 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
                                   transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
                     to={`/divisions/${div.slug}`}>
-                <img className="w-full" src={ACBALogo} alt="acba logo"/>
+                <img className="w-full" src={snow} alt="acba logo"/>
                 <div className="px-3 py-2 content-center">
                   <div className="font-bold text-base text-center">{div.day}</div>
                   <div className="font-bold text-base text-center">{div.name}</div>
