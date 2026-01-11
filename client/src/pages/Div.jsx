@@ -671,13 +671,13 @@ const Div = () => {
               )}
             </div>
             {/* Images */}
-            <div>
+            {/* <div>
               <img
                 alt="duragcat"
                 src={DuragCat}
                 className="w-full rounded-lg bg-gray-200"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Past Games */}
