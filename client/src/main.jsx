@@ -13,7 +13,7 @@ import Div from './pages//Div.jsx'
 import Merch from './pages/Merch.jsx'
 import TeamManager from './pages/TeamManager.jsx'
 import Login from './pages/Login.jsx'
-import Testing from './pages/Testing.jsx'
+// import Testing from './pages/Testing.jsx'
 
 const router = createBrowserRouter([
   {
