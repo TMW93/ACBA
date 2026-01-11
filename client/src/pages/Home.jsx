@@ -6,8 +6,6 @@ import iLoveSnow from '../assets/placeholders/ilovesnow.jpg'
 import wideJiggling from '../assets/placeholders/wideJiggling.webp'
 import catBanner from '../assets/placeholders/catbanner.jpg'
 
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
-
 const autumnSeasonInfo = [
   {
     division: 'Sunday Social 10',
