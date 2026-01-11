@@ -3,8 +3,6 @@ import { useQuery, useLazyQuery, useMutation } from "@apollo/client/react"
 import { QUERY_ALL_DIVISIONS, QUERY_SINGLE_DIVISION } from "../../../utils/queries"
 import {ADD_GAME, REMOVE_GAMES, REMOVE_SINGLE_GAME} from '../../../utils/mutations'
 import timeConvert from "../../../utils/timeConvert"
-import SuccessAlert from "../../SuccessAlert"
-import Divider from '../../Divider'
 import {ChevronDownIcon} from '@heroicons/react/24/solid'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
