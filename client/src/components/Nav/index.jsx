@@ -3,7 +3,7 @@ import Drawer from '../Drawer'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Auth from '../../utils/auth'
-// import ACBALogo from '../../assets/icons/acbaLogo.png'
+import ACBALogo from '../../assets/icons/acbaLogo.png'
 
 const navigation = [
   {
