@@ -162,7 +162,7 @@ const Home = () => {
             <div className="lg:flex lg:w-1/2 lg:shrink lg:grow-0 xl:absolute xl:inset-y-0 xl:right-1/2 xl:w-1/2">
               <div className="relative lg:-ml-8 lg:h-auto lg:w-full lg:grow xl:ml-0">
                 <img
-                  alt=""
+                  alt="snow"
                   src={iLoveSnow}
                   className="absolute inset-0 size-full rounded bg-gray-50 object-cover dark:bg-gray-800"
                 />

@@ -673,7 +673,7 @@ const Div = () => {
             {/* Images */}
             <div>
               <img
-                alt=""
+                alt="duragcat"
                 src={DuragCat}
                 className="w-full rounded-lg bg-gray-200"
               />
