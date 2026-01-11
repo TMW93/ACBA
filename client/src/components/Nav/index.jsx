@@ -4,6 +4,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Auth from '../../utils/auth'
 import ACBALogo from '../../assets/icons/acbaLogo.png'
+import catbanner from '../../assets/placeholders/catbanner.jpg'
 
 const navigation = [
   {
@@ -56,7 +57,7 @@ export default function Nav() {
               <span className="sr-only">Open user menu</span>
               <img
                 alt="acba-logo"
-                src={ACBALogo}
+                src={catbanner}
                 className="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
               />
             </MenuButton>
@@ -129,7 +130,7 @@ export default function Nav() {
             <div className="flex shrink-0 items-center">
               <img
                 alt="ACBA"
-                src={ACBALogo}
+                src={catbanner}
                 className="h-8 w-auto"
               />
             </div>
