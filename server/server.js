@@ -1,7 +1,10 @@
-const express = require('express');
+// const express = require('express');
+import express from 'express'
 const {ApolloServer} = require('@apollo/server');
-const {expressMiddleware} = require('@as-integrations/express5');
-const path = require('path');
+// const {expressMiddleware} = require('@as-integrations/express5');
+import { expressMiddleware } from '@as-integrations/express5';
+// const path = require('path');
+import path from 'path'
 const {authMiddleware} = require('./utils/auth');
 
 const {typeDefs, resolvers} = require('./schemas');
