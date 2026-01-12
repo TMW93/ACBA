@@ -15,7 +15,7 @@ const server = new ApolloServer({
 });
 
 const startApolloServer = async () => {
-  console.log('Express version:', require('express/package.json').version);
+  // console.log('Express version:', require('express/package.json').version);
   await server.start();
 
   app.use(express.urlencoded({extended: false}));
@@ -29,7 +29,7 @@ const startApolloServer = async () => {
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
-    app.get('/:path(*)', (req, res) => {
+    app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
