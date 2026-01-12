@@ -1,8 +1,8 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Divider from "../components/Divider";
-import Snow from '../../public/placeholders/ilovesnow.jpg'
-import CatBanner from '../../public/placeholders/catbanner.jpg'
+import Snow from '/placeholders/ilovesnow.jpg'
+import CatBanner from '/placeholders/catbanner.jpg'
 import DuragCat from '../../public/placeholders/duragCat.jpg'
 
 const touredCountries = [

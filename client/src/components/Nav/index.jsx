@@ -3,8 +3,8 @@ import Drawer from '../Drawer'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Auth from '../../utils/auth'
-import ACBALogo from '../../../public/icons/acbaLogo.png'
-import catbanner from '../../../public/placeholders/catbanner.jpg'
+import ACBALogo from '/icons/acbaLogo.png'
+import catbanner from '/placeholders/catbanner.jpg'
 
 const navigation = [
   {
