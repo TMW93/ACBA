@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import snow from '../../public/placeholders/ilovesnow.jpg'
 import duragcat from '../../public/placeholders/duragCat.jpg'
-import catbanner from '.../../public/placeholders/catbanner.jpg'
+import catbanner from '../../public/placeholders/catbanner.jpg'
 import gf7x from '../../public/placeholders/gf7x.jpg'
 import logo from '../../public/icons/acbaLogo.png'
 
