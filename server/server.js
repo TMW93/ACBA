@@ -15,6 +15,7 @@ const server = new ApolloServer({
 });
 
 const startApolloServer = async () => {
+  console.log('Express version:', require('express/package.json').version);
   await server.start();
 
   app.use(express.urlencoded({extended: false}));
