@@ -12,7 +12,7 @@ const products = [
     name: 'Earthen Bottle',
     href: '#',
     price: '$48',
-    imageSrc: {snow},
+    src: snow,
     imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: 'Nomad Tumbler',
     href: '#',
     price: '$35',
-    imageSrc: {duragcat},
+    src: duragcat,
     imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
   },
   {
@@ -28,7 +28,7 @@ const products = [
     name: 'Focus Paper Refill',
     href: '#',
     price: '$89',
-    imageSrc: {catbanner},
+    src: catbanner,
     imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
   },
   {
@@ -36,7 +36,7 @@ const products = [
     name: 'Machined Mechanical Pencil',
     href: '#',
     price: '$35',
-    imageSrc: {logo},
+    src: logo,
     imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
   },
   {
@@ -44,7 +44,7 @@ const products = [
     name: 'Focus Card Tray',
     href: '#',
     price: '$64',
-    imageSrc: {gf7x},
+    src: gf7x,
     imageAlt: 'Paper card sitting upright in walnut card holder on desk.',
   },
   {
@@ -52,7 +52,7 @@ const products = [
     name: 'Focus Multi-Pack',
     href: '#',
     price: '$39',
-    imageSrc: {snow},
+    src: snow,
     imageAlt: 'Stack of 3 small drab green cardboard paper card refill boxes with white text.',
   },
   {
@@ -60,7 +60,7 @@ const products = [
     name: 'Brass Scissors',
     href: '#',
     price: '$50',
-    imageSrc: {logo},
+    src: logo,
     imageAlt: 'Brass scissors with geometric design, black steel finger holes, and included upright brass stand.',
   },
   {
@@ -68,7 +68,7 @@ const products = [
     name: 'Focus Carry Pouch',
     href: '#',
     price: '$32',
-    imageSrc: {gf7x},
+    src: gf7x,
     imageAlt: 'Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.',
   },
 ]
@@ -88,7 +88,7 @@ const Merch = () => {
             <a key={product.id} href={product.href} className="group">
               <img
                 alt={product.imageAlt}
-                src={product.imageSrc}
+                src={product.src}
                 className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8"
               />
               <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
