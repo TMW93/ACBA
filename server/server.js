@@ -26,11 +26,23 @@ const startApolloServer = async () => {
   }));
 
 
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+  // if (process.env.NODE_ENV === 'production') {
+  //   app.use(express.static(path.join(__dirname, '../client/dist')));
 
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  //   app.get('*', (req, res) => {
+  //     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  //   });
+  // }
+
+  if (process.env.NODE_ENV === 'production') {
+    const clientDist = path.join(__dirname, '../client/dist');
+
+    // Serve static files normally
+    app.use(express.static(clientDist, { fallthrough: true }));
+
+    // Catch-all fallback using middleware, not a route
+    app.use((req, res, next) => {
+      res.sendFile(path.join(clientDist, 'index.html'));
     });
   }
 
