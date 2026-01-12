@@ -1,10 +1,10 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import snow from '../assets/placeholders/ilovesnow.jpg'
-import duragcat from '../assets/placeholders/duragCat.jpg'
-import catbanner from '../assets/placeholders/catbanner.jpg'
-import gf7x from '../assets/placeholders/gf7x.jpg'
-import logo from '../assets/icons/acbaLogo.png'
+import snow from '../../public/placeholders/ilovesnow.jpg'
+import duragcat from '../../public/placeholders/duragCat.jpg'
+import catbanner from '.../../public/placeholders/catbanner.jpg'
+import gf7x from '../../public/placeholders/gf7x.jpg'
+import logo from '../../public/icons/acbaLogo.png'
 
 const products = [
   {
@@ -88,7 +88,7 @@ const Merch = () => {
             <a key={product.id} href={product.href} className="group">
               <img
                 alt={product.imageAlt}
-                // src={product.src}
+                src={product.src}
                 className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8"
               />
               <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>

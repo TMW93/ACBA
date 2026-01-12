@@ -3,8 +3,8 @@ import Drawer from '../Drawer'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Auth from '../../utils/auth'
-import ACBALogo from '../../assets/icons/acbaLogo.png'
-import catbanner from '../../assets/placeholders/catbanner.jpg'
+import ACBALogo from '../../../public/icons/acbaLogo.png'
+import catbanner from '../../../public/placeholders/catbanner.jpg'
 
 const navigation = [
   {
@@ -60,11 +60,11 @@ export default function Nav() {
             <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
               <span className="absolute -inset-1.5"/>
               <span className="sr-only">Open user menu</span>
-              {/* <img
+              <img
                 alt="acba-logo"
                 src={catbanner}
                 className="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
-              /> */}
+              />
             </MenuButton>
             <MenuItems
               transition
@@ -133,11 +133,11 @@ export default function Nav() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             {/* Logo */}
             <div className="flex shrink-0 items-center">
-              {/* <img
+              <img
                 alt="ACBA"
                 src={ACBALogo}
                 className="h-8 w-auto"
-              /> */}
+              />
             </div>
             {/* Navbar Items */}
             <div className="hidden sm:ml-6 sm:block">

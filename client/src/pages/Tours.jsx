@@ -1,9 +1,9 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Divider from "../components/Divider";
-import Snow from '../assets/placeholders/ilovesnow.jpg'
-import CatBanner from '../assets/placeholders/catbanner.jpg'
-import DuragCat from '../assets/placeholders/duragCat.jpg'
+import Snow from '../../public/placeholders/ilovesnow.jpg'
+import CatBanner from '../../public/placeholders/catbanner.jpg'
+import DuragCat from '../../public/placeholders/duragCat.jpg'
 
 const touredCountries = [
   {
@@ -108,14 +108,14 @@ const Tours = () => {
             {/* First Image */}
             <img
               alt="Product screenshot"
-              // src={Snow}
+              src={Snow}
               width={2432}
               height={1442}
               className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 not-dark:hidden sm:w-228 md:-ml-4 lg:-ml-0 dark:ring-white/10"
             />
             <img
               alt="Product screenshot"
-              // src={Snow}
+              src={Snow}
               width={2432}
               height={1442}
               className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-228 md:-ml-4 lg:-ml-0 dark:hidden dark:ring-white/10"
@@ -123,14 +123,14 @@ const Tours = () => {
             {/* Second Image */}
             <img
               alt="Product screenshot"
-              // src={CatBanner}
+              src={CatBanner}
               width={2432}
               height={1442}
               className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 not-dark:hidden sm:w-228 md:-ml-4 lg:-ml-0 dark:ring-white/10 mt-10"
             />
             <img
               alt="Product screenshot"
-              // src={CatBanner}
+              src={CatBanner}
               width={2432}
               height={1442}
               className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-228 md:-ml-4 lg:-ml-0 dark:hidden dark:ring-white/10 mt-10"
