@@ -163,7 +163,7 @@ const Home = () => {
               <div className="relative lg:-ml-8 lg:h-auto lg:w-full lg:grow xl:ml-0">
                 <img
                   alt="snow"
-                  src={iLoveSnow}
+                  // src={iLoveSnow}
                   className="absolute inset-0 size-full rounded bg-gray-50 object-cover dark:bg-gray-800"
                 />
               </div>
@@ -216,7 +216,7 @@ const Home = () => {
               <figure className="border-l border-indigo-600 pl-8 dark:border-indigo-400">
                 <img 
                   alt='catBanner'
-                  src={catBanner}
+                  // src={catBanner}
                   className='rounded'
                 >
                 </img>
