@@ -32,6 +32,11 @@ const navigation = [
     href: '/merch',
     current: false,
   },
+  // {
+  //   name: 'Our Team',
+  //   href: '/our-team',
+  //   current: false,
+  // },
   {
     name: 'Contact Us', 
     href: '/contact-us',
@@ -55,11 +60,11 @@ export default function Nav() {
             <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
               <span className="absolute -inset-1.5"/>
               <span className="sr-only">Open user menu</span>
-              <img
+              {/* <img
                 alt="acba-logo"
                 src={catbanner}
                 className="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
-              />
+              /> */}
             </MenuButton>
             <MenuItems
               transition
@@ -128,11 +133,11 @@ export default function Nav() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             {/* Logo */}
             <div className="flex shrink-0 items-center">
-              <img
+              {/* <img
                 alt="ACBA"
-                src={catbanner}
+                src={ACBALogo}
                 className="h-8 w-auto"
-              />
+              /> */}
             </div>
             {/* Navbar Items */}
             <div className="hidden sm:ml-6 sm:block">
