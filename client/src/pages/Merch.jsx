@@ -1,10 +1,10 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import snow from '/public/placeholders/ilovesnow.jpg'
-import duragcat from '/placeholders/duragCat.jpg'
-import catbanner from '/placeholders/catbanner.jpg'
-import gf7x from '/placeholders/gf7x.jpg'
-import logo from '/icons/acbaLogo.png'
+import snow from '/placeholders/ilovesnow.jpg?url'
+import duragcat from '/placeholders/duragCat.jpg?url'
+import catbanner from '/placeholders/ilovesnow.jpg?url'
+import gf7x from '/placeholders/gf7x.jpg?url'
+import logo from '/icons/acbaLogo.png?url'
 
 const products = [
   {

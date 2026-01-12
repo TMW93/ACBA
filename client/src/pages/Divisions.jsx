@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import {useQuery} from '@apollo/client/react'
 import {QUERY_ALL_DIVISIONS} from '../utils/queries'
 import {Link} from "react-router-dom";
-import ACBALogo from '/icons/acbaLogo.png'
+import ACBALogo from '/icons/acbaLogo.png?url'
 
 const Divisions = () => {
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);

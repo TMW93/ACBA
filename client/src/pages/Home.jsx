@@ -2,8 +2,8 @@ import {useState} from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Divider from '../components/Divider'
-import iLoveSnow from '/placeholders/ilovesnow.jpg'
-import catBanner from '/placeholders/catbanner.jpg'
+import iLoveSnow from '/placeholders/ilovesnow.jpg?url'
+import catBanner from '/placeholders/catbanner.jpg?url'
 
 const autumnSeasonInfo = [
   {

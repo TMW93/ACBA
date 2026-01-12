@@ -6,7 +6,7 @@ import {QUERY_SINGLE_DIVISION, QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_
 import Auth from '../utils/auth'
 import {useEffect, useState} from 'react';
 import quickSortStandings from '../utils/quickSortStandings'
-import DuragCat from '/placeholders/duragCat.jpg'
+import DuragCat from '/placeholders/duragCat.jpg?url'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
 
 const tableHeaders = [
