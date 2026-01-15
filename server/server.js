@@ -2,6 +2,7 @@ const express = require('express');
 const {ApolloServer} = require('@apollo/server');
 const {expressMiddleware} = require('@as-integrations/express5');
 const path = require('path');
+const favicon = require('serve-favicon');
 const {authMiddleware} = require('./utils/auth');
 
 const {typeDefs, resolvers} = require('./schemas');
@@ -21,18 +22,11 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({extended: false}));
   app.use(express.json());
 
+  app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
-
-
-  // if (process.env.NODE_ENV === 'production') {
-  //   app.use(express.static(path.join(__dirname, '../client/dist')));
-
-  //   app.get('*', (req, res) => {
-  //     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  //   });
-  // }
 
   if (process.env.NODE_ENV === 'production') {
     const clientDist = path.join(__dirname, '../client/dist');
