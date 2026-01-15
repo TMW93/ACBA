@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Divider from '../components/Divider'
@@ -152,11 +152,20 @@ const summerSeasonInfo = [
 ];
 
 const Home = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav/>
       {/* Main Content */}
       <div className="flex-1 -mt-10 mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Content */}
         <div className="relative bg-white dark:bg-gray-900">
           <div className="mx-auto max-w-7xl lg:flex lg:justify-between lg:px-8 xl:justify-end">
             <div className="lg:flex lg:w-1/2 lg:shrink lg:grow-0 xl:absolute xl:inset-y-0 xl:right-1/2 xl:w-1/2">
@@ -236,7 +245,8 @@ const Home = () => {
         </div>
         <Divider/>
         {/* Content */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SeasonTable title="2025 Autumn Season" data={autumnSeasonInfo} />
+        {/* <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">17/06/2025</p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
@@ -281,10 +291,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <Divider/>
         {/* Content */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SeasonTable title="2025 Summer Season" data={summerSeasonInfo} />
+        {/* <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">04/01/2025</p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
@@ -329,12 +340,47 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <Divider/>
       </div>
       <Footer/>
     </div>
   )
 };
+
+//table component
+function SeasonTable({ title, data }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{title}</h2>
+      <div className="mt-6 overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-300 dark:divide-white/15">
+          <thead className="bg-gray-50 dark:bg-gray-800/75">
+            <tr>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                Division
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                Start Date
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                Game Times
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800/50 dark:divide-white/10">
+            {data.map((info) => (
+              <tr key={info.division}>
+                <td className="py-4 px-4 text-sm text-gray-900 dark:text-white">{info.division}</td>
+                <td className="py-4 px-4 text-sm text-gray-500 dark:text-gray-400">{info.startDate}</td>
+                <td className="py-4 px-4 text-sm text-gray-500 dark:text-gray-400">{info.gameTime}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
 
 export default Home;
