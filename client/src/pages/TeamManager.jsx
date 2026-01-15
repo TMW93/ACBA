@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import AddTeamForm from '../components/AdminForms/AddTeamForm'
@@ -9,7 +10,7 @@ import RemoveGamesForm from '../components/AdminForms/RemoveGamesForm'
 import ArchiveGamesForm from '../components/AdminForms/ArchiveGamesForm'
 import ResetSeasonForm from '../components/AdminForms/ResetSeasonForm'
 import UpdatePayment from '../components/AdminForms/SetPaymentsForm'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel} from '@headlessui/react'
 import { ArchiveBoxIcon, ArrowPathIcon, CalendarIcon, CheckIcon, CurrencyDollarIcon,TrashIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/react/24/outline'
 
 import {useState} from 'react'
@@ -77,6 +78,14 @@ function classNames(...classes) {
 };
 
 export default function TeamManager() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+
   const [currentForm, setFormState] = useState('');
   const [open, setOpen] = useState(false);
   //console.log(currentForm);

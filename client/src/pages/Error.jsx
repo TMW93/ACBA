@@ -1,9 +1,18 @@
+import {useState, useEffect} from 'react';
 import {useRouteError} from 'react-router-dom';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
 
 const Error = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+  
   const error = useRouteError();
   console.error(error);
 

@@ -1,12 +1,20 @@
+import {useState, useEffect} from 'react';
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { useState } from 'react'
 import Auth from '../utils/auth'
 import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../utils/mutations'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
     email: '',

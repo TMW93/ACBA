@@ -1,6 +1,7 @@
+import {useState, useEffect} from 'react';
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { EnvelopeIcon, PhoneIcon, UserIcon} from '@heroicons/react/20/solid'
+import { EnvelopeIcon, PhoneIcon} from '@heroicons/react/20/solid'
 
 const socialIcons = [
   {
@@ -34,6 +35,14 @@ const socialIcons = [
 ];
 
 const ContactUs = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
       <Nav />

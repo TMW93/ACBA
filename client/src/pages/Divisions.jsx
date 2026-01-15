@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import {useQuery} from '@apollo/client/react'
@@ -6,6 +7,14 @@ import {Link} from "react-router-dom";
 import ACBALogo from '/icons/acbaLogo.png?url'
 
 const Divisions = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+  
   const {loading, error, data} = useQuery(QUERY_ALL_DIVISIONS);
 
   if(loading) {

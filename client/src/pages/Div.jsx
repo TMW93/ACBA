@@ -1,10 +1,10 @@
+import {useState, useEffect} from 'react';
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import {useParams} from 'react-router-dom';
 import {useQuery, useLazyQuery} from '@apollo/client/react';
-import {QUERY_SINGLE_DIVISION, QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_SINGLE_GAME} from '../utils/queries';
+import {QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_SINGLE_GAME} from '../utils/queries';
 import Auth from '../utils/auth'
-import {useEffect, useState} from 'react';
 import quickSortStandings from '../utils/quickSortStandings'
 import DuragCat from '/placeholders/duragCat.jpg?url'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
@@ -46,6 +46,14 @@ const archiveHeaders = [
 ];
 
 const Div = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents forced layout before mount
+
   const {slug} = useParams();
   const [currentTeam, setTeamState] = useState('');
   const [currentGame, setGameState] = useState('');
