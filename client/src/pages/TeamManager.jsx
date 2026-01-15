@@ -11,9 +11,7 @@ import ArchiveGamesForm from '../components/AdminForms/ArchiveGamesForm'
 import ResetSeasonForm from '../components/AdminForms/ResetSeasonForm'
 import UpdatePayment from '../components/AdminForms/SetPaymentsForm'
 import { Dialog, DialogBackdrop, DialogPanel} from '@headlessui/react'
-import { ArchiveBoxIcon, ArrowPathIcon, CalendarIcon, CheckIcon, CurrencyDollarIcon,TrashIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/react/24/outline'
-
-import {useState} from 'react'
+import { ArchiveBoxIcon, ArrowPathIcon, CalendarIcon, CurrencyDollarIcon,TrashIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/react/24/outline'
 
 const tasks = [
   {
