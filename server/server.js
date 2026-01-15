@@ -22,7 +22,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({extended: false}));
   app.use(express.json());
 
-  app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
