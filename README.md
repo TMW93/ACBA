@@ -1,7 +1,7 @@
 # Basketball Sandbox
 
 ## Description
-This is a website to emulate an basket league.
+This is a website to emulate a basketball league.
 [Website](https://acba-sandbox.onrender.com/)
 
 ## Questions
