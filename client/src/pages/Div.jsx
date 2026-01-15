@@ -1,732 +1,1031 @@
-import {useState, useEffect} from 'react';
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
-import {useParams} from 'react-router-dom';
-import {useQuery, useLazyQuery} from '@apollo/client/react';
-import {QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_SINGLE_GAME} from '../utils/queries';
-import Auth from '../utils/auth'
-import quickSortStandings from '../utils/quickSortStandings'
-import DuragCat from '/placeholders/duragCat.jpg?url'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
+// import {useState, useEffect} from 'react';
+// import Nav from "../components/Nav";
+// import Footer from "../components/Footer";
+// import {useParams} from 'react-router-dom';
+// import {useQuery, useLazyQuery} from '@apollo/client/react';
+// import {QUERY_DIVISION_BY_SLUG, QUERY_SINGLE_TEAM, QUERY_SINGLE_GAME} from '../utils/queries';
+// import Auth from '../utils/auth'
+// import quickSortStandings from '../utils/quickSortStandings'
+// import DuragCat from '/placeholders/duragCat.jpg?url'
+// import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, FocusTrap } from '@headlessui/react'
 
-const tableHeaders = [
-  {
-    name: 'Pos',
-  },
-  {
-    name: 'Team',
-  },
-  {
-    name: 'Wins',
-  },
-  {
-    name: 'Losses',
-  },
-  {
-    name: 'Draws',
-  },
-  {
-    name: 'Total Points',
-  }
-];
+// const tableHeaders = [
+//   {
+//     name: 'Pos',
+//   },
+//   {
+//     name: 'Team',
+//   },
+//   {
+//     name: 'Wins',
+//   },
+//   {
+//     name: 'Losses',
+//   },
+//   {
+//     name: 'Draws',
+//   },
+//   {
+//     name: 'Total Points',
+//   }
+// ];
 
-const archiveHeaders = [
-  {
-    name: 'Date',
-  },
-  {
-    name: 'Winner',
-  },
-  {
-    name: 'Final Score',
-  },
-  {
-    name: 'Loser',
-  }
-];
+// const archiveHeaders = [
+//   {
+//     name: 'Date',
+//   },
+//   {
+//     name: 'Winner',
+//   },
+//   {
+//     name: 'Final Score',
+//   },
+//   {
+//     name: 'Loser',
+//   }
+// ];
 
-const Div = () => {
+// const Div = () => {
+
+//   const {slug} = useParams();
+//   const [currentTeam, setTeamState] = useState('');
+//   const [currentGame, setGameState] = useState('');
+//   const [currentMode, setModeState] = useState('');
+//   const [loadingTeam, setLoadingTeam] = useState(true);
+//   const [loadingGame, setLoadingGame] = useState(true);
+//   const [team, setTeam] = useState();
+//   const [game, setGame] = useState();
+//   const [open, setOpen] = useState(false);
+//   const [teamFormState, setTeamFormState] = useState({
+//     name: '',
+//     wins: '',
+//     losses: '',
+//     totalPoints: ''
+//   });
+//   const [gameFormState, setGameFormState] = useState({
+//     scoreWinner: '',
+//     scoreLoser: '',
+//     date: '',
+//     Winner: '',
+//     Loser: '',
+//   });
+//   let sortedTeams = [];
+
+//   const [teamQuery, {loadingSingleTeam, errorSingleTeam, dataSingleTeam}] = useLazyQuery(QUERY_SINGLE_TEAM);
+//   const [gameQuery, {loadingSingleGame, errorSingleGame, dataSingleGame}] = useLazyQuery(QUERY_SINGLE_GAME);
+//   const {loading, error, data} = useQuery(QUERY_DIVISION_BY_SLUG, {
+//     variables: {slug: slug},
+//   });
+
+//   // Game useEffect
+//   useEffect(() => {
+//     setLoadingGame(true);
+//     const selectedGame = async () => {
+//       if(currentGame) {
+//         const gameInfo = await gameQuery({variables: {gameId: currentGame}});
+//         if(gameInfo) {
+//           // console.log(gameInfo.data.game);
+//           setGame({
+//             date: gameInfo.data.game.date,
+//             winner: gameInfo.data.game.winner,
+//             loser: gameInfo.data.game.loser,
+//             scoreWinner: gameInfo.data.game.scoreWinner,
+//             scoreLoser: gameInfo.data.game.scoreLoser,
+//             teamOne: gameInfo.data.game.teamOne,
+//             teamTwo: gameInfo.data.game.teamTwo,
+//           });
+//           setGameFormState({
+//             date: gameInfo.data.game.date,
+//             winner: gameInfo.data.game.winner,
+//             loser: gameInfo.data.game.loser,
+//             scoreWinner: gameInfo.data.game.scoreWinner,
+//             scoreLoser: gameInfo.data.game.scoreLoser,
+//           });
+//           setLoadingGame(false);
+//         }
+//         console.log(game);
+//       }
+//     }
+//     selectedGame();
+//   }, [currentGame]);
+
+//   // Team useEffect
+//   useEffect(() => {
+//     setLoadingTeam(true);
+//     const selectedTeam = async () => {
+//       if(currentTeam) {
+//         const teamInfo = await teamQuery({variables: {teamId: currentTeam}});
+//         if(teamInfo) {
+//           // console.log(teamInfo.data.teamById);
+//           setTeam({
+//             teamId: teamInfo.data.teamById._id,
+//             name: teamInfo.data.teamById.name,
+//             wins: teamInfo.data.teamById.wins,
+//             losses: teamInfo.data.teamById.losses,
+//             draws: teamInfo.data.teamById.draws,
+//             totalPoints: teamInfo.data.teamById.totalPoints,
+//           });
+//           setTeamFormState({
+//             name: teamInfo.data.teamById.name,
+//             wins: teamInfo.data.teamById.wins,
+//             losses: teamInfo.data.teamById.losses,
+//             draws: teamInfo.data.teamById.draws,
+//             totalPoints: teamInfo.data.teamById.totalPoints,
+//           })
+//           setLoadingTeam(false);
+//         }
+//         // console.log(team);
+//       }
+//     }
+//     selectedTeam();
+//   }, [currentTeam]);
+
+//   if(loading) {
+//     return null;
+//   };
+
+//   if(error) {
+//     return `Error! ${error}`;
+//   };
+
+//   const division = data?.divisionBySlug || {};
+//   // console.log(division);  
+
+//   if(division) {
+//     sortedTeams = quickSortStandings(division.teams);
+//     // console.log(sortedTeams);
+//   }
+
+//   const closeModal = () => {
+//     setOpen(false);
+//   };
+
+//   const handleTeamClick = async (teamId) => {
+//     setOpen(true);
+//     setTeamState(teamId);
+//     setModeState('team');
+//     // console.log(teamId);
+//     // console.log('im clicked');
+//   };
+
+//   const handleGameClick = async (gameId) => {
+//     setOpen(true);
+//     setGameState(gameId);
+//     setModeState('game');
+//     // console.log(currentGame);
+//     // console.log('im clicked');
+//   };
+
+//   const handleTeamFormChange = (e) => {
+//     const {name, value} = e.target;
+//     setTeamFormState({
+//       ...formState,
+//       [name]: value,
+//     });
+//   };
+
+//   const handleGameFormChange = (e) => {
+//     const {name, value} = e.target;
+//     setTeamFormState({
+//       ...formState,
+//       [name]: value,
+//     });
+//   };
+
+//   const adminTableHeaders = () => {
+//     if(Auth.loggedIn()) {
+//       return (
+//         <tr>
+//           {tableHeaders.map((header, index) => (
+//             <th
+//               key={index}
+//               scope="col"
+//               className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+//             >
+//               {header.name}
+//             </th>
+//           ))}
+//           <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
+//             <span className="sr-only">Edit</span>
+//           </th>
+//         </tr>
+//       );
+//     } else {
+//       return (
+//         <tr>
+//           {tableHeaders.map((header, index) => (
+//             <th
+//               key={index}
+//               scope="col"
+//               className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+//             >
+//               {header.name}
+//             </th>
+//           ))}
+//         </tr>
+//       );
+//     }
+//   };
+
+//   const adminTableContent = () => {
+//     if(Auth.loggedIn()) {
+//       return (
+//         <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+//           {sortedTeams.map((team, index) => (
+//             <tr key={team._id}>
+//               <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+//                 {index + 1}
+//               </td>
+//               <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+//                 {team.name}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.wins}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.losses}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.draws}
+//               </td>
+//                 <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.totalPoints}
+//               </td>
+//               <td 
+//                 className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
+                
+//               >
+//                 <p
+//                   className="text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+//                   onClick={() => handleTeamClick(team._id)}  
+//                 >
+//                   Edit<span className="sr-only">, {team._id}</span>
+//                 </p>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       );
+//     } else {
+//       return (
+//         <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+//           {sortedTeams.map((team, index) => (
+//             <tr key={team._id}>
+//               <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+//                 {index + 1}
+//               </td>
+//               <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+//                 {team.name}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.wins}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.losses}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.draws}
+//               </td>
+//                 <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {team.totalPoints}
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       );
+//     }
+//   };
+
+//   const adminArchiveHeaders = () => {
+//     if(Auth.loggedIn()) {
+//       return (
+//         <tr>
+//           {archiveHeaders.map((header, index) => (
+//             <th
+//               key={index}
+//               scope="col"
+//               className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+//             >
+//               {header.name}
+//             </th>
+//           ))}
+//           <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
+//             <span className="sr-only">Edit</span>
+//           </th>
+//         </tr>
+//       )
+//     } else {
+//       return (
+//         <tr>
+//           {archiveHeaders.map((header, index) => (
+//             <th
+//               key={index}
+//               scope="col"
+//               className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+//             >
+//               {header.name}
+//             </th>
+//           ))}
+//         </tr>
+//       )
+//     }
+//   };
+
+//   const adminArchiveContent = () => {
+//     if(Auth.loggedIn()) {
+//       return (
+//         <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+//           {division.playedGames.map((game) => (
+//             <tr key={game._id}>
+//               <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+//                 {game.date}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {game.winner}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {game.scoreWinner} - {game.scoreLoser}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {game.loser}
+//               </td>
+//               <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6">
+//                 <p
+//                   className="text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+//                   onClick={() => handleGameClick(game._id)}
+//                 >
+//                   Edit<span className="sr-only">, {game._id}</span>
+//                 </p>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       );
+//     } else {
+//       return (
+//         <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+//           {division.playedGames.map((game) => (
+//             <tr key={game._id}>
+//               <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+//                 {game.name}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {game.winner}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {game.scoreWinner} - {game.scoreLoser}
+//               </td>
+//               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+//                 {game.loser}
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       );
+//     }
+//   };
+
+//   const teamUpdateForm = () => {
+//     if(team !== undefined) {
+//       return (
+//         <form className="mx-auto mt-16 max-w-xl sm:mt-20">
+//           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+//             <h2 className="text-base/7 font-semibold text-gray-900 dark:text-white">Update Team Info</h2>
+//             {/* Team Name */}
+//             <div className="sm:col-span-2">
+//               <label htmlFor="divisionlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                 Team Name
+//               </label>
+//               <div className="mt-2 grid grid-cols-1">
+//                 <input
+//                   id="teamName"
+//                   type="teamName"
+//                   name="teamName"
+//                   defaultValue={team.name}
+//                   className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                   onChange={handleTeamFormChange}            
+//                 />
+//               </div>
+//             </div>
+//             {/* Wins */}
+//             <div className="sm:col-span-2">
+//               <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                 Wins
+//               </label>
+//               <div className="mt-2 grid grid-cols-1">
+//                 <input
+//                   id="wins"
+//                   type="number"
+//                   name="wins"
+//                   defaultValue={team.wins}
+//                   className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                   onChange={handleTeamFormChange}            
+//                 />
+//               </div>
+//             </div>
+//             {/* Losses */}
+//             <div className="sm:col-span-2">
+//               <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                 Losses
+//               </label>
+//               <div className="mt-2 grid grid-cols-1">
+//                 <input
+//                   id="losses"
+//                   type="number"
+//                   name="losses"
+//                   defaultValue={team.losses}
+//                   className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                   onChange={handleTeamFormChange}            
+//                 />
+//               </div>
+//             </div>
+//             {/* Draws */}
+//             <div className="sm:col-span-2">
+//               <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                 Draws
+//               </label>
+//               <div className="mt-2 grid grid-cols-1">
+//                 <input
+//                   id="draws"
+//                   type="number"
+//                   name="draws"
+//                   defaultValue={team.draws}
+//                   className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                   onChange={handleTeamFormChange}            
+//                 />
+//               </div>
+//             </div>
+//             {/* Total Points */}
+//             <div className="sm:col-span-2">
+//               <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                 Total Points
+//               </label>
+//               <div className="mt-2 grid grid-cols-1">
+//                 <input
+//                   id="ttp"
+//                   type="number"
+//                   name="ttp"
+//                   defaultValue={team.totalPoints}
+//                   className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                   onChange={handleTeamFormChange}            
+//                 />
+//               </div>
+//             </div>
+//           </div>
+//           {/* Submit Button */}
+//           <div className="mt-10">
+//             <button
+//               type="submit"
+//               className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+//             >
+//               Update Team Info
+//             </button>
+//           </div>
+//           {/* Cancel Button */}
+//           <div className="mt-10">
+//             <button
+//               type="submit"
+//               className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+//               onClick={closeModal}
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//         </form>
+//       )
+//     } else {
+//       return (
+//         <p>There was an error in loading the form...</p>
+//       )
+//     }
+//   };
+
+//   const gameUpdateForm = () => {
+//     if(division.playedGames.length > 0) {
+//       if(game !== undefined) {
+//         return (
+//           <form className="mx-auto mt-16 max-w-xl sm:mt-20">
+//             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+//               <h2 className="text-base/7 font-semibold text-gray-900 dark:text-white">Update Game Info</h2>
+//               {/* Date */}
+//               <div className="sm:col-span-2">
+//                 <label htmlFor="divisionlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                   Date
+//                 </label>
+//                 <div className="mt-2 grid grid-cols-1">
+//                   <input
+//                     id="gameDate"
+//                     type="gameDate"
+//                     name="gameDate"
+//                     defaultValue={game.date}
+//                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                     onChange={handleGameFormChange}            
+//                   />
+//                 </div>
+//               </div>
+//               {/* Winner */}
+//               <div className="sm:col-span-2">
+//                 <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                   Winner
+//                 </label>
+//                 <div className="mt-2 grid grid-cols-1">
+//                   <select
+//                     id="winner"
+//                     name="winner"
+//                     type="winner"
+//                     defaultValue={game.winner}
+//                   >
+//                     <option value={game.teamOne}>{game.teamOne}</option>
+//                     <option value={game.teamtwo}>{game.teamTwo}</option>
+//                   </select>
+//                 </div>
+//               </div>
+//               {/* Loser */}
+//               <div className="sm:col-span-2">
+//                 <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                   Loser
+//                 </label>
+//                 <div className="mt-2 grid grid-cols-1">
+//                   <select
+//                     id="loser"
+//                     name="loser"
+//                     type="loser"
+//                     defaultValue={game.loser}
+//                   >
+//                     <option value={game.teamOne}>{game.teamOne}</option>
+//                     <option value={game.teamtwo}>{game.teamTwo}</option>
+//                   </select>
+//                 </div>
+//               </div>
+//               {/* Score Winner */}
+//               <div className="sm:col-span-2">
+//                 <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                   Winner's Score
+//                 </label>
+//                 <div className="mt-2 grid grid-cols-1">
+//                   <input
+//                     id="scoreWinner"
+//                     type="number"
+//                     name="scoreWinner"
+//                     defaultValue={game.scoreWinner}
+//                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                     onChange={handleGameFormChange}            
+//                   />
+//                 </div>
+//               </div>
+//               {/* Score Loser */}
+//               <div className="sm:col-span-2">
+//                 <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
+//                   Loser's Score
+//                 </label>
+//                 <div className="mt-2 grid grid-cols-1">
+//                   <input
+//                     id="ttp"
+//                     type="number"
+//                     name="ttp"
+//                     defaultValue={game.scoreLoser}
+//                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
+//                     onChange={handleGameFormChange}            
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//             {/* Submit Button */}
+//             <div className="mt-10">
+//               <button
+//                 type="submit"
+//                 className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+//               >
+//                 Update Game Info
+//               </button>
+//             </div>
+//             {/* Cancel Button */}
+//             <div className="mt-10">
+//               <button
+//                 type="submit"
+//                 className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+//                 onClick={closeModal}
+//               >
+//                 Cancel
+//               </button>
+//             </div>
+//           </form>
+//         );
+//       }
+//     } else if (division.playedGames.length === 0) {
+//       <p>No games have been played.</p>
+//     } else {
+//       return (
+//         <p>There was a problem in loading the form...</p>
+//       );
+//     }
+//   };
+  
+//   return (
+//     <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
+//       <Nav />
+//       {/* Content */}
+//       <div className="-mt-10 mx-auto flex-1 max-w-7xl px-6 lg:px-8">
+//         <h2 className="text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
+//         <h2 className="mt-2 text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
+//         <div className="max-w-2xl lg:mx-0 lg:max-w-none">
+//           {/* Standings */}
+//           <div className="mt-8 flow-root">
+//             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+//               <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+//                 <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+//                   <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
+//                     <thead className="bg-gray-50 dark:bg-gray-800/75">
+//                       {adminTableHeaders()}
+//                     </thead>
+//                     {adminTableContent()}
+//                   </table>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           {/* Games & Images */}
+//           <div className="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base/7 text-gray-700 lg:max-w-none lg:grid-cols-2 dark:text-gray-300">
+//             <div>
+//               <h2 className="mt-2 mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">Upcoming Games</h2>
+//               {division.games.length > 0 && (
+//                 <div> 
+//                 <h2 className="mx-auto mt-2  mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.games[0].date}</h2>
+//                 {division.games.map((game) => (
+//                   <div key={game._id} className="max-w-sm rounded overflow-hidden shadow-lg mb-10">
+//                     <div className="px-6 py-4">
+//                       <div className="font-bold text-xl">
+//                         {game.time}
+//                       </div>
+//                       <div className="font-bold text-xl mb-2">
+//                         {game.venue}
+//                       </div>
+//                       <p className="text-gray-700 text-base">
+//                         <span>{game.teamOne}</span>
+//                         <span> VS </span>
+//                         <span>{game.teamTwo}</span>
+//                       </p>
+//                     </div>
+//                   </div>
+//                 ))}
+//                 </div>
+//               )}
+//             </div>
+//             {/* Images */}
+//             <div>
+//               <img
+//                 alt="duragcat"
+//                 src={DuragCat}
+//                 className="w-full rounded-lg bg-gray-200"
+//               />
+//             </div>
+//           </div>
+//         </div>
+//         {/* Past Games */}
+//         <div className="relative overflow-hidden pt-16 lg:pt-20 mb-10">
+//           <div className="mt-8 flow-root">
+//             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+//               <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+//                 <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+//                   <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
+//                     <thead className="bg-gray-50 dark:bg-gray-800/75">
+//                       {adminArchiveHeaders()}
+//                     </thead>
+//                     {adminArchiveContent()}
+//                   </table>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>                
+//         </div>
+//       </div>
+//       {/* Modal */}
+//       <Dialog open={open} onClose={setOpen} className="relative z-10">
+//         <DialogBackdrop
+//           transition
+//           className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-gray-900/50"
+//         />
+//         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+//           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+//             <DialogPanel
+//               transition
+//               className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10"
+//             >
+//               {currentMode === 'team' && teamUpdateForm()}
+//               {currentMode === 'game' && gameUpdateForm()}
+//             </DialogPanel>
+//           </div>
+//         </div>
+//       </Dialog>
+//       <Footer/>
+//     </div>
+//   )
+// }
+
+// export default Div;
+
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useQuery, useLazyQuery } from '@apollo/client/react';
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import Auth from '../utils/auth';
+import quickSortStandings from '../utils/quickSortStandings';
+import {
+  QUERY_DIVISION_BY_SLUG,
+  QUERY_SINGLE_TEAM,
+  QUERY_SINGLE_GAME,
+} from '../utils/queries';
+
+import DuragCat from '/placeholders/duragCat.jpg?url';
+
+const tableHeaders = ['Pos', 'Team', 'Wins', 'Losses', 'Draws', 'Total Points'];
+const archiveHeaders = ['Date', 'Winner', 'Final Score', 'Loser'];
+
+export default function Div() {
+  const { slug } = useParams();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null; // prevents forced layout before mount
-
-  const {slug} = useParams();
-  const [currentTeam, setTeamState] = useState('');
-  const [currentGame, setGameState] = useState('');
-  const [currentMode, setModeState] = useState('');
-  const [loadingTeam, setLoadingTeam] = useState(true);
-  const [loadingGame, setLoadingGame] = useState(true);
-  const [team, setTeam] = useState();
-  const [game, setGame] = useState();
+  const [currentTeam, setCurrentTeam] = useState(null);
+  const [currentGame, setCurrentGame] = useState(null);
+  const [currentMode, setCurrentMode] = useState(null);
   const [open, setOpen] = useState(false);
-  const [teamFormState, setTeamFormState] = useState({
-    name: '',
-    wins: '',
-    losses: '',
-    totalPoints: ''
-  });
-  const [gameFormState, setGameFormState] = useState({
-    scoreWinner: '',
-    scoreLoser: '',
-    date: '',
-    Winner: '',
-    Loser: '',
-  });
-  let sortedTeams = [];
 
-  const [teamQuery, {loadingSingleTeam, errorSingleTeam, dataSingleTeam}] = useLazyQuery(QUERY_SINGLE_TEAM);
-  const [gameQuery, {loadingSingleGame, errorSingleGame, dataSingleGame}] = useLazyQuery(QUERY_SINGLE_GAME);
-  const {loading, error, data} = useQuery(QUERY_DIVISION_BY_SLUG, {
-    variables: {slug: slug},
+  const [teamFormState, setTeamFormState] = useState({});
+  const [gameFormState, setGameFormState] = useState({});
+
+  const [teamQuery, { data: teamData }] = useLazyQuery(QUERY_SINGLE_TEAM);
+  const [gameQuery, { data: gameData }] = useLazyQuery(QUERY_SINGLE_GAME);
+
+  const { loading, error, data } = useQuery(QUERY_DIVISION_BY_SLUG, {
+    variables: { slug },
   });
 
-  // Game useEffect
-  useEffect(() => {
-    setLoadingGame(true);
-    const selectedGame = async () => {
-      if(currentGame) {
-        const gameInfo = await gameQuery({variables: {gameId: currentGame}});
-        if(gameInfo) {
-          // console.log(gameInfo.data.game);
-          setGame({
-            date: gameInfo.data.game.date,
-            winner: gameInfo.data.game.winner,
-            loser: gameInfo.data.game.loser,
-            scoreWinner: gameInfo.data.game.scoreWinner,
-            scoreLoser: gameInfo.data.game.scoreLoser,
-            teamOne: gameInfo.data.game.teamOne,
-            teamTwo: gameInfo.data.game.teamTwo,
-          });
-          setGameFormState({
-            date: gameInfo.data.game.date,
-            winner: gameInfo.data.game.winner,
-            loser: gameInfo.data.game.loser,
-            scoreWinner: gameInfo.data.game.scoreWinner,
-            scoreLoser: gameInfo.data.game.scoreLoser,
-          });
-          setLoadingGame(false);
-        }
-        console.log(game);
-      }
-    }
-    selectedGame();
-  }, [currentGame]);
+  useEffect(() => setMounted(true), []);
 
-  // Team useEffect
-  useEffect(() => {
-    setLoadingTeam(true);
-    const selectedTeam = async () => {
-      if(currentTeam) {
-        const teamInfo = await teamQuery({variables: {teamId: currentTeam}});
-        if(teamInfo) {
-          // console.log(teamInfo.data.teamById);
-          setTeam({
-            teamId: teamInfo.data.teamById._id,
-            name: teamInfo.data.teamById.name,
-            wins: teamInfo.data.teamById.wins,
-            losses: teamInfo.data.teamById.losses,
-            draws: teamInfo.data.teamById.draws,
-            totalPoints: teamInfo.data.teamById.totalPoints,
-          });
-          setTeamFormState({
-            name: teamInfo.data.teamById.name,
-            wins: teamInfo.data.teamById.wins,
-            losses: teamInfo.data.teamById.losses,
-            draws: teamInfo.data.teamById.draws,
-            totalPoints: teamInfo.data.teamById.totalPoints,
-          })
-          setLoadingTeam(false);
-        }
-        // console.log(team);
-      }
-    }
-    selectedTeam();
-  }, [currentTeam]);
-
-  if(loading) {
-    return null;
+  // Handle team modal open
+  const handleTeamClick = (teamId) => {
+    setCurrentTeam(teamId);
+    setCurrentMode('team');
+    setOpen(true);
+    teamQuery({ variables: { teamId } });
   };
 
-  if(error) {
-    return `Error! ${error}`;
+  // Handle game modal open
+  const handleGameClick = (gameId) => {
+    setCurrentGame(gameId);
+    setCurrentMode('game');
+    setOpen(true);
+    gameQuery({ variables: { gameId } });
   };
+
+  // Sync team data when fetched
+  useEffect(() => {
+    if (teamData?.teamById) {
+      setTeamFormState({
+        name: teamData.teamById.name,
+        wins: teamData.teamById.wins,
+        losses: teamData.teamById.losses,
+        draws: teamData.teamById.draws,
+        totalPoints: teamData.teamById.totalPoints,
+      });
+    }
+  }, [teamData]);
+
+  // Sync game data when fetched
+  useEffect(() => {
+    if (gameData?.game) {
+      setGameFormState({
+        date: gameData.game.date,
+        winner: gameData.game.winner,
+        loser: gameData.game.loser,
+        scoreWinner: gameData.game.scoreWinner,
+        scoreLoser: gameData.game.scoreLoser,
+        teamOne: gameData.game.teamOne,
+        teamTwo: gameData.game.teamTwo,
+      });
+    }
+  }, [gameData]);
+
+  if (!mounted || loading) return null;
+  if (error) return <p>Error: {error.message}</p>;
 
   const division = data?.divisionBySlug || {};
-  // console.log(division);  
+  const sortedTeams = division.teams ? quickSortStandings(division.teams) : [];
 
-  if(division) {
-    sortedTeams = quickSortStandings(division.teams);
-    // console.log(sortedTeams);
-  }
-
-  const closeModal = () => {
-    setOpen(false);
-  };
-
-  const handleTeamClick = async (teamId) => {
-    setOpen(true);
-    setTeamState(teamId);
-    setModeState('team');
-    // console.log(teamId);
-    // console.log('im clicked');
-  };
-
-  const handleGameClick = async (gameId) => {
-    setOpen(true);
-    setGameState(gameId);
-    setModeState('game');
-    // console.log(currentGame);
-    // console.log('im clicked');
-  };
-
-  const handleTeamFormChange = (e) => {
-    const {name, value} = e.target;
-    setTeamFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
-  const handleGameFormChange = (e) => {
-    const {name, value} = e.target;
-    setTeamFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
-  const adminTableHeaders = () => {
-    if(Auth.loggedIn()) {
-      return (
-        <tr>
-          {tableHeaders.map((header, index) => (
-            <th
-              key={index}
-              scope="col"
-              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-            >
-              {header.name}
-            </th>
-          ))}
-          <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
-            <span className="sr-only">Edit</span>
-          </th>
-        </tr>
-      );
-    } else {
-      return (
-        <tr>
-          {tableHeaders.map((header, index) => (
-            <th
-              key={index}
-              scope="col"
-              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-            >
-              {header.name}
-            </th>
-          ))}
-        </tr>
-      );
-    }
-  };
-
-  const adminTableContent = () => {
-    if(Auth.loggedIn()) {
-      return (
-        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-          {sortedTeams.map((team, index) => (
-            <tr key={team._id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                {index + 1}
-              </td>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                {team.name}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.wins}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.losses}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.draws}
-              </td>
-                <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.totalPoints}
-              </td>
-              <td 
-                className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6"
-                
-              >
-                <p
-                  className="text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
-                  onClick={() => handleTeamClick(team._id)}  
-                >
-                  Edit<span className="sr-only">, {team._id}</span>
-                </p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      );
-    } else {
-      return (
-        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-          {sortedTeams.map((team, index) => (
-            <tr key={team._id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                {index + 1}
-              </td>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                {team.name}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.wins}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.losses}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.draws}
-              </td>
-                <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {team.totalPoints}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      );
-    }
-  };
-
-  const adminArchiveHeaders = () => {
-    if(Auth.loggedIn()) {
-      return (
-        <tr>
-          {archiveHeaders.map((header, index) => (
-            <th
-              key={index}
-              scope="col"
-              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-            >
-              {header.name}
-            </th>
-          ))}
-          <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-6">
-            <span className="sr-only">Edit</span>
-          </th>
-        </tr>
-      )
-    } else {
-      return (
-        <tr>
-          {archiveHeaders.map((header, index) => (
-            <th
-              key={index}
-              scope="col"
-              className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
-            >
-              {header.name}
-            </th>
-          ))}
-        </tr>
-      )
-    }
-  };
-
-  const adminArchiveContent = () => {
-    if(Auth.loggedIn()) {
-      return (
-        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-          {division.playedGames.map((game) => (
-            <tr key={game._id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                {game.date}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {game.winner}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {game.scoreWinner} - {game.scoreLoser}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {game.loser}
-              </td>
-              <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-6">
-                <p
-                  className="text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
-                  onClick={() => handleGameClick(game._id)}
-                >
-                  Edit<span className="sr-only">, {game._id}</span>
-                </p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      );
-    } else {
-      return (
-        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-          {division.playedGames.map((game) => (
-            <tr key={game._id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                {game.name}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {game.winner}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {game.scoreWinner} - {game.scoreLoser}
-              </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                {game.loser}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      );
-    }
-  };
-
-  const teamUpdateForm = () => {
-    if(team !== undefined) {
-      return (
-        <form className="mx-auto mt-16 max-w-xl sm:mt-20">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <h2 className="text-base/7 font-semibold text-gray-900 dark:text-white">Update Team Info</h2>
-            {/* Team Name */}
-            <div className="sm:col-span-2">
-              <label htmlFor="divisionlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                Team Name
-              </label>
-              <div className="mt-2 grid grid-cols-1">
-                <input
-                  id="teamName"
-                  type="teamName"
-                  name="teamName"
-                  defaultValue={team.name}
-                  className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                  onChange={handleTeamFormChange}            
-                />
-              </div>
-            </div>
-            {/* Wins */}
-            <div className="sm:col-span-2">
-              <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                Wins
-              </label>
-              <div className="mt-2 grid grid-cols-1">
-                <input
-                  id="wins"
-                  type="number"
-                  name="wins"
-                  defaultValue={team.wins}
-                  className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                  onChange={handleTeamFormChange}            
-                />
-              </div>
-            </div>
-            {/* Losses */}
-            <div className="sm:col-span-2">
-              <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                Losses
-              </label>
-              <div className="mt-2 grid grid-cols-1">
-                <input
-                  id="losses"
-                  type="number"
-                  name="losses"
-                  defaultValue={team.losses}
-                  className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                  onChange={handleTeamFormChange}            
-                />
-              </div>
-            </div>
-            {/* Draws */}
-            <div className="sm:col-span-2">
-              <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                Draws
-              </label>
-              <div className="mt-2 grid grid-cols-1">
-                <input
-                  id="draws"
-                  type="number"
-                  name="draws"
-                  defaultValue={team.draws}
-                  className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                  onChange={handleTeamFormChange}            
-                />
-              </div>
-            </div>
-            {/* Total Points */}
-            <div className="sm:col-span-2">
-              <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                Total Points
-              </label>
-              <div className="mt-2 grid grid-cols-1">
-                <input
-                  id="ttp"
-                  type="number"
-                  name="ttp"
-                  defaultValue={team.totalPoints}
-                  className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                  onChange={handleTeamFormChange}            
-                />
-              </div>
-            </div>
-          </div>
-          {/* Submit Button */}
-          <div className="mt-10">
+  // Table row generator
+  const renderTeamRows = () =>
+    sortedTeams.map((team, idx) => (
+      <tr key={team._id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+        <td className="py-4 text-center">{idx + 1}</td>
+        <td className="py-4 text-center">{team.name}</td>
+        <td className="py-4 text-center">{team.wins}</td>
+        <td className="py-4 text-center">{team.losses}</td>
+        <td className="py-4 text-center">{team.draws}</td>
+        <td className="py-4 text-center">{team.totalPoints}</td>
+        {Auth.loggedIn() && (
+          <td className="py-4 text-center">
             <button
-              type="submit"
-              className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+              className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+              onClick={() => handleTeamClick(team._id)}
             >
-              Update Team Info
+              Edit
             </button>
-          </div>
-          {/* Cancel Button */}
-          <div className="mt-10">
-            <button
-              type="submit"
-              className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
-              onClick={closeModal}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      )
-    } else {
-      return (
-        <p>There was an error in loading the form...</p>
-      )
-    }
-  };
+          </td>
+        )}
+      </tr>
+    ));
 
-  const gameUpdateForm = () => {
-    if(division.playedGames.length > 0) {
-      if(game !== undefined) {
-        return (
-          <form className="mx-auto mt-16 max-w-xl sm:mt-20">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <h2 className="text-base/7 font-semibold text-gray-900 dark:text-white">Update Game Info</h2>
-              {/* Date */}
-              <div className="sm:col-span-2">
-                <label htmlFor="divisionlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Date
-                </label>
-                <div className="mt-2 grid grid-cols-1">
-                  <input
-                    id="gameDate"
-                    type="gameDate"
-                    name="gameDate"
-                    defaultValue={game.date}
-                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                    onChange={handleGameFormChange}            
-                  />
-                </div>
-              </div>
-              {/* Winner */}
-              <div className="sm:col-span-2">
-                <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Winner
-                </label>
-                <div className="mt-2 grid grid-cols-1">
-                  <select
-                    id="winner"
-                    name="winner"
-                    type="winner"
-                    defaultValue={game.winner}
-                  >
-                    <option value={game.teamOne}>{game.teamOne}</option>
-                    <option value={game.teamtwo}>{game.teamTwo}</option>
-                  </select>
-                </div>
-              </div>
-              {/* Loser */}
-              <div className="sm:col-span-2">
-                <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Loser
-                </label>
-                <div className="mt-2 grid grid-cols-1">
-                  <select
-                    id="loser"
-                    name="loser"
-                    type="loser"
-                    defaultValue={game.loser}
-                  >
-                    <option value={game.teamOne}>{game.teamOne}</option>
-                    <option value={game.teamtwo}>{game.teamTwo}</option>
-                  </select>
-                </div>
-              </div>
-              {/* Score Winner */}
-              <div className="sm:col-span-2">
-                <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Winner's Score
-                </label>
-                <div className="mt-2 grid grid-cols-1">
-                  <input
-                    id="scoreWinner"
-                    type="number"
-                    name="scoreWinner"
-                    defaultValue={game.scoreWinner}
-                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                    onChange={handleGameFormChange}            
-                  />
-                </div>
-              </div>
-              {/* Score Loser */}
-              <div className="sm:col-span-2">
-                <label htmlFor="gameselectlabel" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Loser's Score
-                </label>
-                <div className="mt-2 grid grid-cols-1">
-                  <input
-                    id="ttp"
-                    type="number"
-                    name="ttp"
-                    defaultValue={game.scoreLoser}
-                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500"
-                    onChange={handleGameFormChange}            
-                  />
-                </div>
-              </div>
-            </div>
-            {/* Submit Button */}
-            <div className="mt-10">
-              <button
-                type="submit"
-                className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
-              >
-                Update Game Info
-              </button>
-            </div>
-            {/* Cancel Button */}
-            <div className="mt-10">
-              <button
-                type="submit"
-                className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-black shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        );
-      }
-    } else if (division.playedGames.length === 0) {
-      <p>No games have been played.</p>
-    } else {
-      return (
-        <p>There was a problem in loading the form...</p>
-      );
-    }
-  };
-  
-  return (
-    <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
-      <Nav />
-      {/* Content */}
-      <div className="-mt-10 mx-auto flex-1 max-w-7xl px-6 lg:px-8">
-        <h2 className="text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.day}</h2>
-        <h2 className="mt-2 text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.name}</h2>
-        <div className="max-w-2xl lg:mx-0 lg:max-w-none">
-          {/* Standings */}
-          <div className="mt-8 flow-root">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-                  <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
-                    <thead className="bg-gray-50 dark:bg-gray-800/75">
-                      {adminTableHeaders()}
-                    </thead>
-                    {adminTableContent()}
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Games & Images */}
-          <div className="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base/7 text-gray-700 lg:max-w-none lg:grid-cols-2 dark:text-gray-300">
-            <div>
-              <h2 className="mt-2 mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">Upcoming Games</h2>
-              {division.games.length > 0 && (
-                <div> 
-                <h2 className="mx-auto mt-2  mb-5 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl dark:text-white">{division.games[0].date}</h2>
-                {division.games.map((game) => (
-                  <div key={game._id} className="max-w-sm rounded overflow-hidden shadow-lg mb-10">
-                    <div className="px-6 py-4">
-                      <div className="font-bold text-xl">
-                        {game.time}
-                      </div>
-                      <div className="font-bold text-xl mb-2">
-                        {game.venue}
-                      </div>
-                      <p className="text-gray-700 text-base">
-                        <span>{game.teamOne}</span>
-                        <span> VS </span>
-                        <span>{game.teamTwo}</span>
-                      </p>
-                    </div>
-                  </div>
-                ))}
-                </div>
-              )}
-            </div>
-            {/* Images */}
-            <div>
-              <img
-                alt="duragcat"
-                src={DuragCat}
-                className="w-full rounded-lg bg-gray-200"
-              />
-            </div>
-          </div>
+  const renderGameRows = () =>
+    division.playedGames?.map((game) => (
+      <tr key={game._id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+        <td className="py-4 text-center">{game.date}</td>
+        <td className="py-4 text-center">{game.winner}</td>
+        <td className="py-4 text-center">
+          {game.scoreWinner} - {game.scoreLoser}
+        </td>
+        <td className="py-4 text-center">{game.loser}</td>
+        {Auth.loggedIn() && (
+          <td className="py-4 text-center">
+            <button
+              className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+              onClick={() => handleGameClick(game._id)}
+            >
+              Edit
+            </button>
+          </td>
+        )}
+      </tr>
+    ));
+
+  // Team Form Component
+  const TeamForm = () => (
+    <form className="mx-auto mt-8 max-w-lg grid gap-4">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        Update Team Info
+      </h2>
+      {['name', 'wins', 'losses', 'draws', 'totalPoints'].map((field) => (
+        <div key={field}>
+          <label className="block text-sm font-medium text-gray-900 dark:text-white">
+            {field.charAt(0).toUpperCase() + field.slice(1)}
+          </label>
+          <input
+            type={field === 'name' ? 'text' : 'number'}
+            name={field}
+            value={teamFormState[field] || ''}
+            onChange={(e) =>
+              setTeamFormState({ ...teamFormState, [field]: e.target.value })
+            }
+            className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 focus:outline-indigo-600"
+          />
         </div>
-        {/* Past Games */}
-        <div className="relative overflow-hidden pt-16 lg:pt-20 mb-10">
-          <div className="mt-8 flow-root">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-                  <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
-                    <thead className="bg-gray-50 dark:bg-gray-800/75">
-                      {adminArchiveHeaders()}
-                    </thead>
-                    {adminArchiveContent()}
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>                
-        </div>
+      ))}
+      <div className="flex gap-4 mt-4">
+        <button
+          type="submit"
+          className="flex-1 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500"
+        >
+          Update
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="flex-1 rounded bg-gray-300 px-4 py-2 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600"
+        >
+          Cancel
+        </button>
       </div>
-      {/* Modal */}
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
-        <DialogBackdrop
-          transition
-          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-gray-900/50"
-        />
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <DialogPanel
-              transition
-              className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-closed:sm:translate-y-0 data-closed:sm:scale-95 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10"
-            >
-              {currentMode === 'team' && teamUpdateForm()}
-              {currentMode === 'game' && gameUpdateForm()}
-            </DialogPanel>
+    </form>
+  );
+
+  // Game Form Component
+  const GameForm = () => (
+    <form className="mx-auto mt-8 max-w-lg grid gap-4">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        Update Game Info
+      </h2>
+      {['date', 'winner', 'loser', 'scoreWinner', 'scoreLoser'].map((field) => (
+        <div key={field}>
+          <label className="block text-sm font-medium text-gray-900 dark:text-white">
+            {field.charAt(0).toUpperCase() + field.slice(1)}
+          </label>
+          <input
+            type={field.includes('score') ? 'number' : 'text'}
+            name={field}
+            value={gameFormState[field] || ''}
+            onChange={(e) =>
+              setGameFormState({ ...gameFormState, [field]: e.target.value })
+            }
+            className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 focus:outline-indigo-600"
+          />
+        </div>
+      ))}
+      <div className="flex gap-4 mt-4">
+        <button
+          type="submit"
+          className="flex-1 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500"
+        >
+          Update
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="flex-1 rounded bg-gray-300 px-4 py-2 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+
+  return (
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+      <Nav />
+      <main className="flex-1 mx-auto max-w-7xl px-6 lg:px-8 py-16">
+        {/* Division Title */}
+        <h1 className="text-center text-4xl font-semibold text-gray-900 dark:text-white">
+          {division.day} - {division.name}
+        </h1>
+
+        {/* Standings Table */}
+        <div className="mt-8 overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-300 dark:divide-white/15">
+            <thead className="bg-gray-50 dark:bg-gray-800/75">
+              <tr>
+                {tableHeaders.map((h) => (
+                  <th key={h} className="px-3 py-2 text-center text-sm font-semibold text-gray-900 dark:text-gray-200">
+                    {h}
+                  </th>
+                ))}
+                {Auth.loggedIn() && <th className="px-3 py-2 text-center">Edit</th>}
+              </tr>
+            </thead>
+            <tbody>{renderTeamRows()}</tbody>
+          </table>
+        </div>
+
+        {/* Upcoming Games & Image */}
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white text-center mb-6">
+              Upcoming Games
+            </h2>
+            {division.games?.map((game) => (
+              <div key={game._id} className="mb-4 p-4 border rounded-lg shadow-sm dark:border-gray-700">
+                <p className="font-bold">{game.date} - {game.time}</p>
+                <p className="text-gray-700 dark:text-gray-300">{game.teamOne} VS {game.teamTwo}</p>
+                <p className="text-gray-500 dark:text-gray-400">{game.venue}</p>
+                {Auth.loggedIn() && (
+                  <button
+                    className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mt-2"
+                    onClick={() => handleGameClick(game._id)}
+                  >
+                    Edit
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
+          <div>
+            <img src={DuragCat} alt="duragcat" className="w-full rounded-lg" />
+          </div>
+        </div>
+
+        {/* Past Games */}
+        <div className="mt-10 overflow-x-auto">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
+            Past Games
+          </h2>
+          <table className="min-w-full divide-y divide-gray-300 dark:divide-white/15">
+            <thead className="bg-gray-50 dark:bg-gray-800/75">
+              <tr>
+                {archiveHeaders.map((h) => (
+                  <th key={h} className="px-3 py-2 text-center text-sm font-semibold text-gray-900 dark:text-gray-200">
+                    {h}
+                  </th>
+                ))}
+                {Auth.loggedIn() && <th className="px-3 py-2 text-center">Edit</th>}
+              </tr>
+            </thead>
+            <tbody>{renderGameRows()}</tbody>
+          </table>
+        </div>
+      </main>
+
+      {/* Modal */}
+      <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
+        <DialogBackdrop className="fixed inset-0 bg-gray-500/75 dark:bg-gray-900/50" />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <DialogPanel className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-lg shadow-lg">
+            {currentMode === 'team' ? <TeamForm /> : null}
+            {currentMode === 'game' ? <GameForm /> : null}
+          </DialogPanel>
         </div>
       </Dialog>
-      <Footer/>
-    </div>
-  )
-}
 
-export default Div;
+      <Footer />
+    </div>
+  );
+}
