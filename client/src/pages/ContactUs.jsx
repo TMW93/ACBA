@@ -44,10 +44,10 @@ const ContactUs = () => {
   if (!mounted) return null; // prevents forced layout before mount
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav />
       {/* Content */}
-      <div className="flex-1 relative isolate bg-white dark:bg-gray-900">
+      <div className="flex-1 w-full px-6 lg:px-8 py-24 sm:py-32">
         <div className="-mt-45 mx-auto max-w-7xl px-6 lg:px-8">         
           <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
             <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">

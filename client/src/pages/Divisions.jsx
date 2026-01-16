@@ -5,6 +5,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { QUERY_ALL_DIVISIONS } from '../utils/queries';
 import ACBALogo from '/icons/acbaLogo.png?url';
+import Divider from '../components/Divider';
 
 export default function Divisions() {
   const [mounted, setMounted] = useState(false);
@@ -43,7 +44,7 @@ export default function Divisions() {
           ))}
         </div>
       </main>
-
+      <Divider/>
       <Footer />
     </div>
   );

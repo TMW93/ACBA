@@ -52,9 +52,9 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden bg-white py-24 sm:py-32 dark:bg-gray-900">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav/>
-      <div className="flex-1 mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="flex-1 w-full px-6 lg:px-8 py-24 sm:py-32">
         <form onSubmit={handleSubmit} method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <h2 className="text-base/7 font-semibold text-gray-900 dark:text-white">Login</h2>

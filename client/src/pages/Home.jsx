@@ -47,7 +47,6 @@ const Home = () => {
   return (
     <div className="flex flex-col min-h-screen w-full overflow-hidden bg-white dark:bg-gray-900 pt-14 sm:pt-14">
       <Nav />
-
       {/* Main Content */}
       <div className="flex-1 w-full">
         {/* Top Content */}
@@ -81,8 +80,6 @@ const Home = () => {
             </div>
           </div>
         </section>
-
-
         <Divider />
 
         {/* New Monday Social C */}
@@ -116,7 +113,6 @@ const Home = () => {
             </div>
           </div>
         </section>
-
         <Divider />
 
         {/* Seasons */}
