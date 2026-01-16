@@ -1,13 +1,13 @@
 import Auth from '../../utils/auth';
 
 export default function AdminTable({ headers, data, onEdit, onDelete }) {
-  if (!data || data.length === 0) return <div></div>;
+  if (!data || data.length === 0) return <div>No data available</div>;
 
   const isAdmin = Auth.loggedIn();
 
   return (
-    <div className="relative -mx-6 overflow-x-auto py-2 align-middle">
-      <table className="w-full table-fixed divide-y divide-gray-300 dark:divide-gray-600">
+    <div className="relative -mx-6 overflow-x-auto py-2 align-middle w-full">
+      <table className="table-fixed w-full divide-y divide-gray-300 dark:divide-gray-600">
         <thead className="bg-gray-50 dark:bg-gray-800">
           <tr>
             {headers.map((header) => (
@@ -38,7 +38,7 @@ export default function AdminTable({ headers, data, onEdit, onDelete }) {
                 </td>
               ))}
               {isAdmin && (onEdit || onDelete) && (
-                <td className="px-3 py-2 whitespace-nowrap text-sm flex gap-2">
+                <td className="px-3 py-2 whitespace-nowrap text-sm flex gap-2 justify-center">
                   {onEdit && (
                     <button
                       onClick={() => onEdit(row)}
