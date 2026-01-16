@@ -41,49 +41,53 @@ const summerSeasonInfo = [
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => setMounted(true), []);
-
   if (!mounted) return null;
 
   return (
-    <div className="flex flex-col min-h-screen w-full overflow-hidden bg-white dark:bg-gray-900">
+    <div className="flex flex-col min-h-screen w-full overflow-hidden bg-white dark:bg-gray-900 pt-14 sm:pt-14">
       <Nav />
 
       {/* Main Content */}
       <div className="flex-1 w-full">
-        {/* Hero Section */}
-        <div className="w-full relative">
-          <img
-            alt="snow"
-            src={iLoveSnow}
-            className="w-full h-[100dvh] object-cover rounded dark:bg-gray-800"
-          />
-          <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-8">
-            <div className="max-w-2xl">
+        {/* Top Content */}
+        <section className="flex flex-col lg:flex-row w-full">
+          {/* Left image */}
+          <div className="lg:w-1/2">
+            <img
+              src={iLoveSnow}
+              alt="snow"
+              className="w-full h-auto object-cover rounded"
+            />
+          </div>
+
+          {/* Right content */}
+          <div className="lg:w-1/2 flex flex-col justify-start px-6 sm:px-8 mt-6 lg:mt-0">
+            <div className="max-w-xl text-center lg:text-left">
               <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
                 09/01/2026
               </p>
-              <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+              <h1 className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
                 Announcement
               </h1>
               <p className="mt-6 text-xl/8 text-gray-700 dark:text-gray-300">
                 Welcome to my basketball sandbox website.
               </p>
-              <div className="mt-6 text-base/7 text-gray-600 dark:text-gray-400">
+              <div className="mt-6 text-base/7 text-gray-600 dark:text-gray-400 space-y-1">
                 <p>To login, go to /login</p>
                 <p>email: timwong@email.com</p>
                 <p>password: admin123</p>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
 
         <Divider />
 
         {/* New Monday Social C */}
-        <section className="w-full px-6 py-12 sm:px-8">
-          <div className="max-w-2xl mx-auto">
+        <section className="w-full px-6 py-12 sm:px-8 lg:px-16">
+          <div className="max-w-2xl mx-auto text-center lg:text-left">
             <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
               08/07/2025
             </p>
@@ -94,16 +98,17 @@ const Home = () => {
               🏀 New Monday Social C Season! 🏀
             </p>
           </div>
-
-          <div className="mt-8 space-y-8 max-w-2xl mx-auto">
-            <img alt="catBanner" src={catBanner} className="w-full h-auto rounded" />
-            <div className="text-base/7 text-gray-600 dark:text-gray-400">
+          <div className="mt-8 flex flex-col gap-8 max-w-3xl mx-auto lg:flex-row lg:items-start lg:gap-12">
+            <figure className="flex-1">
+              <img alt="catBanner" src={catBanner} className="w-full h-auto rounded" />
+            </figure>
+            <div className="flex-1 text-base/7 text-gray-600 dark:text-gray-400 space-y-4">
               <p>
                 Dust off those basketball shoes - it's time to hit the court! 🙌 Our new Monday
                 Social C division kicks off on 22/09 at Auburn PCYC and it's perfect for players
                 who love the game without the pressure. 💪
               </p>
-              <p className="mt-4">
+              <p>
                 Whether you're looking to stay active, have some fun, or just ball out with friends
                 - this league is for you! 🏆 Bring your crew, invite your fam - it's a social comp
                 everyone can enjoy!
@@ -116,11 +121,9 @@ const Home = () => {
 
         {/* Seasons */}
         <SeasonTable title="2025 Autumn Season" data={autumnSeasonInfo} />
-
         <Divider />
 
         <SeasonTable title="2025 Summer Season" data={summerSeasonInfo} />
-
         <Divider />
       </div>
 
@@ -132,11 +135,11 @@ const Home = () => {
 // Table component
 function SeasonTable({ title, data }) {
   return (
-    <section className="w-[100dvw] px-6 lg:px-8 py-12">
-      <div className="mx-auto max-w-7xl">
+    <section className="w-full px-6 lg:px-16 py-12">
+      <div className="mx-auto w-full">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{title}</h2>
         <div className="mt-6 overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-300 dark:divide-white/15">
+          <table className="w-full min-w-full divide-y divide-gray-300 dark:divide-white/15">
             <thead className="bg-gray-50 dark:bg-gray-800/75">
               <tr>
                 <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
@@ -166,5 +169,5 @@ function SeasonTable({ title, data }) {
   );
 }
 
-export default Home;
 
+export default Home;
