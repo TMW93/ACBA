@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -7,47 +7,64 @@ export default function Drawer({ open, setOpen, children }) {
   const startX = useRef(0)
   const currentX = useRef(0)
   const [dragging, setDragging] = useState(false)
+  const [isVisible, setIsVisible] = useState(open)
 
-  // Start touch
+  // Smooth open/close
+  useEffect(() => {
+    if (open) {
+      setIsVisible(true)
+    } else if (panelRef.current) {
+      // Wait for transition to finish before removing from DOM
+      const timeout = setTimeout(() => setIsVisible(false), 300)
+      return () => clearTimeout(timeout)
+    }
+  }, [open])
+
+  // Swipe handlers
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX
     setDragging(true)
   }
 
-  // Move touch
   const handleTouchMove = (e) => {
     if (!dragging) return
     currentX.current = e.touches[0].clientX
     const diff = currentX.current - startX.current
-    if (panelRef.current) {
-      // Only allow swipe to close (right-to-left swipe)
-      if (diff < 0) {
-        panelRef.current.style.transform = `translateX(${diff}px)`
-      }
+    if (panelRef.current && diff < 0) {
+      panelRef.current.style.transform = `translateX(${diff}px)`
     }
   }
 
-  // End touch
   const handleTouchEnd = () => {
     setDragging(false)
     const diff = currentX.current - startX.current
-    // If swiped more than 50px to the left, close drawer
     if (diff < -50) {
       setOpen(false)
     } else if (panelRef.current) {
-      panelRef.current.style.transform = '' // reset position
+      panelRef.current.style.transform = '' // reset
     }
   }
 
+  if (!isVisible) return null
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-50">
-      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/30 transition-opacity ${
+          open ? 'opacity-100' : 'opacity-0'
+        }`}
+        aria-hidden="true"
+      />
+
+      {/* Drawer panel */}
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
             <DialogPanel
               ref={panelRef}
-              className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out sm:duration-700"
+              className={`pointer-events-auto w-screen max-w-md transform transition-transform duration-300 ease-in-out
+                ${open ? 'translate-x-0' : 'translate-x-full'}`}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
