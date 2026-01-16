@@ -1,53 +1,79 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-export default function Drawer() {
-  const [open, setOpen] = useState(false);
+export default function Drawer({ open, setOpen, children }) {
+  const panelRef = useRef(null)
+  const startX = useRef(0)
+  const currentX = useRef(0)
+  const [dragging, setDragging] = useState(false)
+
+  // Start touch
+  const handleTouchStart = (e) => {
+    startX.current = e.touches[0].clientX
+    setDragging(true)
+  }
+
+  // Move touch
+  const handleTouchMove = (e) => {
+    if (!dragging) return
+    currentX.current = e.touches[0].clientX
+    const diff = currentX.current - startX.current
+    if (panelRef.current) {
+      // Only allow swipe to close (right-to-left swipe)
+      if (diff < 0) {
+        panelRef.current.style.transform = `translateX(${diff}px)`
+      }
+    }
+  }
+
+  // End touch
+  const handleTouchEnd = () => {
+    setDragging(false)
+    const diff = currentX.current - startX.current
+    // If swiped more than 50px to the left, close drawer
+    if (diff < -50) {
+      setOpen(false)
+    } else if (panelRef.current) {
+      panelRef.current.style.transform = '' // reset position
+    }
+  }
 
   return (
-    <div>
-      <button
-        onClick={() => setOpen(true)}
-        className="float-right flex block rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:inset-ring dark:inset-ring-white/5 dark:hover:bg-white/20"
-      >
-        Our Socials!
-      </button>
-      <Dialog open={open} onClose={setOpen} className="relative z-50">
-        <div className="fixed inset-0" />
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-              <DialogPanel
-                transition
-                className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700"
-              >
-                <div className="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl dark:bg-gray-800 dark:after:absolute dark:after:inset-y-0 dark:after:left-0 dark:after:w-px dark:after:bg-white/10">
-                  <div className="px-4 sm:px-6">
-                    <div className="flex items-start justify-between">
-                      <DialogTitle className="text-base font-semibold text-gray-900 dark:text-white">
-                        Panel title
-                      </DialogTitle>
-                      <div className="ml-3 flex h-7 items-center">
-                        <button
-                          type="button"
-                          onClick={() => setOpen(false)}
-                          className="relative rounded-md text-gray-400 hover:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:hover:text-white dark:focus-visible:outline-indigo-500"
-                        >
-                          <span className="absolute -inset-2.5" />
-                          <span className="sr-only">Close panel</span>
-                          <XMarkIcon aria-hidden="true" className="size-6" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="relative mt-6 flex-1 px-4 sm:px-6">{/* Your content */}</div>
+    <Dialog open={open} onClose={setOpen} className="relative z-50">
+      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+      <div className="fixed inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+            <DialogPanel
+              ref={panelRef}
+              className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out sm:duration-700"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl dark:bg-gray-800">
+                {/* Header */}
+                <div className="px-4 sm:px-6 flex items-center justify-between">
+                  <DialogTitle className="text-base font-semibold text-gray-900 dark:text-white">
+                    Our Socials
+                  </DialogTitle>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="relative rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
+                  >
+                    <span className="sr-only">Close panel</span>
+                    <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+                  </button>
                 </div>
-              </DialogPanel>
-            </div>
+                {/* Content */}
+                <div className="relative mt-6 flex-1 px-4 sm:px-6">{children}</div>
+              </div>
+            </DialogPanel>
           </div>
         </div>
-      </Dialog>
-    </div>
+      </div>
+    </Dialog>
   )
 }
