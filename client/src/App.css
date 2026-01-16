@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
+/* Root container: center max width on desktop only */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 1280px;   /* desktop max width */
+  margin: 0 auto;      /* center horizontally */
   text-align: center;
+  width: 100%;         /* take full width on mobile */
+  box-sizing: border-box;
+  padding: 0;          /* remove global padding */
 }
 
+/* Logo styles */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -20,25 +24,36 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Logo Spin Animation */
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* Card padding */
 .card {
   padding: 2em;
 }
 
+/* Text links */
 .read-the-docs {
   color: #888;
+}
+
+/* Ensure images, tables, and full-width sections don't overflow */
+img, video, canvas, iframe, svg, table {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tables: allow horizontal scroll on small screens */
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
