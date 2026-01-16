@@ -1,26 +1,26 @@
 import Auth from '../../utils/auth';
 
 export default function AdminTable({ headers, data, onEdit, onDelete }) {
-  if (!data || data.length === 0) return <p>No data available.</p>;
+  if (!data || data.length === 0) return <div></div>;
 
   const isAdmin = Auth.loggedIn();
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-600">
+    <div className="relative -mx-6 overflow-x-auto py-2 align-middle">
+      <table className="w-full table-fixed divide-y divide-gray-300 dark:divide-gray-600">
         <thead className="bg-gray-50 dark:bg-gray-800">
           <tr>
             {headers.map((header) => (
               <th
                 key={header.key}
                 scope="col"
-                className="px-3 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-200"
+                className="px-3 py-3 text-center text-base font-semibold text-gray-900 dark:text-gray-200"
               >
                 {header.label}
               </th>
             ))}
             {isAdmin && (onEdit || onDelete) && (
-              <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+              <th className="px-3 py-3 text-center text-base font-semibold text-gray-900 dark:text-gray-200">
                 Actions
               </th>
             )}
@@ -32,7 +32,7 @@ export default function AdminTable({ headers, data, onEdit, onDelete }) {
               {headers.map((header) => (
                 <td
                   key={header.key}
-                  className="px-3 py-2 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300"
+                  className="px-3 py-2 whitespace-nowrap text-center text-sm text-gray-700 dark:text-gray-300"
                 >
                   {row[header.key]}
                 </td>
