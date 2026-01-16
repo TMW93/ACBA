@@ -32,7 +32,7 @@ export default function Divisions() {
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav />
 
-      <main className="flex-1 mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
+      <main className="flex-1 mx-auto px-6 lg:px-8 py-24 sm:py-32">
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-12">
           Divisions
         </h1>
