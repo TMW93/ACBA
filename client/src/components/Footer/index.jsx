@@ -43,15 +43,17 @@ const navigation = [
 ]
 
 const Footer = () => {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
-    <footer className="bg-white dark:bg-gray-900 h-10">
-      <div className="mx-auto mt-10 max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+    <footer className="bg-white dark:bg-gray-900">
+      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+        {/* Social Icons */}
         <div className="flex justify-center gap-x-6 md:order-2">
+          {/* Replace with actual icons */}
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -63,12 +65,14 @@ const Footer = () => {
             </a>
           ))}
         </div>
-        <p className="mt-8  mr-8 text-center text-sm/6 text-gray-600 md:order-1 md:mt-0 dark:text-gray-400">
-          &copy; 2026 Tim W.
+
+        {/* Copyright Text */}
+        <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400 md:order-1 md:mt-0">
+          &copy; 2026 Tim W. All rights reserved.
         </p>
       </div>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer
