@@ -29,7 +29,7 @@ export default function Divisions() {
   }, {});
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-gray-800 dark:bg-gray-900/90 overflow-hidden">
       <Nav />
 
       <main className="flex-1 mx-auto px-6 lg:px-8 py-24 sm:py-32">
