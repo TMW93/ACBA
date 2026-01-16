@@ -30,11 +30,10 @@ a:hover {
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  place-items: center;
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
+  width: 100%;            /* Full width */
+  min-height: 100vh;      /* Ensure full screen height */
+  overflow-x: hidden;     /* Prevent horizontal scrolling */
+  display: block;         /* Remove flex layout */
 }
 
 /* Headings */
