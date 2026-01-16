@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 const navigation = [
   {
     name: 'Facebook',
@@ -41,6 +43,11 @@ const navigation = [
 ]
 
 const Footer = () => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return null
+
   return (
     <footer className="bg-white dark:bg-gray-900 h-10">
       <div className="mx-auto mt-10 max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
