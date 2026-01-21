@@ -120,23 +120,23 @@ export default function Nav() {
                 </button>
 
                 {/* Mobile menu button */}
-                <Disclosure.Button className="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <DisclosureButton className="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="h-5 w-5" />
                   ) : (
                     <Bars3Icon className="h-5 w-5" />
                   )}
-                </Disclosure.Button>
+                </DisclosureButton>
               </div>
             </div>
           </div>
 
           {/* Mobile panel */}
-          <Disclosure.Panel className="sm:hidden bg-gray-800 dark:bg-gray-900/90">
+          <DisclosurePanel className="sm:hidden bg-gray-800 dark:bg-gray-900/90">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <DisclosureButton
                   key={item.name}
                   as="a"
                   href={item.href}
@@ -148,7 +148,7 @@ export default function Nav() {
                   )}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </DisclosureButton>
               ))}
 
               <button
@@ -158,7 +158,7 @@ export default function Nav() {
                 Our Socials
               </button>
             </div>
-          </Disclosure.Panel>
+          </DisclosurePanel>
 
           <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
         </>

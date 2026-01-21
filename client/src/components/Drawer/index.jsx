@@ -1,13 +1,13 @@
-import { Dialog, DialogPanel, DialogTitle, Transition } from '@headlessui/react'
+import { Dialog, DialogPanel, DialogTitle, Transition ,TransitionChild } from '@headlessui/react'
 import { Fragment } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 export default function Drawer({ open, setOpen, children }) {
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={setOpen}>
         {/* Overlay */}
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"
           enterFrom="opacity-0"
@@ -17,13 +17,13 @@ export default function Drawer({ open, setOpen, children }) {
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
               {/* Panel */}
-              <Transition.Child
+              <TransitionChild
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                 enterFrom="translate-x-full"
@@ -50,11 +50,11 @@ export default function Drawer({ open, setOpen, children }) {
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">{children}</div>
                   </div>
                 </DialogPanel>
-              </Transition.Child>
+              </TransitionChild>
             </div>
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   )
 }
