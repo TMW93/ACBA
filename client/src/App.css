@@ -44,28 +44,3 @@
 .read-the-docs {
   color: #888;
 }
-
-/* Ensure images, tables, and full-width sections don't overflow */
-img, video, canvas, iframe, svg, table {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Tables: allow horizontal scroll on small screens */
-table {
-  border-collapse: collapse;
-  width: 100%;         /* Ensure table takes up full width */
-  table-layout: auto;  /* Allow dynamic table width based on content */
-}
-
-table th, table td {
-  padding: 0.75rem;     /* Add padding inside cells */
-  text-align: left;     /* Align text to the left */
-}
-
-@media (max-width: 768px) {
-  table {
-    table-layout: fixed;  /* Ensure table is more responsive on small screens */
-  }
-}
