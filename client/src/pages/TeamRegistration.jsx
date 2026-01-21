@@ -138,8 +138,8 @@ const TeamRegistration = () => {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav />
-      <div>
-        <div className="flex-1 w-full pt-10 mt-20">   
+      <div className='flex-1 w-full py-24 sm:py-32'>
+        <div className="mx-auto px-6 lg:px-8">   
           <div className="mx-auto -mt-5 max-w-2xl lg:mx-0 lg:max-w-none">
             <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
               Team Registration/Information

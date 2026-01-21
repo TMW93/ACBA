@@ -69,11 +69,18 @@ const Home = () => {
             </div>
             <div className="flex items-start justify-end lg:order-first">
               <img
-                alt="Product screenshot"
+                alt="Sunday Social Beginners Image"
                 src={iLoveSnow}
                 width={2432}
                 height={1442}
                 className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-228 dark:hidden dark:ring-white/10"
+              />
+              <img
+                alt="Sunday Social Beginners Image"
+                src={iLoveSnow}
+                width={2432}
+                height={1442}
+                className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 not-dark:hidden sm:w-228 dark:ring-white/10"
               />
             </div>
           </div>
@@ -191,10 +198,10 @@ function SeasonTable({ title, data }) {
                     <td className="py-4 pr-3 pl-4 text-center text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
                       {info.division}
                     </td>
-                    <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                    <td className="px-3 py-4 text-center text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
                       {info.startDate}
                     </td>
-                    <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                    <td className="px-3 py-4 text-center text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
                       {info.gameTime}
                     </td>
                   </tr>
