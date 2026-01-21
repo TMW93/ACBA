@@ -139,32 +139,15 @@ const TeamRegistration = () => {
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav />
       <div>
-        <div className="flex-1 w-full px-6 lg:px-8 py-24 sm:py-32">   
+        <div className="flex-1 w-full pt-10 mt-20">   
           <div className="mx-auto -mt-5 max-w-2xl lg:mx-0 lg:max-w-none">
             <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
               Team Registration/Information
             </h1>
-            <div className="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base/7 text-gray-700 lg:max-w-none lg:grid-cols-2 dark:text-gray-300">
+            <div className="mt-20 grid max-w-xl grid-cols-1 gap-8 text-base/7 text-gray-700 lg:max-w-none lg:grid-cols-2 dark:text-gray-300">
+              {/* Policies */}
               <div>
-                {/* Rules and Regulations */}
                 <p className="text-3xl">
-                  Rules and Regulations
-                </p>               
-                <ul className="mt-4 text-left">
-                  <li className="mt-2">
-                    All players must play 5 out of their 12 of their games  or 4 out of 10/11 games to qualify for playoff.
-                  </li>
-                  <li className="mt-2">
-                    We do not accept doctor certificate for injuries if players do not show up. All players must be dressed in uniform and sit on the bench to qualify for games if they are injured.
-                  </li>
-                  <li className="mt-2">
-                    Excuses such as players have paid their fee but did not show up will not be accepted as being qualified for a game.
-                  </li>
-                </ul>
-                <p className="mt-6 text-left">
-                  Note: Acba has the right to move teams up or down in regards to their skill level in the competition. Where a team is deemed too strong for a division  Acba will refund the balance if we do not have a division that suits the team. Please ensure you understand this rule before you enter the competition.
-                </p>
-                <p className=" mt-6 text-3xl">
                   Australian Chinese Basketball Assoication Zero Tolerance Policy            
                 </p>
                 <p className="mt-6 text-left">
@@ -216,12 +199,32 @@ const TeamRegistration = () => {
                   We ask any person that feels they cannot refrain from the above unacceptable behaviour to not attend or join the competition.
                 </p>
               </div>
+              {/* Rules and Regulations */}
+              <div>
+                <p className="text-3xl">
+                  Rules and Regulations
+                </p>               
+                <ul className="mt-4 text-left">
+                  <li className="mt-2">
+                    All players must play 5 out of their 12 of their games  or 4 out of 10/11 games to qualify for playoff.
+                  </li>
+                  <li className="mt-2">
+                    We do not accept doctor certificate for injuries if players do not show up. All players must be dressed in uniform and sit on the bench to qualify for games if they are injured.
+                  </li>
+                  <li className="mt-2">
+                    Excuses such as players have paid their fee but did not show up will not be accepted as being qualified for a game.
+                  </li>
+                </ul>
+                <p className="mt-6 text-left">
+                  Note: Acba has the right to move teams up or down in regards to their skill level in the competition. Where a team is deemed too strong for a division  Acba will refund the balance if we do not have a division that suits the team. Please ensure you understand this rule before you enter the competition.
+                </p>
+              </div>
             </div>
           </div>
         </div>
         <Divider/>
         {/* Division Info */}
-        <div className="relative overflow-hidden pt-16 lg:pt-20">
+        <div className="relative overflow-hidden mt-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="sm:flex sm:items-center">

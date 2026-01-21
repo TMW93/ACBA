@@ -50,44 +50,40 @@ const Home = () => {
       {/* Main Content */}
       <div className="flex-1 w-full">
         {/* Top Content */}
-        <section className="flex flex-col lg:flex-row w-full">
-          {/* Left image */}
-          <div className="lg:w-1/2">
-            <img
-              src={iLoveSnow}
-              alt="snow"
-              className="w-full h-auto object-cover rounded"
-            />
-          </div>
-
-          {/* Right content */}
-          <div className="lg:w-1/2 flex flex-col justify-start px-6 sm:px-8 mt-6 lg:mt-0">
-            <div className="max-w-xl text-center lg:text-left">
-              <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
-                09/01/2026
-              </p>
-              <h1 className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-                Announcement
-              </h1>
-              <p className="mt-6 text-xl/8 text-gray-700 dark:text-gray-300">
-                Welcome to my basketball sandbox website.
-              </p>
-              <div className="mt-6 text-base/7 text-gray-600 dark:text-gray-400 space-y-1">
-                <p>To login, go to /login</p>
-                <p>email: timwong@email.com</p>
-                <p>password: admin123</p>
+        <section className="mx-auto max-w-7xl px-6 lg:px-8 mt-20 mb-10">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            <div className="lg:ml-auto lg:pt-4 lg:pl-4">
+              <div className="lg:max-w-lg">
+                <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">11/01/2026</h2>
+                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+                  New Sunday Social Beginners Competition
+                </p>
+                <p className="mt-10 text-base/7 text-gray-600 lg:col-span-7 dark:text-gray-400">
+                  ACBA will be launching a new Sunday Social Beginners Competition starting in late February. Games are at Cumberland University (Lidcombe) from 6pm - 8pm. 
+                  It's a great way to enjoy a social game, get some exercise, and have fun with light cardio.
+                </p>
+                <p className="mt-6 text-base/7 text-gray-600 lg:col-span-7 dark:text-gray-400">
+                  Teams and individual players are welcome. For more information, please email info@acba.com.au
+                </p>
               </div>
+            </div>
+            <div className="flex items-start justify-end lg:order-first">
+              <img
+                alt="Product screenshot"
+                src={iLoveSnow}
+                width={2432}
+                height={1442}
+                className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-228 dark:hidden dark:ring-white/10"
+              />
             </div>
           </div>
         </section>
         <Divider />
 
         {/* New Monday Social C */}
-        <section className="w-full px-6 py-12 sm:px-8 lg:px-16">
-          <div className="max-w-2xl mx-auto text-center lg:text-left">
-            <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
-              08/07/2025
-            </p>
+        <section className="mx-auto max-w-7xl px-6 lg:px-8 mt-5 mb-5">
+          <div className="mx-auto max-w-2xl lg:mx-0">
+            <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">08/07/2025</p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
               New Monday Social C
             </h1>
@@ -95,17 +91,39 @@ const Home = () => {
               🏀 New Monday Social C Season! 🏀
             </p>
           </div>
-          <div className="mt-8 flex flex-col gap-8 max-w-3xl mx-auto lg:flex-row lg:items-start lg:gap-12">
-            <figure className="flex-1">
-              <img alt="catBanner" src={catBanner} className="w-full h-auto rounded" />
-            </figure>
-            <div className="flex-1 text-base/7 text-gray-600 dark:text-gray-400 space-y-4">
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
+            <div className="relative lg:order-last lg:col-span-5">
+              <svg
+                aria-hidden="true"
+                className="absolute -top-160 left-1 -z-10 h-256 w-702 -translate-x-1/2 mask-[radial-gradient(64rem_64rem_at_111.5rem_0%,white,transparent)] stroke-gray-900/10 dark:stroke-white/10"
+              >
+                <defs>
+                  <pattern
+                    id="e87443c8-56e4-4c20-9111-55b82fa704e3"
+                    width={200}
+                    height={200}
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path d="M0.5 0V200M200 0.5L0 0.499983" />
+                  </pattern>
+                </defs>
+                <rect fill="url(#e87443c8-56e4-4c20-9111-55b82fa704e3)" width="100%" height="100%" strokeWidth={0} />
+              </svg>
+              <figure className="border-l border-indigo-600 pl-8 dark:border-indigo-400">
+                <img
+                  alt="monday social c image"
+                  className="object-cover rounded-xl"
+                  src={catBanner}
+                />
+              </figure>
+            </div>
+            <div className="max-w-xl text-base/7 text-gray-600 lg:col-span-7 dark:text-gray-400">
               <p>
-                Dust off those basketball shoes - it's time to hit the court! 🙌 Our new Monday
-                Social C division kicks off on 22/09 at Auburn PCYC and it's perfect for players
+                Dust off those basketball shoes - it's time to hit the court! 🙌 Our new Monday Social C division 
+                kicks off on 22/09 at Auburn PCYC and it's perfect for players
                 who love the game without the pressure. 💪
               </p>
-              <p>
+              <p className="mt-8">
                 Whether you're looking to stay active, have some fun, or just ball out with friends
                 - this league is for you! 🏆 Bring your crew, invite your fam - it's a social comp
                 everyone can enjoy!
@@ -113,7 +131,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <Divider />
+        <Divider/>
 
         {/* Seasons */}
         <SeasonTable title="2025 Autumn Season" data={autumnSeasonInfo} />
@@ -131,37 +149,63 @@ const Home = () => {
 // Table component
 function SeasonTable({ title, data }) {
   return (
-    <section className="w-full px-6 lg:px-16 py-12">
-      <div className="mx-auto w-full">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{title}</h2>
-        <div className="mt-6 overflow-x-auto">
-          <table className="w-full min-w-full divide-y divide-gray-300 dark:divide-white/15">
-            <thead className="bg-gray-50 dark:bg-gray-800/75">
-              <tr>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
-                  Division
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
-                  Start Date
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
-                  Game Times
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800/50 dark:divide-white/10">
-              {data.map((info) => (
-                <tr key={info.division}>
-                  <td className="py-4 px-4 text-sm text-gray-900 dark:text-white">{info.division}</td>
-                  <td className="py-4 px-4 text-sm text-gray-500 dark:text-gray-400">{info.startDate}</td>
-                  <td className="py-4 px-4 text-sm text-gray-500 dark:text-gray-400">{info.gameTime}</td>
+  <section className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
+    <div className="sm:flex sm:items-center">
+      <div className="sm:flex-auto">
+        <h1 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h1>
+        <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">
+          Information for the {title}
+        </p>
+      </div>  
+    </div>
+    <div className="mt-8 flow-root">
+      <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+            <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
+              <thead className="bg-gray-50 dark:bg-gray-800/75">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+                  >
+                    Division
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
+                  >
+                    Start Date
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
+                  >
+                    Game Times
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+                {data.map((info) => (
+                  <tr key={info.division}>
+                    <td className="py-4 pr-3 pl-4 text-center text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                      {info.division}
+                    </td>
+                    <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                      {info.startDate}
+                    </td>
+                    <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                      {info.gameTime}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 }
 
