@@ -8,119 +8,102 @@ const avaliableDivs = [
   {
     division: 'Sunday Social 10',
     timeslot: '11a.m - 2.30p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Sunday Pool A',
     timeslot: '9a.m - 12.30p.m',
-    prizeMoney: 500,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Sunday Pool B',
     timeslot: '9a.m - 12.30p.m',
-    prizeMoney: 450,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Sunday Division 8A',
     timeslot: '8:15a.m - 9:45a.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC'
   },
   {
     division: 'Sunday Division 8B',
     timeslot: '8:15a.m - 9:45a.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC'
   },
   {
     division: 'Sunday Unisex 7',
     timeslot: '3:30p.m - 6:30p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Cumberland Uni'
   },
   {
     division: 'Monday Division 5',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 500,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Monday PCYC Social C',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Monday Concord Social C',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Tuesday Social A',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Tuesday Social B ',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Wednesday Division 2',
     timeslot: '8:15a.m - 9:45a.m',
-    prizeMoney: 750,
     status: 'OPEN',
     venue: 'Auburn PCYC'
   },
    {
     division: 'Wednesday Division 3',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Thursday Social B',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Thursday Social C',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Thursday Social Beginners',
     timeslot: '8:15a.m - 9:45a.m',
-    prizeMoney: 300,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
   {
     division: 'Thursday Unisex 7',
     timeslot: '7p.m - 9:10p.m',
-    prizeMoney: 400,
     status: 'OPEN',
     venue: 'Auburn PCYC/ Cumberland Uni'
   },
@@ -138,7 +121,9 @@ const TeamRegistration = () => {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav />
+      {/* Main Content */}
       <div className='flex-1 w-full py-24 sm:py-32'>
+        {/* Info Div */}
         <div className="mx-auto px-6 lg:px-8">   
           <div className="mx-auto -mt-5 max-w-2xl lg:mx-0 lg:max-w-none">
             <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
@@ -224,77 +209,84 @@ const TeamRegistration = () => {
         </div>
         <Divider/>
         {/* Division Info */}
-        <div className="relative overflow-hidden mt-10">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="px-4 sm:px-6 lg:px-8">
-              <div className="sm:flex sm:items-center">
-                <div className="sm:flex-auto">
-                  <h1 className="text-4xl text-base font-semibold text-gray-900 dark:text-white">
-                    Division Information
-                  </h1>
-                  <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-                    General Information For Each Division
-                  </p>
-                </div>
-              </div>
-              <div className="mt-8 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                  <div className="inline-block min-w-full py-2 align-middle">
-                    <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-                      <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
-                        <thead className="bg-gray-50 dark:bg-gray-800/75">
-                          <tr>
-                            <th scope="col" className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200">
-                              Division
-                            </th>
-                            <th scope="col" className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200">
-                              Timeslot
-                            </th>
-                            <th scope="col" className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200">
-                              Status
-                            </th>
-                            <th scope="col" className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200">
-                              Prize Money
-                            </th>
-                            <th scope="col" className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200">
-                              Venue
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
-                          {avaliableDivs.map((div) => (
-                            <tr key={div.division}>
-                              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                                {div.division}
-                              </td>
-                              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                                {div.timeslot}
-                              </td>
-                              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                                {div.status}
-                              </td>
-                              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                                ${div.prizeMoney}
-                              </td>
-                              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
-                                {div.venue}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <DivisionTable data={avaliableDivs}/>
         <Divider/>
       </div>
       <Footer/>
     </div>
   )
 };
+
+// Table component
+function DivisionTable({ data }) {
+  return (
+  <section className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
+    <div className="sm:flex sm:items-center">
+      <div className="sm:flex-auto">
+        <h1 className="text-base font-semibold text-gray-900 dark:text-white">Division Information</h1>
+        <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">
+          General Information for each Division
+        </p>
+      </div>  
+    </div>
+    <div className="mt-8 flow-root">
+      <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div className="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+            <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
+              <thead className="bg-gray-50 dark:bg-gray-800/75">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pr-3 pl-4 text-center text-sm font-semibold text-gray-900 sm:pl-6 dark:text-gray-200"
+                  >
+                    Division
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
+                  >
+                    Timeslot
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-200"
+                  >
+                    Venue
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-800/50">
+                {data.map((info) => (
+                  <tr key={info.division}>
+                    <td className="py-4 pr-3 pl-4 text-center text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 dark:text-white">
+                      {info.division}
+                    </td>
+                    <td className="px-3 py-4 text-center text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                      {info.timeslot}
+                    </td>
+                    <td className="px-3 py-4 text-center text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                      {info.status}
+                    </td>
+                    <td className="px-3 py-4 text-center text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                      {info.venue}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  );
+}
 
 export default TeamRegistration;
