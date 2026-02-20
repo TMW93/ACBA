@@ -36,8 +36,8 @@ export default function Drawer({ open, setOpen, children }) {
                 <DialogPanel className="pointer-events-auto w-screen max-w-md">
                   <div className="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl dark:bg-gray-800">
                     <div className="px-4 sm:px-6 flex items-start justify-between">
-                      <DialogTitle className="mt-15 text-base font-semibold text-gray-900 dark:text-white overflow-hidden">
-                        <div>
+                      <DialogTitle className="mt-15 w-full max-w-full text-base font-semibold text-gray-900 dark:text-white">
+                        <div className='w-full'>
                           <h2 className='mb-5 text-base/7 text-gray-800'>Our Facebook</h2>
                           <FacebookProfileEmbed/>
                         </div>
