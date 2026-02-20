@@ -33,24 +33,24 @@ export default function Drawer({ open, setOpen, children }) {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <DialogPanel className="pointer-events-auto w-screen max-w-md">
-                  <div className="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl dark:bg-gray-800">
+                <DialogPanel className="pointer-events-auto w-screen w-screen max-w-2xl">
+                  <div className="relative flex w-full h-full flex-col overflow-y-auto bg-white py-6 shadow-xl dark:bg-gray-800">
                     <div className="px-4 sm:px-6 flex items-start justify-between">
-                      <DialogTitle className="mt-15 w-full max-w-full text-base font-semibold text-gray-900 dark:text-white">
+                      <DialogTitle className="mt-15 text-base font-semibold text-gray-900 dark:text-white">
                         <div className='w-full'>
                           <h2 className='mb-5 text-base/7 text-gray-800'>Our Facebook</h2>
-                          <FacebookProfileEmbed/>
                         </div>
                       </DialogTitle>
                       <button
-                              type="button"
-                              onClick={() => setOpen(false)}
-                              className="relative rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
-                            >
-                              <span className="sr-only">Close panel</span>
-                              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                            </button>
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        className="relative rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
+                      >
+                        <span className="sr-only">Close panel</span>
+                        <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
                     </div>
+                    <div className="px-4 sm:px-6 mt-4 w-full"> <FacebookProfileEmbed /> </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">{children}</div>
                   </div>
                 </DialogPanel>
