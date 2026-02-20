@@ -48,7 +48,7 @@ const ContactUs = () => {
       <Nav />
       {/* Content */}
       <div className="flex-1 w-full px-6 lg:px-8 py-24 sm:py-32">
-        <div className="-mt-45 mx-auto max-w-7xl px-6 lg:px-8">         
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">         
           <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
             <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
               <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
@@ -59,7 +59,7 @@ const ContactUs = () => {
                   ACBA Administration
                 </p>
                 <dl className="mt-10 space-y-4 text-base/7 text-gray-600 dark:text-gray-300">
-                  <div className="flex gap-x-4">
+                  <div className="flex items-center justify-center gap-x-4">
                     <dt className="flex-none">
                       <span className="sr-only">Phone</span>
                       <PhoneIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
@@ -70,7 +70,7 @@ const ContactUs = () => {
                       </p>
                     </dd>
                   </div>
-                  <div className="flex gap-x-4">
+                  <div className="flex items-center justify-center gap-x-4">
                     <dt className="flex-none">
                       <span className="sr-only">Email</span>
                       <EnvelopeIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
@@ -95,7 +95,7 @@ const ContactUs = () => {
                 </p>
                 <dl className="mt-10 space-y-4 text-base/7 text-gray-600 dark:text-gray-300">
                   {socialIcons.map((social) => (
-                    <div key={social.name} className="flex gap-x-4">
+                    <div key={social.name} className="flex items-center justify-center gap-x-4">
                       <dt className="flex-none">
                         <span className="sr-only">{social.name}</span>
                         <social.icon aria-hidden="true" className="h-7 w-6 text-gray-400"/>
