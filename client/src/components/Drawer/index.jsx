@@ -1,6 +1,7 @@
 import { Dialog, DialogPanel, DialogTitle, Transition ,TransitionChild } from '@headlessui/react'
 import { Fragment } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import FacebookProfileEmbed from '../FacebookPlugin'
 
 export default function Drawer({ open, setOpen, children }) {
   return (
@@ -35,17 +36,20 @@ export default function Drawer({ open, setOpen, children }) {
                 <DialogPanel className="pointer-events-auto w-screen max-w-md">
                   <div className="relative flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl dark:bg-gray-800">
                     <div className="px-4 sm:px-6 flex items-start justify-between">
-                      <DialogTitle className="text-base font-semibold text-gray-900 dark:text-white">
-                        Our Socials
+                      <DialogTitle className="mt-15 text-base font-semibold text-gray-900 dark:text-white overflow-hidden">
+                        <div>
+                          <h2 className='mb-5 text-base/7 text-gray-800'>Our Facebook</h2>
+                          <FacebookProfileEmbed/>
+                        </div>
                       </DialogTitle>
                       <button
-                        type="button"
-                        onClick={() => setOpen(false)}
-                        className="relative rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
-                      >
-                        <span className="sr-only">Close panel</span>
-                        <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
+                              type="button"
+                              onClick={() => setOpen(false)}
+                              className="relative rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
+                            >
+                              <span className="sr-only">Close panel</span>
+                              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">{children}</div>
                   </div>
