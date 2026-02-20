@@ -32,12 +32,10 @@ export default function Divisions() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       <Nav />
-
       <main className="flex-1 w-full px-6 lg:px-8 py-24 sm:py-32">
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-12">
           Divisions
         </h1>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {days.map(day => (
             <DayDivisions key={day} day={day} divisions={divisionsByDay[day]} />
